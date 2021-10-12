@@ -3,24 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://ansible-labs-crew.github.io/1-intro/</loc>
+    <loc>https://devsecops-workshop.github.io/1-intro/</loc>
   </url>
   
   <url>
-    <loc>https://ansible-labs-crew.github.io/2-rhacs/</loc>
+    <loc>https://devsecops-workshop.github.io/2-rhacs/</loc>
   </url>
   
   <url>
-    <loc>https://ansible-labs-crew.github.io/</loc>
+    <loc>https://devsecops-workshop.github.io/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://ansible-labs-crew.github.io/categories/</loc>
+    <loc>https://devsecops-workshop.github.io/categories/</loc>
   </url>
   
   <url>
-    <loc>https://ansible-labs-crew.github.io/tags/</loc>
+    <loc>https://devsecops-workshop.github.io/tags/</loc>
   </url>
   
 </urlset>
