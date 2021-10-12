@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://ansible-labs-crew.github.io/1-intro/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ansible-labs-crew.github.io/2-rhacs/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ansible-labs-crew.github.io/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://ansible-labs-crew.github.io/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://ansible-labs-crew.github.io/tags/</loc>
+  </url>
+  
+</urlset>
