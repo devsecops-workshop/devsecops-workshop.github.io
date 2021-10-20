@@ -9,7 +9,7 @@
 
     <link rel="icon" href="https://devsecops-workshop.github.io/images/favicon.png" type="image/png">
 
-    <title> :: DevSecOps Workshop 2021</title>
+    <title>Install and Configure ACS :: DevSecOps Workshop 2021</title>
 
     
     <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634730991" rel="stylesheet">
@@ -41,7 +41,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/">
+  <body class="" data-url="/10-rhacs-setup/">
     <nav id="sidebar" class="">
 
 
@@ -216,7 +216,7 @@
     
     <li data-nav-id="/10-rhacs-setup/" title="Install and Configure ACS" class="dd-item
         
-        
+        active
         
         ">
       <a href="https://devsecops-workshop.github.io/10-rhacs-setup/">
@@ -382,24 +382,205 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
               
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='https://devsecops-workshop.github.io/'></a> > Install and Configure ACS
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#install-rhacs">Install RHACS</a>
+      <ul>
+        <li><a href="#install-the-operator">Install the Operator</a></li>
+        <li><a href="#install-the-main-component-central">Install the main component <strong>Central</strong></a></li>
+        <li><a href="#prepare-to-add-secured-clusters">Prepare to add Secured Clusters</a></li>
+        <li><a href="#prepare-the-secured-cluster">Prepare the Secured Cluster</a></li>
+        <li><a href="#add-the-cluster-as-securedcluster-to-acs-central">Add the Cluster as <strong>SecuredCluster</strong> to <strong>ACS Central</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
         <div id="head-tags">
         
         </div>
         
         <div id="body-inner">
           
+            <h1>
+              
+              Install and Configure ACS
+            </h1>
+          
 
         
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fas fa-bars"></i> navigation</a>
-</span>
 
- 
-<h1 id="devsecops-workshop">DevSecOps Workshop</h1>
-<p>This is the documentation for the DevSecOps Workshop</p>
+
+	<p>During the workshop you went through the OpenShift developer experience starting from software development using Quarkus and <code>odo</code>, moving on to automating build and deployment using Tekton pipelines and finally using GitOps for production deployments.</p>
+<p>Now it&rsquo;s time to add another extremely important piece to the setup; enhancing application security in a conainerized world. Using the most recent addition to the OpenShift portfolio: <strong>Red Hat Advanced Cluster Security for Kubernetes</strong>!</p>
+<h2 id="install-rhacs">Install RHACS</h2>
+<h3 id="install-the-operator">Install the Operator</h3>
+<ul>
+<li>Install the &ldquo;Advanced Cluster Security for Kubernetes&rdquo; operator from OperatorHub with the default values.</li>
+</ul>
+<h3 id="install-the-main-component-central">Install the main component <strong>Central</strong></h3>
+<ul>
+<li>Navigate to <strong>Operators → Installed Operators</strong></li>
+<li>Select the ACS operator</li>
+<li>You are probably in the <strong>openshift-operator</strong> project, create a new project <strong>stackrox</strong> (use the <strong>Project</strong> drop-down)</li>
+<li>Select <strong>Provided APIs → Central → Create Central</strong></li>
+<li>Change the name if you like and accept the default values</li>
+<li>Click <strong>Create Central</strong></li>
+<li>After deployment has finished (<strong>Status</strong> &ldquo;Conditions: Deployed, Initialized&rdquo;) access the RHACS Portal to verify the installation
+<ul>
+<li>Look up the <strong>central-htpasswd</strong> secret that was created to get the password</li>
+<li>Look up  and access the route <strong>central</strong> which was also generated automatically.</li>
+</ul>
+</li>
+<li>This will get you to the RHACS portal, accept the self-signed certificate and login as user <strong>admin</strong> with the password from the secret.</li>
+</ul>
+<p>Now you have a <strong>Central</strong> instance that provides the following services in an
+RHACS setup:</p>
+<ul>
+<li>
+<p>The application management interface and services. It handles data persistence, API interactions, and user interface access. You can use the same <strong>Central</strong> instance to <strong>secure multiple</strong> OpenShift or Kubernetes clusters.</p>
+</li>
+<li>
+<p>Scanner, which is a vulnerability scanner for  scanning container images. It analyzes all image layers to check known vulnerabilities from the Common Vulnerabilities and Exposures (CVEs) list. Scanner also identifies vulnerabilities in packages installed by package managers and in dependencies for multiple programming languages.</p>
+</li>
+</ul>
+<p>To actually do and see anything you need to add a <strong>SecuredCluster</strong> (be it the same or another OpenShift cluster). For effect go to the <strong>RHACS Portal</strong>, the Dashboard should by pretty empty, click on the <strong>Compliance</strong> link in the menu to the left, lots of zero&rsquo;s and empty panels, too.</p>
+<p>Because you don&rsquo;t have a monitored and secured OpenShift cluster yet.</p>
+<h3 id="prepare-to-add-secured-clusters">Prepare to add Secured Clusters</h3>
+<p>First you have to generate an init bundle which contains certificates and is used to authenticate a <strong>SecuredCluster</strong> to the <strong>Central</strong> instance, again regardless if it&rsquo;s the same cluster as the Central instance or a remote/other cluster.</p>
+<p>In the <strong>RHACS Portal</strong>:</p>
+<ul>
+<li>Navigate to <strong>Platform Configuration → Integrations</strong>.</li>
+<li>Under the <strong>Authentication Tokens</strong> section, click on <strong>Cluster Init Bundle</strong>.</li>
+<li>Click <strong>New Integration</strong></li>
+<li>Enter a name for the cluster init bundle and click <strong>Generate</strong>.</li>
+<li>Click <strong>Download Kubernetes Secret File</strong> to download the generated bundle.</li>
+</ul>
+<p>The init bundle needs to be applied on all OpenShift clusters you want to secure &amp; monitor.</p>
+<h3 id="prepare-the-secured-cluster">Prepare the Secured Cluster</h3>
+<p>For this workshop we run <strong>Central</strong> and <strong>SecuredCluster</strong> on one OpenShift cluster. E.g. we monitor and secure the same cluster the central services live on.</p>
+<p><strong>Apply the init bundle</strong></p>
+<ul>
+<li>Use the <code>oc</code> command to log in to the OpenShift cluster as <code>cluster-admin</code>.
+<ul>
+<li>The easiest way might be to use the <strong>Copy login command</strong> link from the UI</li>
+</ul>
+</li>
+<li>Switch to the <strong>Project</strong> you installed <strong>ACS Central</strong> in, it should be <code>stackrox</code>.</li>
+<li>Run <code>oc create -f &lt;init_bundle&gt;.yaml -n stackrox</code> pointing to the init bundle you downloaded from the Central instance and the Project you created.</li>
+<li>This will create a number of secrets:</li>
+</ul>
+<pre><code>secret/collector-tls created
+secret/sensor-tls created
+secret/admission-control-tls created
+</code></pre><h3 id="add-the-cluster-as-securedcluster-to-acs-central">Add the Cluster as <strong>SecuredCluster</strong> to <strong>ACS Central</strong></h3>
+<p>Now you are ready to install the <strong>SecuredClusters</strong> instance, this will deploy the secured cluster services:</p>
+<ul>
+<li>Go to the <strong>ACS Operator</strong> in <strong>Operators-&gt;Installed Operators</strong></li>
+<li>Using the Operator create an instance of the <strong>Secured Cluster</strong> type <strong>in the Project you created</strong> (should be stackrox)</li>
+<li>Change the <strong>Cluster Name</strong> for the cluster if you want, it&rsquo;ll appear under this name in the RHACS Portal</li>
+<li>And most importantly for <strong>Central Endpoint</strong>  enter the address and port number of your <strong>Central</strong> instance, this is the same as the <strong>RACS Portal</strong>.
+<ul>
+<li>If the RHACS Portal is available at <code>https://central-stackrox.apps.cluster-65h4j.65h4j.sandbox1803.opentlc.com/</code> the endpoint is <code>central-stackrox.apps.cluster-65h4j.65h4j.sandbox1803.opentlc.com:443</code>.</li>
+</ul>
+</li>
+<li>Under <strong>Admission Control Settings</strong>
+<ul>
+<li>enable <strong>listenOnCreates</strong> and <strong>listenOnUpdates</strong></li>
+<li>Set <strong>Contact Image Scanners</strong> to <strong>ScanIfMissing</strong></li>
+</ul>
+</li>
+<li>Click <strong>Create</strong></li>
+</ul>
+<p>Now go to your <strong>RHACS Portal</strong> again, after a couple of minutes you should see you secured cluster under <strong>Platform Configuration-&gt;Clusters</strong>. Wait until all <strong>Cluster Status</strong> indicators become green.</p>
+<!-- ### Create a serviceaccount to scan the internal registry
+To enable scanning of all images in the internal registry, you'll have to
+-  add a serviceaccount
+- assign it the needed privileges
+- configure an **Integration** in ACS
+
+**Create ServiceAccount to read images from Registry**
+- Make sure you are in the `stackrox` **Project**
+- **User Management -> ServiceAccounts -> Create ServiceAccount**
+- Replace the example name with `acs-registry-reader` and click **Create**
+- In the new ServiceAccount, under **Secrets** click the `...-token-...` secret
+- Under **Data** copy the Token
+- Using `oc` give the ServiceAccount the right to **read** images from all projects:
+
+```
+oc adm policy add-cluster-role-to-user 'system:image-puller' -z acs-registry-reader -n stackrox
+```
+
+or
+
+```
+oc adm policy add-cluster-role-to-user 'system:image-puller' system:serviceaccount:stackrox:acs-registry-reader -n stackrox
+```
+And you'll need the service address for the registry, look it up e.g. from the **Environment** of a registry pod.
+  - It should be something like: `image-registry.openshift-image-registry.svc:5000`
+
+
+**Add Registry Integration to ACS**
+
+Access the **RHACS Portal** and add an integration of type **Generic Docker Registry** from the **Platform Configuration -> Integrations menu**.
+
+Fill in the fields:
+- Give the integration a unique name that should include the cluster name
+- Set **Types** to **Registry**
+- Set **Endpoint** to the registry service address
+- Put in the ServiceAccount name as username and the token you copied above
+- Select Disable TLS certificate validation
+- Press the test button to validate the connection and press **Save** when the test is successful. -->
+
+
+
+
+
+<footer class=" footline" >
 	
-  
+</footer>
+
         
         </div>
         
@@ -514,6 +695,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -529,6 +711,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -614,8 +799,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="https://devsecops-workshop.github.io/5-gitops/" title="Configure GitOps"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="https://devsecops-workshop.github.io/1-intro/" title="The DevSecOps Workshop" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="https://devsecops-workshop.github.io/11-rhacs-warmup/" title="Getting to know ACS" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -647,4 +834,3 @@
 
   </body>
 </html>
-

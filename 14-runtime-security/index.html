@@ -9,7 +9,7 @@
 
     <link rel="icon" href="https://devsecops-workshop.github.io/images/favicon.png" type="image/png">
 
-    <title> :: DevSecOps Workshop 2021</title>
+    <title>Securing Runtime Events :: DevSecOps Workshop 2021</title>
 
     
     <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634730991" rel="stylesheet">
@@ -41,7 +41,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/">
+  <body class="" data-url="/14-runtime-security/">
     <nav id="sidebar" class="">
 
 
@@ -312,7 +312,7 @@
     
     <li data-nav-id="/14-runtime-security/" title="Securing Runtime Events" class="dd-item
         
-        
+        active
         
         ">
       <a href="https://devsecops-workshop.github.io/14-runtime-security/">
@@ -382,24 +382,132 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
               
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='https://devsecops-workshop.github.io/'></a> > Securing Runtime Events
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#handling-security-issues-at-runtime">Handling Security Issues at Runtime</a></li>
+    <li><a href="#test-the-runtime-policy">Test the Runtime Policy</a></li>
+    <li><a href="#enforce-runtime-protection">Enforce Runtime Protection</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
         <div id="head-tags">
         
         </div>
         
         <div id="body-inner">
           
+            <h1>
+              
+              Securing Runtime Events
+            </h1>
+          
 
         
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fas fa-bars"></i> navigation</a>
-</span>
 
- 
-<h1 id="devsecops-workshop">DevSecOps Workshop</h1>
-<p>This is the documentation for the DevSecOps Workshop</p>
+
+	<p>So far you&rsquo;ve seen how ACS can handle security issues concerning <strong>Build</strong> and <strong>Deploy</strong> stages. But ACS is also able to detect and secure container runtime behaviour. Let&rsquo;s have a look&hellip;</p>
+<h2 id="handling-security-issues-at-runtime">Handling Security Issues at Runtime</h2>
+<p>As a scenario let&rsquo;s assume you won&rsquo;t to protect container workloads against attackers who are trying to install software. ACS comes with pre-configured policies for Ubuntu and Red Hat-based containers to detect if a package management tool is installed, this can be used in the <strong>Build</strong> and <strong>Deploy</strong> stages:</p>
+<ul>
+<li><strong>Red Hat Package Manager in Image</strong></li>
+</ul>
+<p>And, more important for this section about runtime security, a policy to detect the execution of a package manager as a runtime violation, using Kernel instrumentation:</p>
+<ul>
+<li><strong>Red Hat Package Manager Execution</strong></li>
+</ul>
+<p>In the <strong>ACS Portal</strong>, go to <strong>Platform Configuration-&gt;System Policies</strong>, search for the policies by e.g. typing <code>policy</code> and then <code>red hat</code> into the filter. Open the policy detail view by clicking it and have a look at what they do.</p>
+
+<div class="notices tip" ><p>You can use the included policies as they are but you can always e.g. clone and adapt them to your needs or write completely new ones.</p>
+</div>
+
+<p>As you can see the <strong>Red Hat Package Manager Execution</strong> policy will alert as soon as a process <strong>rpm or dnf or yum</strong> is executed.</p>
+
+<div class="notices tip" ><p>Like with most included policies it is not set to enforce!</p>
+</div>
+
+<h2 id="test-the-runtime-policy">Test the Runtime Policy</h2>
+<p>To see how the alert would look like, we have to trigger the condition:</p>
+<ul>
+<li>You should have a namespace with your Quarkus application runnning</li>
+<li>In the OCP UI navigate to the pod and open a terminal into the container</li>
+<li>Run <code>yum search test</code>. Or whatever.</li>
+<li>Go to the <strong>Violations</strong> view in the <strong>ACS Portal</strong>.</li>
+<li>You should see a violation of the policy, if you click it, you&rsquo;ll get the details.</li>
+<li>Run several <code>yum</code> commands in the terminal and check back with the <strong>Violations</strong> view:
+<ul>
+<li>As long as you stay in the same <strong>deployment</strong>, there won&rsquo;t be a new violation</li>
+<li>but you will see the details for every new violation of the same type in the details.</li>
+</ul>
+</li>
+</ul>
+<h2 id="enforce-runtime-protection">Enforce Runtime Protection</h2>
+<p>But the real fun starts when you enforce the policy. Using the included policy, it&rsquo;s easy to just &ldquo;switch it on&rdquo;:</p>
+<ul>
+<li>In the <strong>ACS Portal</strong> bring up the <strong>Red Hat Package Manager Execution</strong> again.</li>
+<li>Click the <strong>Edit</strong> button above the Details view to the right.</li>
+<li>Click <strong>-&gt;Next</strong> until you arrive at the <strong>Enforcement Behaviour</strong> page.</li>
+<li>Set <strong>Runtime</strong> to <strong>ON</strong></li>
+<li>Click <strong>Save</strong></li>
+</ul>
+<p>Now trigger the policy again by opening a terminal into the pod and executing <code>yum</code>. See what happens:</p>
+<ul>
+<li>Runtime enforcement will kill the pod immediately (via k8s).</li>
+<li>Kubernetes will scale it up again automatically
+<ul>
+<li>This is to be expected and allows to contain a potential compromise while not causing a production outage.</li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+<footer class=" footline" >
 	
-  
+</footer>
+
         
         </div>
         
@@ -578,6 +686,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -594,6 +703,9 @@
             
                 
                     
+                        
+                        
+                    
                 
                 
 
@@ -614,8 +726,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="https://devsecops-workshop.github.io/13-rhacs-pipeline/" title="Integrating ACS into the Pipeline"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="https://devsecops-workshop.github.io/1-intro/" title="The DevSecOps Workshop" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="https://devsecops-workshop.github.io/100-playground/" title="Playground" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -647,4 +761,3 @@
 
   </body>
 </html>
-

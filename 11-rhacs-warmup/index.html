@@ -9,7 +9,7 @@
 
     <link rel="icon" href="https://devsecops-workshop.github.io/images/favicon.png" type="image/png">
 
-    <title> :: DevSecOps Workshop 2021</title>
+    <title>Getting to know ACS :: DevSecOps Workshop 2021</title>
 
     
     <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634730991" rel="stylesheet">
@@ -41,7 +41,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/">
+  <body class="" data-url="/11-rhacs-warmup/">
     <nav id="sidebar" class="">
 
 
@@ -240,7 +240,7 @@
     
     <li data-nav-id="/11-rhacs-warmup/" title="Getting to know ACS" class="dd-item
         
-        
+        active
         
         ">
       <a href="https://devsecops-workshop.github.io/11-rhacs-warmup/">
@@ -382,24 +382,176 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
               
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='https://devsecops-workshop.github.io/'></a> > Getting to know ACS
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#acs-features">ACS Features</a></li>
+    <li><a href="#ui-overview">UI Overview</a></li>
+    <li><a href="#exploring-the-security-use-cases">Exploring the Security Use Cases</a></li>
+    <li><a href="#system-policies">System Policies</a></li>
+    <li><a href="#filters">Filters</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
         <div id="head-tags">
         
         </div>
         
         <div id="body-inner">
           
+            <h1>
+              
+              Getting to know ACS
+            </h1>
+          
 
         
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fas fa-bars"></i> navigation</a>
-</span>
 
- 
-<h1 id="devsecops-workshop">DevSecOps Workshop</h1>
-<p>This is the documentation for the DevSecOps Workshop</p>
+
+	<p>Before we start to integrate <strong>Red Hat Advanced Cluster Security</strong> in our setup, you should become familiar with the basic concepts.</p>
+<h2 id="acs-features">ACS Features</h2>
+<p>ACS delivers on these security use cases:</p>
+<ul>
+<li><strong>Vulnerability Management</strong>: Protect the software supply chain and prevent known vulnerabilities from being used as an entry point in your applications.</li>
+<li><strong>Configuration Management</strong>: Leverage the OpenShift platform for declarative security to prevent or limit attacks, even in the presence of exploitable vulnerabilities.</li>
+<li><strong>Network Segmentation</strong>: Using Kubernetes network policies in OpenShift, restrict open network paths for isolation and to prevent lateral movement by attackers.</li>
+<li><strong>Risk Profiling</strong>: Prioritize applications and security risks automatically to focus investigation and mitigation efforts.</li>
+<li><strong>Threat detection and incident response</strong>: Continuous observation and response in order to take action on attack-related activity, and to use observed behavior to inform mitigation efforts to harden security.</li>
+<li><strong>Compliance</strong>: Making sure that industry and regulatory standards are being met in your OpenShift environments.</li>
+</ul>
+<h2 id="ui-overview">UI Overview</h2>
+<ul>
+<li>
+<p><strong>Dashboard</strong>:
+The dashboard serves as the security overview - helping the security team understand what the sources of risk are, categories of violations, and gaps in compliance. All of the elements are clickable for more information and categories are customizable.</p>
+</li>
+<li>
+<p><strong>Top bar</strong>:
+Near the top, we see an overview of our OpenShift clusters. It provides insight into the usage of images and secrets.
+The top bar provides links to Search, Command-line tools, Cluster Health, Documentation, API Reference, and logged-in
+user account</p>
+</li>
+<li>
+<p><strong>Left menus</strong>:
+The left hands side menus provide navigation into each of the security use-cases, as well as product configuration to integrate with your existing tooling.</p>
+</li>
+<li>
+<p><strong>Global Search</strong>:
+On every page throughout the UI, the global search allows you to search for any data that ACS tracks.</p>
+</li>
+</ul>
+<h2 id="exploring-the-security-use-cases">Exploring the Security Use Cases</h2>
+<p>Now start to explore the Security Use Cases ACS targets as provided in the left side menu.</p>
+<ul>
+<li>
+<p><strong>Network Graph</strong>:</p>
+<ul>
+<li>The Network Graph is a flow diagram, firewall diagram, and firewall rule builder in one.</li>
+<li>The default view <strong>Active</strong> the actual traffic for the Past Hour between the deployments in all namespaces is shown.</li>
+</ul>
+</li>
+<li>
+<p><strong>Violations</strong>:</p>
+<ul>
+<li>Violations record all times where a policy criteria was triggered by any of the objects in your cluster - images, components, deployments, runtime activity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Compliance</strong>:</p>
+<ul>
+<li>The compliance reports gather information for configuration, industry standards, and best practices for container-based workloads running in OpenShift.</li>
+</ul>
+</li>
+<li>
+<p><strong>Vulnerability Management</strong>:</p>
+<ul>
+<li>Vulnerability Management provides several important reports - where the vulnerabilities are, which are the most widespread or the most recent, where my images are coming from.</li>
+<li>In the upper right are buttons to link to all policies, CVEs, and images, and a menu to bring you to reports by cluster, namespace, deployment, and co.</li>
+</ul>
+</li>
+<li>
+<p><strong>Configuration Management</strong>:</p>
+<ul>
+<li>Configuration management provides visibility into a number of infrastructure components: clusters and nodes, namespaces and deployments, and Kubernetes systems like RBAC and secrets.</li>
+</ul>
+</li>
+<li>
+<p><strong>Risk</strong>:</p>
+<ul>
+<li>The Risk view goes beyond the basics of vulnerabilities. It helps to understand how deployment configuration and runtime activity impact the likelihood of an exploit occurring and how successful those exploits will be.</li>
+<li>This list view shows all deployments, in all clusters and namespaces, ordered by Risk priority.</li>
+</ul>
+</li>
+</ul>
+<h2 id="system-policies">System Policies</h2>
+<p>As the foundation of ACS are the <strong>system policies</strong>, have a good look around:</p>
+<ul>
+<li>Navigate to the <strong>System Policies</strong> section from <strong>Platform Configuration</strong> in the left side menu.</li>
+<li>You will get an overview of the Built-in Policies</li>
+<li>All of the policies that ship with the product are designed with the goal of providing targeted remediation that improves security hardening.</li>
+<li>You’ll see this list contains many <strong>Build</strong> and <strong>Deploy</strong> time policies to catch misconfigurations early in the pipeline, but also <strong>Runtime</strong> policies.</li>
+<li>These policies come from us at Red Hat - our expertise, our interpretation of industry best practice, and our interpretation of common compliance standards, but you can modify them or create your own.</li>
+</ul>
+<h2 id="filters">Filters</h2>
+<p>Most UI pages have a filters section at the top that allows you to narrow the reporting view to matching or non-matching criteria. Almost all of the attributes that ACS gathers are filterable, try it out:</p>
+<ul>
+<li>Go to the <strong>Risk</strong> view</li>
+<li>Click in the <strong>Filters</strong> Bar</li>
+<li>Start typing <code>Process Name</code> and select the <code>Process Name</code> key</li>
+<li>Type <code>java</code> and press enter; click away to get the filters dropdown to clear</li>
+<li>You should see your deployment that has been “seen” running Java since it started</li>
+<li>Try another one: limit the filter to your Project namespace only</li>
+<li>Note the <strong>Create Policy</strong> button. It can be used to create a policy from the search filter to automatically identify this criteria.</li>
+</ul>
+
+
+
+
+
+<footer class=" footline" >
 	
-  
+</footer>
+
         
         </div>
         
@@ -530,6 +682,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -545,6 +698,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -614,8 +770,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="https://devsecops-workshop.github.io/10-rhacs-setup/" title="Install and Configure ACS"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="https://devsecops-workshop.github.io/1-intro/" title="The DevSecOps Workshop" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="https://devsecops-workshop.github.io/12-create-policy/" title="Create a Custom Security Policy" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -647,4 +805,3 @@
 
   </body>
 </html>
-

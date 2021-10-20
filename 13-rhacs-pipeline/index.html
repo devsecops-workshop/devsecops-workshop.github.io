@@ -9,7 +9,7 @@
 
     <link rel="icon" href="https://devsecops-workshop.github.io/images/favicon.png" type="image/png">
 
-    <title>The DevSecOps Workshop :: DevSecOps Workshop 2021</title>
+    <title>Integrating ACS into the Pipeline :: DevSecOps Workshop 2021</title>
 
     
     <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634730991" rel="stylesheet">
@@ -41,7 +41,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/1-intro/">
+  <body class="" data-url="/13-rhacs-pipeline/">
     <nav id="sidebar" class="">
 
 
@@ -96,7 +96,7 @@
     
     <li data-nav-id="/1-intro/" title="The DevSecOps Workshop" class="dd-item
         
-        active
+        
         
         ">
       <a href="https://devsecops-workshop.github.io/1-intro/">
@@ -288,7 +288,7 @@
     
     <li data-nav-id="/13-rhacs-pipeline/" title="Integrating ACS into the Pipeline" class="dd-item
         
-        
+        active
         
         ">
       <a href="https://devsecops-workshop.github.io/13-rhacs-pipeline/">
@@ -405,7 +405,7 @@
             
           
           
-            <a href='https://devsecops-workshop.github.io/'></a> > The DevSecOps Workshop
+            <a href='https://devsecops-workshop.github.io/'></a> > Integrating ACS into the Pipeline
           
         
           
@@ -418,10 +418,18 @@
     <div class="wrapper">
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#intro">Intro</a></li>
-    <li><a href="#what-to-expect">What to Expect</a></li>
-    <li><a href="#workshop-environment">Workshop Environment</a></li>
-    <li><a href="#workshop-flow">Workshop Flow</a></li>
+    <li><a href="#finally-putting-the-sec-in-devsecops">Finally: Putting the Sec in DevSecOps!</a></li>
+    <li><a href="#integrate-image-scan-into-the-pipeline">Integrate Image Scan into the Pipeline</a>
+      <ul>
+        <li><a href="#lets-go-prepare-roxctl">Let&rsquo;s go: Prepare <code>roxctl</code></a></li>
+        <li><a href="#create-the-roxctl-token">Create the <code>roxctl</code> token</a></li>
+        <li><a href="#create-ocp-secret-with-token">Create OCP secret with token</a></li>
+        <li><a href="#create-a-scan-task">Create a Scan Task</a></li>
+        <li><a href="#add-the-task-to-the-pipeline">Add the Task to the Pipeline</a></li>
+      </ul>
+    </li>
+    <li><a href="#test-the-scan-task">Test the Scan Task</a></li>
+    <li><a href="#enforce-the-policy">Enforce the Policy</a></li>
   </ul>
 </nav>
     </div>
@@ -439,7 +447,7 @@
           
             <h1>
               
-              The DevSecOps Workshop
+              Integrating ACS into the Pipeline
             </h1>
           
 
@@ -447,40 +455,161 @@
 
 
 
-	<h2 id="intro">Intro</h2>
-<p>This workshop is meant to introduce you to the application development cycle leveraging OpenShift&rsquo;s tooling &amp; features with a special focus on securing your environment using Advanced Cluster Security for Kubernetes (ACS). And all in a <strong>fun way</strong>.</p>
-<p>This is the storyline you&rsquo;ll follow today:</p>
-<ul>
-<li>Create application using CodeReady Workspaces</li>
-<li>Inner Dev Loop
-<ul>
-<li>Use <code>odo</code> to create, push, change apps on the fly</li>
-</ul>
-</li>
-<li>Outer Dev Loop
-<ul>
-<li>Learn to work with Tekton Pipelines</li>
-<li>Use GitOps with ArgoCD</li>
-</ul>
-</li>
-<li>Secure your app and OpenShift cluster with <strong>ACS</strong>
-<ul>
-<li>Introduction to ACS</li>
-<li>Example use cases</li>
-<li>Add ACS scanning to Tekton Pipeline</li>
-</ul>
-</li>
-</ul>
-<h2 id="what-to-expect">What to Expect</h2>
-<p>We try to balance guided workshop steps and challenging you to use your knowledge to learn new skills. This means you&rsquo;ll get detailed step-by-step instructions for every new chapter/task, later on the guide will become less verbose and we&rsquo;ll weave in some challenges.</p>
+	<h2 id="finally-putting-the-sec-in-devsecops">Finally: Putting the Sec in DevSecOps!</h2>
 
-<div class="notices warning" ><p>A good understanding of how OpenShift works together with hands-on experience is expected. For example we will not tell you how to log in <code>oc</code> to your cluster or tell you what it is&hellip; ;)</p>
+<div class="notices tip" ><p>There are basically two ways to interface with ACS. The UI, which focuses on the needs of the security team, and a separate &ldquo;interface&rdquo; for developers to integrate into their existing toolset (CI/CD pipeline, consoles, ticketing systems etc): The <code>roxctl</code> commandline tool. This way ACS provides a familiar interface to understand and address issues that the security team considers important.</p>
 </div>
 
-<h2 id="workshop-environment">Workshop Environment</h2>
-<p>You will be provided with freshly installed OpenShift 4 clusters running in AWS. Depending on attendee numbers we might ask you to gather in teams. Some workshop tasks must be done only once for the cluster (e.g. installing Operators), others like deploying and securing the application can be done by every team member separately in her/his own Project. This will be mentioned in the guide.</p>
-<h2 id="workshop-flow">Workshop Flow</h2>
-<p>We&rsquo;ll tackle the topics at hand step by step with an introduction covering the things worked on before every section.</p>
+<p>ACS policies can act during the CI/CD pipeline to identify security risk in images before they are run as a container.</p>
+<h2 id="integrate-image-scan-into-the-pipeline">Integrate Image Scan into the Pipeline</h2>
+<p>You should have created and build a custom policy in ACS and tested it for triggering violations. Now you will integrate it into the build pipeline.</p>
+<h3 id="lets-go-prepare-roxctl">Let&rsquo;s go: Prepare <code>roxctl</code></h3>
+<p>Build-time policies require the use of the <code>roxctl</code> command-line tool which is available for download from the ACS Central UI, in the upper right corner of the dashboard. <code>Roxctl</code> needs to authenticate to <strong>ACS Central</strong> to do anything. It can use either username and password authentication to Central, or API token based. It&rsquo;s good practice to use a token so that&rsquo;s what you&rsquo;ll do.</p>
+<h3 id="create-the-roxctl-token">Create the <code>roxctl</code> token</h3>
+<p>On the ACS portal:</p>
+<ul>
+<li>navigate to <strong>Configure &gt; Integrations</strong>.</li>
+<li>Scroll down to the <strong>Authentication Tokens</strong> category, and select <strong>API Token</strong>.</li>
+<li>Click <strong>Generate Token</strong>. Enter the name <code>pipeline</code> for the token and select the role <strong>Admin</strong>.</li>
+<li>Select <strong>Generate</strong></li>
+<li>Save the contents of the token somewhere!</li>
+</ul>
+<h3 id="create-ocp-secret-with-token">Create OCP secret with token</h3>
+<p>In your OCP cluster, create a secret with the API token in the project your pipeline lives in:</p>
+<ul>
+<li>In the UI switch to your Project</li>
+<li>Create a new key/value secret named <strong>roxsecrets</strong></li>
+<li>Introduce these key/values into the secret:
+<ul>
+<li><strong>rox_central_endpoint</strong>: &lt;the URL to your <strong>ACS Portal</strong>&gt;
+<ul>
+<li>It should be something like central-stackrox.apps.cluster-psslb.psslb.sandbox555.opentlc.com:443&rdquo;</li>
+</ul>
+</li>
+<li><strong>rox_api_token</strong>: &lt;the API token you generated&gt;</li>
+</ul>
+</li>
+</ul>
+<h3 id="create-a-scan-task">Create a Scan Task</h3>
+<p>You are now ready to create a new pipeline task that will use <code>roxctl</code> to scan the image build in your pipeline before the deploy step:</p>
+<ul>
+<li>In the OCP UI, make sure you are still in the project with your pipeline and the secret <code>roxsecrets</code></li>
+<li>Go to <strong>Pipelines-&gt;Tasks</strong></li>
+<li>Click <strong>Create-&gt; ClusterTask</strong></li>
+<li>Replace the YAML displayed with this:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: tekton.dev/v1beta1
+<span style="color:#66d9ef">kind</span>: ClusterTask
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: rox-image-check
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">params</span>:
+    - <span style="color:#66d9ef">description</span>: &gt;<span style="color:#e6db74">-
+</span><span style="color:#e6db74">        Secret containing the address:port tuple for StackRox Central (example -</span>
+        rox.stackrox.io:<span style="color:#ae81ff">443</span>)
+      <span style="color:#66d9ef">name</span>: rox_central_endpoint
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">description</span>: Secret containing the StackRox API token with CI permissions
+      <span style="color:#66d9ef">name</span>: rox_api_token
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&#39;Full name of image to scan (example -- gcr.io/rox/sample:5.0-rc1)&#39;</span>
+      <span style="color:#66d9ef">name</span>: image
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">description</span>: Use image digest result from s2i-java build task
+      <span style="color:#66d9ef">name</span>: image_digest
+      <span style="color:#66d9ef">type</span>: string
+  <span style="color:#66d9ef">results</span>:
+    - <span style="color:#66d9ef">description</span>: Output of `roxctl image check`
+      <span style="color:#66d9ef">name</span>: check_output
+  <span style="color:#66d9ef">steps</span>:
+    - <span style="color:#66d9ef">env</span>:
+        - <span style="color:#66d9ef">name</span>: ROX_API_TOKEN
+          <span style="color:#66d9ef">valueFrom</span>:
+            <span style="color:#66d9ef">secretKeyRef</span>:
+              <span style="color:#66d9ef">key</span>: rox_api_token
+              <span style="color:#66d9ef">name</span>: $(params.rox_api_token)
+        - <span style="color:#66d9ef">name</span>: ROX_CENTRAL_ENDPOINT
+          <span style="color:#66d9ef">valueFrom</span>:
+            <span style="color:#66d9ef">secretKeyRef</span>:
+              <span style="color:#66d9ef">key</span>: rox_central_endpoint
+              <span style="color:#66d9ef">name</span>: $(params.rox_central_endpoint)
+      <span style="color:#66d9ef">image</span>: registry.access.redhat.com/ubi8/ubi-minimal:latest
+      <span style="color:#66d9ef">name</span>: rox-image-check
+      <span style="color:#66d9ef">resources</span>: {}
+      <span style="color:#66d9ef">script</span>: &gt;<span style="color:#e6db74">-
+</span><span style="color:#e6db74">        #!/usr/bin/env bash</span>
+
+        set +x
+
+        curl -k -L -H <span style="color:#e6db74">&#34;Authorization: Bearer $ROX_API_TOKEN&#34;</span>
+        https://$ROX_CENTRAL_ENDPOINT/api/cli/download/roxctl-linux --output
+        ./roxctl  &gt; /dev/<span style="color:#66d9ef">null</span>; echo <span style="color:#e6db74">&#34;Getting roxctl&#34;</span>
+
+        chmod +x ./roxctl  &gt; /dev/<span style="color:#66d9ef">null</span>
+
+        ./roxctl image check -c Deepspace --insecure-skip-tls-verify -e $ROX_CENTRAL_ENDPOINT
+        --image $(params.image)@$(params.image_digest)
+</code></pre></div><p>Take your time to <strong>understand</strong> the Tekton task definition:</p>
+<ul>
+<li>First some parameters are defined, it&rsquo;s important to understand some of these are taken or depend on the build task that run before.</li>
+<li>The script action pulls the <code>roxctl</code> binary into the pipeline workspace so you&rsquo;ll always have a version compatible with your ACS version.</li>
+<li>The most important bit is the <code>roxctl</code> execution, of course.
+<ul>
+<li>it executes the <code>image check</code> command</li>
+<li>only checks against policies from category <strong>Deepspace</strong> that was created above. This way you can check against a subset of policies!</li>
+<li>defines the image to check and it&rsquo;s digest</li>
+</ul>
+</li>
+</ul>
+<h3 id="add-the-task-to-the-pipeline">Add the Task to the Pipeline</h3>
+<ul>
+<li>Now add the <strong>rox-image-check</strong> task to your pipeline between the <strong>build</strong> and <strong>deploy</strong> steps.</li>
+</ul>
+<p>After you added it you have to fill in values for the parameters the task defines. Click the task, a form with the parameters will open, fill it in:</p>
+<ul>
+<li><strong>rox_central_endpoint</strong>: <code>roxsecrets</code></li>
+<li><strong>rox_api_token</strong>: <code>roxsecrets</code></li>
+<li><strong>image</strong>: <code>image-registry.openshift-image-registry.svc:5000/deepspace-int/quarkus-deepspace</code>
+<ul>
+<li>Adapt the Project name if you changed it</li>
+</ul>
+</li>
+<li><strong>image_digest</strong>: $(tasks.build.results.IMAGE_DIGEST)
+<ul>
+<li>This variable takes the result of the <strong>build</strong> task and uses it in the scan task.</li>
+</ul>
+</li>
+<li>Click <strong>Save</strong></li>
+</ul>
+<h2 id="test-the-scan-task">Test the Scan Task</h2>
+<p>With our Deepspace <strong>Security Policy</strong> still not set to <code>enforce</code> we first are going to test the pipeline integration. Start the pipeline with Java <strong>Version</strong> <code>java-old-test</code></p>
+<ul>
+<li>Expected Result:
+<ul>
+<li>The <code>rox-image-check</code> task should succeed, but if you have a look at the output (click the task in the visual representation) you should see that the <strong>build violated our policy</strong>!</li>
+</ul>
+</li>
+</ul>
+<p>To test the fixed image, just start the task with the default (latest) Java version again.</p>
+<ul>
+<li>Expected Result:
+<ul>
+<li>The <code>rox-image-check</code> task should succeed, if you have a look at the output you should see <strong>no policy violation</strong>!</li>
+</ul>
+</li>
+</ul>
+<h2 id="enforce-the-policy">Enforce the Policy</h2>
+<p>The last step is to enforce the Security Policy. If the policy is violated the pipeline should be stopped and the application should not be deployed.</p>
+<ul>
+<li>Edit the <strong>Security Policy</strong> in <strong>ACS Portal</strong> and set enforcement to <strong>On</strong> for the stages <strong>Build</strong> and <strong>Deploy</strong></li>
+<li>Run the pipeline again, first with Java <strong>Version</strong> <code>java-old-test</code> and then with the latest default version.</li>
+<li>Expecte results:
+<ul>
+<li>We are sure you know by now what to expect!</li>
+<li>The pipeline should fail with the old Java image version and succeed with the latest image version!</li>
+</ul>
+</li>
+</ul>
 
 
 
@@ -521,23 +650,6 @@
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                         
                         
                     
@@ -668,6 +780,26 @@
             
             
                 
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -705,10 +837,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="https://devsecops-workshop.github.io/" title=""> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="https://devsecops-workshop.github.io/12-create-policy/" title="Create a Custom Security Policy"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="https://devsecops-workshop.github.io/2-prepare-cluster/" title="Prepare Cluster" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="https://devsecops-workshop.github.io/14-runtime-security/" title="Securing Runtime Events" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

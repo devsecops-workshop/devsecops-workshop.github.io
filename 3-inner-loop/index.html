@@ -9,7 +9,7 @@
 
     <link rel="icon" href="https://devsecops-workshop.github.io/images/favicon.png" type="image/png">
 
-    <title> :: DevSecOps Workshop 2021</title>
+    <title>Inner Loop :: DevSecOps Workshop 2021</title>
 
     
     <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634730991" rel="stylesheet">
@@ -41,7 +41,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/">
+  <body class="" data-url="/3-inner-loop/">
     <nav id="sidebar" class="">
 
 
@@ -144,7 +144,7 @@
     
     <li data-nav-id="/3-inner-loop/" title="Inner Loop" class="dd-item
         
-        
+        active
         
         ">
       <a href="https://devsecops-workshop.github.io/3-inner-loop/">
@@ -382,24 +382,112 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
               
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='https://devsecops-workshop.github.io/'></a> > Inner Loop
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents"></nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
         <div id="head-tags">
         
         </div>
         
         <div id="body-inner">
           
+            <h1>
+              
+              Inner Loop
+            </h1>
+          
 
         
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fas fa-bars"></i> navigation</a>
-</span>
 
- 
-<h1 id="devsecops-workshop">DevSecOps Workshop</h1>
-<p>This is the documentation for the DevSecOps Workshop</p>
+
+	<p>In this part of the workshop you&rsquo;ll experience how modern software development using the OpenShift tooling can be done in a fast, iterative way. <strong>Inner loop</strong> here means <code>this is the way</code>, sorry, process, for a developer to try out new things and quickly change and test her/his code.</p>
+<p>As an example you&rsquo;ll create a new Quarkus application. You don&rsquo;t need to have prior experience programming in Java as this will be kept really simple.</p>
+<ul>
+<li>Bring up your CodeReady Workspace in your browser.</li>
+<li>In CRW open Terminal
+<ul>
+<li>In <strong>My Workspace</strong> to the right click <strong>New Terminal</strong></li>
+</ul>
+</li>
+<li>Copy the login command from your OpenShift cluster, and use it to log in <code>oc</code> in the CRW terminal.</li>
+<li>Create a new project <code>deepspace-dev</code></li>
+<li>First use <code>odo</code> (&ldquo;OpenShift Do&rdquo;) to list the programming languages/frameworks it supports
+<ul>
+<li>Note that not all languages <code>odo</code> works with are officially supported!</li>
+</ul>
+</li>
+</ul>
+<pre><code>./odo catalog list components
+</code></pre><p>Now initialize a new Quarkus application</p>
+<pre><code>./odo create java-quarkus
+</code></pre><p>Create the app</p>
+<pre><code>./odo url create deepdive-app
+</code></pre><p>And finally push the app to OpenShift</p>
+<pre><code>./odo push
+</code></pre><p>To test the app:</p>
+<ul>
+<li>In OpenShift open the <code>deepspace-dev</code> project and switch to the <strong>Developer Console</strong></li>
+<li>Open the deployment and access the route</li>
+<li>Your app should show up as a simple web page. In the <code>RESTEasy JAX-RS</code> section click the <code>@Path</code> endpoint <code>/hello</code> to see the result.</li>
+</ul>
+<p>Now for the fun part: Using <code>odo</code> you can just dynamically change your code and push it out again without doing a new build! No dev magic involved:</p>
+<ul>
+<li>In your code access and change <code>GreetingRessource.java</code> to <code>Hello Deepdive</code></li>
+<li>Push the code to OpenShift</li>
+</ul>
+<pre><code>./odo push
+</code></pre><ul>
+<li>And access the endpoint in the web app again.</li>
+</ul>
+
+
+
+
+
+<footer class=" footline" >
 	
-  
+</footer>
+
         
         </div>
         
@@ -466,6 +554,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -481,6 +570,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -614,8 +706,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="https://devsecops-workshop.github.io/2-prepare-cluster/" title="Prepare Cluster"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="https://devsecops-workshop.github.io/1-intro/" title="The DevSecOps Workshop" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="https://devsecops-workshop.github.io/4-outer-loop/" title="Outer Loop" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -647,4 +741,3 @@
 
   </body>
 </html>
-

@@ -9,7 +9,7 @@
 
     <link rel="icon" href="https://devsecops-workshop.github.io/images/favicon.png" type="image/png">
 
-    <title> :: DevSecOps Workshop 2021</title>
+    <title>Prepare Cluster :: DevSecOps Workshop 2021</title>
 
     
     <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634730991" rel="stylesheet">
@@ -41,7 +41,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/">
+  <body class="" data-url="/2-prepare-cluster/">
     <nav id="sidebar" class="">
 
 
@@ -120,7 +120,7 @@
     
     <li data-nav-id="/2-prepare-cluster/" title="Prepare Cluster" class="dd-item
         
-        
+        active
         
         ">
       <a href="https://devsecops-workshop.github.io/2-prepare-cluster/">
@@ -382,24 +382,163 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
               
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='https://devsecops-workshop.github.io/'></a> > Prepare Cluster
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#cluster-preparation">Cluster Preparation</a></li>
+    <li><a href="#install-and-prepare-gitea">Install and Prepare Gitea</a></li>
+    <li><a href="#install-and-prepare-codeready-workspaces-crw">Install and Prepare CodeReady Workspaces (CRW)</a></li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
         <div id="head-tags">
         
         </div>
         
         <div id="body-inner">
           
+            <h1>
+              
+              Prepare Cluster
+            </h1>
+          
 
         
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fas fa-bars"></i> navigation</a>
-</span>
 
- 
-<h1 id="devsecops-workshop">DevSecOps Workshop</h1>
-<p>This is the documentation for the DevSecOps Workshop</p>
+
+	<h2 id="cluster-preparation">Cluster Preparation</h2>
+<p>Before you start you have to install a number of components you&rsquo;ll use during the workshop. The first two are <code>Gitea</code> for providing Git services in your cluster and <code>CodeReady Workspaces</code> as development environment. But fear not, both are managed by an operator.</p>
+<h2 id="install-and-prepare-gitea">Install and Prepare Gitea</h2>
+<p>We&rsquo;ll need Git repository srvices, so let&rsquo;s just install trusted <code>Gitea</code> using an operator:</p>
+
+<div class="notices tip" ><p>This is a good example of how you can integrate an operator into your catalog that is not part of the default OperatorHub already.</p>
+</div>
+
+<ul>
+<li>Log in the <code>oc</code> command to your OpenShift cluster (the easiest way is to use the <strong>Copy login command</strong> link in the OCP web UI).</li>
+<li>Now using <code>oc</code> add the Gitea Operator to your OperatorHub</li>
+</ul>
+<pre><code>oc apply -f https://raw.githubusercontent.com/redhat-gpte-devopsautomation/gitea-operator/master/catalog_source.yaml
+</code></pre><ul>
+<li>Go to OperatorHub and search for <code>Gitea</code></li>
+<li>Install the <code>Gitea Operator</code> with default settings</li>
+<li>Create a new project <code>git</code></li>
+<li>Go to <strong>Installed Operators -&gt; Gitea Operator</strong> and click <strong>Create instance</strong> in the new project.</li>
+<li>On the <strong>Create Gitea</strong> page switch to the YAML view and make sure the following <code>spec</code> values exist:</li>
+</ul>
+<pre><code>spec:
+  giteaSsl: true
+  giteaAdminUser: gitea
+  giteaAdminPassword: &quot;gitea&quot;
+  giteaAdminEmail: opentlc-mgr@redhat.com
+</code></pre><ul>
+<li>Click <strong>Create</strong></li>
+</ul>
+<p>After creation has finished:</p>
+<ul>
+<li>Look up and access the <code>repository</code> route, this will take you to the Gitea web UI</li>
+<li>Login to Gitea with user <code>gitea</code> and password <code>gitea</code></li>
+<li>Clone the example repo:
+<ul>
+<li>Click the <strong>+</strong> dropdown and choose <strong>New Migration</strong></li>
+<li>As type choose <strong>Git</strong></li>
+<li><strong>URL</strong>: <a href="https://github.com/devsecops-workshop/quarkus-build-options.git">https://github.com/devsecops-workshop/quarkus-build-options.git</a></li>
+<li>Click <strong>Migrate Repository</strong></li>
+</ul>
+</li>
+</ul>
+<p>In the cloned repository you&rsquo;ll find a <code>devfile.yml</code> for use with CodeReady Workspaces (CRW). You have to edit the file to point to your own repository:</p>
+<ul>
+<li>Copy the clone URL of your repo.</li>
+<li>Edit the <code>devfile.yml</code> by clicking it and selecting the <strong>Edit File</strong> pencil icon.
+<ul>
+<li>In the file change <strong>location:</strong> to the clone URL you just copied.</li>
+<li>Commit changes</li>
+</ul>
+</li>
+</ul>
+<h2 id="install-and-prepare-codeready-workspaces-crw">Install and Prepare CodeReady Workspaces (CRW)</h2>
+<ul>
+<li>Install the CRW Operator from OperatorHub (not the Tech Preview one!) using default settings.</li>
+<li>Open the operator and create a new <strong>CodeReady Workspaces</strong> instance using the default settings.</li>
+<li>Wait until deployment has finished.</li>
+</ul>
+<p>As you&rsquo;ll start your CRW workspace using the devfile mechanism, you have to compose the URL from the codeready route and the devfile location.</p>
+<ul>
+<li>First look up the <code>codeready</code> route and the full URL to access the <code>devfile.yml</code> in Gitea.</li>
+<li>Now use both components to build an URL like below:</li>
+</ul>
+<pre><code>https://&lt;codeready-openshift-route&gt;/f?url=&lt;full URL to devfile.yml&gt;
+</code></pre><p>For example it could look like this:</p>
+<pre><code>https://&lt;codeready-openshift-workspaces.apps.cluster-mqpmq.mqpmq.sandbox283.opentlc.com/f?url=https://repository-git.apps.cluster-mqpmq.mqpmq.sandbox283.opentlc.com/gitea/quarkus-build-options/raw/branch/master/devfile.yml
+</code></pre><ul>
+<li>Now use this URL to launch your CRW Workspace in your Browser
+<ul>
+<li>Log in as User opentlc-mgr</li>
+<li>Apply permissions</li>
+<li>In the next form add an email address, it will be added to Keycloak</li>
+</ul>
+</li>
+</ul>
+<p>Have a good look around the UI, it should look familiar if you have ever worked with VSCode and the like. To prepare the Workspace for developing with OpenShift, ru the following steps:</p>
+<ul>
+<li>In the CRW shortcuts menu to the left
+<ul>
+<li>Run <strong>install oc</strong></li>
+<li>Run <strong>install odo</strong></li>
+</ul>
+</li>
+<li>Close the tabs the installation opened.</li>
+</ul>
+
+
+
+
+
+<footer class=" footline" >
 	
-  
+</footer>
+
         
         </div>
         
@@ -450,6 +589,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -465,6 +605,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -614,8 +757,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="https://devsecops-workshop.github.io/1-intro/" title="The DevSecOps Workshop"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="https://devsecops-workshop.github.io/1-intro/" title="The DevSecOps Workshop" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="https://devsecops-workshop.github.io/3-inner-loop/" title="Inner Loop" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -647,4 +792,3 @@
 
   </body>
 </html>
-

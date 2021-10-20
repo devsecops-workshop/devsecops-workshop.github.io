@@ -9,7 +9,7 @@
 
     <link rel="icon" href="https://devsecops-workshop.github.io/images/favicon.png" type="image/png">
 
-    <title> :: DevSecOps Workshop 2021</title>
+    <title>Outer Loop :: DevSecOps Workshop 2021</title>
 
     
     <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634730991" rel="stylesheet">
@@ -41,7 +41,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/">
+  <body class="" data-url="/4-outer-loop/">
     <nav id="sidebar" class="">
 
 
@@ -168,7 +168,7 @@
     
     <li data-nav-id="/4-outer-loop/" title="Outer Loop" class="dd-item
         
-        
+        active
         
         ">
       <a href="https://devsecops-workshop.github.io/4-outer-loop/">
@@ -382,24 +382,125 @@
         <div id="overlay"></div>
         <div class="padding highlightable">
               
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='https://devsecops-workshop.github.io/'></a> > Outer Loop
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents"></nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
         <div id="head-tags">
         
         </div>
         
         <div id="body-inner">
           
+            <h1>
+              
+              Outer Loop
+            </h1>
+          
 
         
 
-<span id="sidebar-toggle-span">
-<a href="#" id="sidebar-toggle" data-sidebar-toggle=""><i class="fas fa-bars"></i> navigation</a>
-</span>
 
- 
-<h1 id="devsecops-workshop">DevSecOps Workshop</h1>
-<p>This is the documentation for the DevSecOps Workshop</p>
+
+	<p>Now that you have seen how a developer can quickly start to code using modern tooling, it&rsquo;s time to learn how to proceed with the application to production. The first step is to implement a build pipeline to automate new builds. Let&rsquo;s call this stage <code>int</code>.</p>
+<p>To create and run the build pipeline you&rsquo;ll use OpenShift Pipelines/Tekton. The first step is to install it:</p>
+<ul>
+<li>Install <code>OpenShift Pipelines</code> from OperatorHub</li>
+</ul>
+<p>After this create a new deployment of your game-changing application:</p>
+<ul>
+<li>Switch to the <strong>OpenShift Developer Console</strong></li>
+<li>Create a new project <code>deepspace-int</code></li>
+<li>Click the <strong>+Add</strong> menu entry to the right and choose <strong>From Git</strong></li>
+<li>As <strong>Git Repo URL</strong> enter your Gitea clone URL</li>
+<li>As <strong>Builder Image</strong> select <strong>Red Hat OpenJDK 11 (RHEL 7)</strong></li>
+<li>Check <strong>Add pipeline</strong></li>
+<li>click <strong>Create</strong></li>
+<li>Create Tekton Pipeline</li>
+<li>Remove git from names</li>
+<li>Cancel Pipeline Build</li>
+</ul>
+<p>Now your build pipeline has been set up and is ready to run. There is one more step in preparation of the security part of this workshop. We need a way to build and deploy from an older image with some security issues in it.</p>
+<ul>
+<li>In the default <code>Java</code> image stream create another <strong>Image Stream Tag</strong> that points to an older version.</li>
+<li>Using the Administrator view, switch to the project <code>openshift</code> and under <strong>Builds</strong> access the <strong>ImageStreams</strong> Tag : java-old-image</li>
+<li>Search and open the <strong>ImageStream</strong> <code>Java</code></li>
+<li>Switch to YAML view and add the following snippet to the <code>tags:</code> section.
+<ul>
+<li>Be careful to keep the needed indents!</li>
+</ul>
+</li>
+</ul>
+<pre><code>- name: java-old-image
+     annotations:
+       description: Build and run Java applications using Maven and OpenJDK 8.
+       iconClass: icon-rh-openjdk
+       openshift.io/display-name: Red Hat OpenJDK 8 (UBI 8)
+       sampleContextDir: undertow-servlet
+       sampleRepo: 'https://github.com/jboss-openshift/openshift-quickstarts'
+       supports: 'java:8,java'
+       tags: 'builder,java,openjdk'
+       version: '8'
+     from:
+       kind: DockerImage
+       name: 'registry.redhat.io/openjdk/openjdk-11-rhel7:1.1-9'
+     generation: 4
+     importPolicy: {}
+     referencePolicy:
+       type: Local
+</code></pre><p>This will add a tag java-old-image that points to an older version. The image can be inspected here:
+<a href="https://catalog.redhat.com/software/containers/openjdk/openjdk-11-rhel7/5bf57185dd19c775cddc4ce5?tag=1.10-1.1630314161&amp;push_date=1630540002000&amp;container-tabs=security">https://catalog.redhat.com/software/containers/openjdk/openjdk-11-rhel7/5bf57185dd19c775cddc4ce5?tag=1.10-1.1630314161&amp;push_date=1630540002000&amp;container-tabs=security</a></p>
+<ul>
+<li>Have a look at version 1.1-9</li>
+</ul>
+<p>Now run the pipeline again but choose Image java-old-image this time.</p>
+
+
+
+
+
+<footer class=" footline" >
 	
-  
+</footer>
+
         
         </div>
         
@@ -482,6 +583,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -497,6 +599,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -614,8 +719,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="https://devsecops-workshop.github.io/3-inner-loop/" title="Inner Loop"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="https://devsecops-workshop.github.io/1-intro/" title="The DevSecOps Workshop" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="https://devsecops-workshop.github.io/5-gitops/" title="Configure GitOps" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -647,4 +754,3 @@
 
   </body>
 </html>
-
