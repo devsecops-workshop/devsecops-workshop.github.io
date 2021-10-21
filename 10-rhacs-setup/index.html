@@ -12,22 +12,22 @@
     <title>Install and Configure ACS :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634744426" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1634744426" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1634744426" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1634744426" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1634744426" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1634744426" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1634744426" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1634744426" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1634744426" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1634744426" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634805511" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1634805511" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1634805511" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1634805511" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1634805511" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1634805511" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1634805511" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1634805511" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1634805511" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1634805511" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1634744426" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1634805511" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1634744426"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1634805511"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1634744426"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1634744426"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1634805511"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1634805511"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1634744426"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1634805511"></script>
 
     
   </div>
@@ -425,6 +425,7 @@
         <li><a href="#prepare-to-add-secured-clusters">Prepare to add Secured Clusters</a></li>
         <li><a href="#prepare-the-secured-cluster">Prepare the Secured Cluster</a></li>
         <li><a href="#add-the-cluster-as-securedcluster-to-acs-central">Add the Cluster as <strong>SecuredCluster</strong> to <strong>ACS Central</strong></a></li>
+        <li><a href="#create-a-serviceaccount-to-scan-the-internal-registry">Create a serviceaccount to scan the internal registry</a></li>
       </ul>
     </li>
   </ul>
@@ -534,44 +535,44 @@ secret/admission-control-tls created
 <li>Click <strong>Create</strong></li>
 </ul>
 <p>Now go to your <strong>RHACS Portal</strong> again, after a couple of minutes you should see you secured cluster under <strong>Platform Configuration-&gt;Clusters</strong>. Wait until all <strong>Cluster Status</strong> indicators become green.</p>
-<!-- ### Create a serviceaccount to scan the internal registry
-To enable scanning of all images in the internal registry, you'll have to
--  add a serviceaccount
-- assign it the needed privileges
-- configure an **Integration** in ACS
+<h3 id="create-a-serviceaccount-to-scan-the-internal-registry">Create a serviceaccount to scan the internal registry</h3>
+<p>To enable scanning of all images in the internal registry, you&rsquo;ll have to</p>
+<ul>
+<li>add a serviceaccount</li>
+<li>assign it the needed privileges</li>
+<li>configure an <strong>Integration</strong> in ACS</li>
+</ul>
+<p><strong>Create ServiceAccount to read images from Registry</strong></p>
+<ul>
+<li>Make sure you are in the <code>stackrox</code> <strong>Project</strong></li>
+<li><strong>User Management -&gt; ServiceAccounts -&gt; Create ServiceAccount</strong></li>
+<li>Replace the example name with <code>acs-registry-reader</code> and click <strong>Create</strong></li>
+<li>In the new ServiceAccount, under <strong>Secrets</strong> click the <code>...-token-...</code> secret</li>
+<li>Under <strong>Data</strong> copy the Token</li>
+<li>Using <code>oc</code> give the ServiceAccount the right to <strong>read</strong> images from all projects:</li>
+</ul>
+<pre><code>oc adm policy add-cluster-role-to-user 'system:image-puller' -z acs-registry-reader -n stackrox
+</code></pre><p>or</p>
+<pre><code>oc adm policy add-cluster-role-to-user 'system:image-puller' system:serviceaccount:stackrox:acs-registry-reader -n stackrox
+</code></pre><p>And you&rsquo;ll need the service address for the registry, look it up e.g. from the <strong>Environment</strong> of a registry pod.</p>
+<ul>
+<li>It should be something like: <code>image-registry.openshift-image-registry.svc:5000</code></li>
+</ul>
+<p><strong>Add Registry Integration to ACS</strong></p>
+<p>Access the <strong>RHACS Portal</strong> and add an integration of type <strong>Generic Docker Registry</strong> from the <strong>Platform Configuration -&gt; Integrations menu</strong>.</p>
+<p>Fill in the fields:</p>
+<ul>
+<li>Give the integration a unique name that should include the cluster name</li>
+<li>Set <strong>Types</strong> to <strong>Registry</strong></li>
+<li>Set <strong>Endpoint</strong> to the registry service address</li>
+<li>Put in the ServiceAccount name as username and the token you copied above</li>
+<li>Select Disable TLS certificate validation</li>
+<li>Press the test button to validate the connection and press <strong>Save</strong> when the test is successful.</li>
+</ul>
 
-**Create ServiceAccount to read images from Registry**
-- Make sure you are in the `stackrox` **Project**
-- **User Management -> ServiceAccounts -> Create ServiceAccount**
-- Replace the example name with `acs-registry-reader` and click **Create**
-- In the new ServiceAccount, under **Secrets** click the `...-token-...` secret
-- Under **Data** copy the Token
-- Using `oc` give the ServiceAccount the right to **read** images from all projects:
+<div class="notices tip" ><p>You can also (this might be easier to maintain) just change the user and password for the exisintg, auto-generated entries for the entries <code>https://image-registry.openshift-image-registry.svc:5000</code> and <code>https://image-registry.openshift-image-registry.svc.cluster.local:5000</code>.</p>
+</div>
 
-```
-oc adm policy add-cluster-role-to-user 'system:image-puller' -z acs-registry-reader -n stackrox
-```
-
-or
-
-```
-oc adm policy add-cluster-role-to-user 'system:image-puller' system:serviceaccount:stackrox:acs-registry-reader -n stackrox
-```
-And you'll need the service address for the registry, look it up e.g. from the **Environment** of a registry pod.
-  - It should be something like: `image-registry.openshift-image-registry.svc:5000`
-
-
-**Add Registry Integration to ACS**
-
-Access the **RHACS Portal** and add an integration of type **Generic Docker Registry** from the **Platform Configuration -> Integrations menu**.
-
-Fill in the fields:
-- Give the integration a unique name that should include the cluster name
-- Set **Types** to **Registry**
-- Set **Endpoint** to the registry service address
-- Put in the ServiceAccount name as username and the token you copied above
-- Select Disable TLS certificate validation
-- Press the test button to validate the connection and press **Save** when the test is successful. -->
 
 
 
@@ -812,19 +813,19 @@ Fill in the fields:
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1634744426"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1634744426"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1634744426"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1634744426"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1634744426"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1634744426"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1634805511"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1634805511"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1634805511"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1634805511"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1634805511"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1634805511"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1634744426"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1634744426"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1634744426"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1634805511"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1634805511"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1634805511"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1634744426"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1634805511"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
