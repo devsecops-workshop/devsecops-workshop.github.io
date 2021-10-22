@@ -12,22 +12,22 @@
     <title>Inner Loop :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634905813" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1634905813" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1634905813" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1634905813" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1634905813" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1634905813" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1634905813" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1634905813" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1634905813" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1634905813" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634906081" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1634906081" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1634906081" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1634906081" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1634906081" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1634906081" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1634906081" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1634906081" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1634906081" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1634906081" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1634905813" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1634906081" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1634905813"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1634906081"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1634905813"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1634905813"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1634906081"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1634906081"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1634905813"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1634906081"></script>
 
     
   </div>
@@ -440,16 +440,16 @@
 
 
 
-	<p>In this part of the workshop you&rsquo;ll experience how modern software development using the OpenShift tooling can be done in a fast, iterative way. <strong>Inner loop</strong> here means <code>this is the way</code>, sorry, process, for a developer to try out new things and quickly change and test her/his code.</p>
+	<p>In this part of the workshop you&rsquo;ll experience how modern software development using the OpenShift tooling can be done in a fast, iterative way. <strong>Inner loop</strong> here means <code>this is the way</code>, sorry, process, for a developer to try out new things and quickly change and test her/his code on OpenShift without having to build new images all the time or being a Kubernetes expert.</p>
 <p>As an example you&rsquo;ll create a new Quarkus application. You don&rsquo;t need to have prior experience programming in Java as this will be kept really simple.</p>
 <ul>
 <li>Bring up your CodeReady Workspace in your browser.</li>
 <li>In CRW open Terminal
 <ul>
-<li>In <strong>My Workspace</strong> to the right click <strong>New Terminal</strong></li>
+<li>In <strong>My Workspace</strong> (cube icon) to the right click <strong>New Terminal</strong></li>
 </ul>
 </li>
-<li>Copy the login command from your OpenShift cluster, and use it to log in <code>oc</code> in the CRW terminal.</li>
+<li>Copy the oc login command from your OpenShift cluster (tope right &gt; Username &gt; Copy login command), and use it to log in <code>oc</code> in the CRW terminal.</li>
 <li>Create a new project <code>deepspace-dev</code></li>
 </ul>
 <pre><code>./oc new-project deepspace-dev
@@ -463,25 +463,25 @@
 <pre><code>./odo catalog list components
 </code></pre><p>Now initialize a new Quarkus application</p>
 <pre><code>./odo create java-quarkus
-</code></pre><p>Create the app</p>
+</code></pre><p>Make the app accessible via http</p>
 <pre><code>./odo url create deepdive-app
 </code></pre><p>And finally push the app to OpenShift</p>
 <pre><code>./odo push
 </code></pre><p>To test the app:</p>
 <ul>
 <li>In OpenShift open the <code>deepspace-dev</code> project and switch to the <strong>Developer Console</strong></li>
-<li>Open the <strong>Topology</strong> tab and click on the round circle with the OpenShift icon to display details of the deployment</li>
-<li>In the opened <strong>Resources</strong> view on the right, click on the URL displayed under the route <code>deepdive-app-app</code></li>
+<li>Open the <strong>Topology</strong> tab and click on the top right link of OpenShift icon to display the website of the app</li>
 <li>Your app should show up as a simple web page. In the <code>RESTEasy JAX-RS</code> section click the <code>@Path</code> endpoint <code>/hello</code> to see the result.</li>
 </ul>
 <p>Now for the fun part: Using <code>odo</code> you can just dynamically change your code and push it out again without doing a new build! No dev magic involved:</p>
 <ul>
-<li>In your code access and change <code>GreetingRessource.java</code> to <code>Hello Deepdive</code></li>
-<li>Push the code to OpenShift</li>
+<li>In your CRW Workspace on the left expand the file tree to open file <code>src/main/java/org/acmeGreetingRessource.java</code> to <code>Hello Deepdive</code></li>
+<li>Push the code to OpenShift again</li>
 </ul>
 <pre><code>./odo push
 </code></pre><ul>
-<li>And access the endpoint in the web app again.</li>
+<li>And reload the app webpage.</li>
+<li>The change should be there in a matter of seconds</li>
 </ul>
 
 
@@ -723,19 +723,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1634905813"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1634905813"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1634905813"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1634905813"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1634905813"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1634905813"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1634906081"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1634906081"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1634906081"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1634906081"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1634906081"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1634906081"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1634905813"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1634905813"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1634905813"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1634906081"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1634906081"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1634906081"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1634905813"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1634906081"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
