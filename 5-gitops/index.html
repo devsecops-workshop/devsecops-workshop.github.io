@@ -12,22 +12,22 @@
     <title>Configure GitOps :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634896750" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1634896750" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1634896750" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1634896750" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1634896750" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1634896750" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1634896750" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1634896750" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1634896750" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1634896750" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634898605" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1634898605" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1634898605" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1634898605" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1634898605" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1634898605" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1634898605" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1634898605" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1634898605" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1634898605" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1634896750" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1634898605" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1634896750"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1634898605"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1634896750"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1634896750"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1634898605"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1634898605"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1634896750"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1634898605"></script>
 
     
   </div>
@@ -474,154 +474,154 @@ Give ACS Permissions to create objects in namespace deepspace-prod</li>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: tekton.dev/v1beta1
 <span style="color:#66d9ef">kind</span>: Task
 <span style="color:#66d9ef">metadata</span>:
- <span style="color:#66d9ef">annotations</span>:
-   <span style="color:#66d9ef">tekton.dev/pipelines.minVersion</span>: <span style="color:#ae81ff">0.12.1</span>
-   <span style="color:#66d9ef">tekton.dev/tags</span>: git
- <span style="color:#66d9ef">resourceVersion</span>: <span style="color:#e6db74">&#39;94554874&#39;</span>
- <span style="color:#66d9ef">name</span>: git-update-deployment
- <span style="color:#66d9ef">uid</span>: 0099bf67-93ee-4cfb<span style="color:#ae81ff">-9e09</span>-94ed743b26bf
- <span style="color:#66d9ef">creationTimestamp</span>: <span style="color:#e6db74">&#39;2021-10-20T17:15:32Z&#39;</span>
- <span style="color:#66d9ef">generation</span>: <span style="color:#ae81ff">52</span>
- <span style="color:#66d9ef">managedFields</span>:
-   - <span style="color:#66d9ef">apiVersion</span>: tekton.dev/v1beta1
-     <span style="color:#66d9ef">fieldsType</span>: FieldsV1
-     <span style="color:#66d9ef">fieldsV1</span>:
-       <span style="color:#66d9ef">&#39;f:metadata&#39;</span>:
-         <span style="color:#66d9ef">&#39;f:annotations&#39;</span>:
-           <span style="color:#66d9ef">.</span>: {}
-           <span style="color:#66d9ef">&#39;f:tekton.dev/pipelines.minVersion&#39;</span>: {}
-           <span style="color:#66d9ef">&#39;f:tekton.dev/tags&#39;</span>: {}
-         <span style="color:#66d9ef">&#39;f:labels&#39;</span>:
-           <span style="color:#66d9ef">.</span>: {}
-           <span style="color:#66d9ef">&#39;f:app.kubernetes.io/version&#39;</span>: {}
-           <span style="color:#66d9ef">&#39;f:operator.tekton.dev/provider-type&#39;</span>: {}
-       <span style="color:#66d9ef">&#39;f:spec&#39;</span>:
-         <span style="color:#66d9ef">.</span>: {}
-         <span style="color:#66d9ef">&#39;f:description&#39;</span>: {}
-         <span style="color:#66d9ef">&#39;f:params&#39;</span>: {}
-         <span style="color:#66d9ef">&#39;f:results&#39;</span>: {}
-         <span style="color:#66d9ef">&#39;f:steps&#39;</span>: {}
-         <span style="color:#66d9ef">&#39;f:workspaces&#39;</span>: {}
-     <span style="color:#66d9ef">manager</span>: Mozilla
-     <span style="color:#66d9ef">operation</span>: Update
-     <span style="color:#66d9ef">time</span>: <span style="color:#e6db74">&#39;2021-10-20T17:15:32Z&#39;</span>
- <span style="color:#66d9ef">namespace</span>: deepspace-int
- <span style="color:#66d9ef">labels</span>:
-   <span style="color:#66d9ef">app.kubernetes.io/version</span>: <span style="color:#e6db74">&#39;0.1&#39;</span>
-   <span style="color:#66d9ef">operator.tekton.dev/provider-type</span>: community
+  <span style="color:#66d9ef">annotations</span>:
+    <span style="color:#66d9ef">tekton.dev/pipelines.minVersion</span>: <span style="color:#ae81ff">0.12.1</span>
+    <span style="color:#66d9ef">tekton.dev/tags</span>: git
+  <span style="color:#66d9ef">resourceVersion</span>: <span style="color:#e6db74">&#39;94554874&#39;</span>
+  <span style="color:#66d9ef">name</span>: git-update-deployment
+  <span style="color:#66d9ef">uid</span>: 0099bf67-93ee-4cfb<span style="color:#ae81ff">-9e09</span>-94ed743b26bf
+  <span style="color:#66d9ef">creationTimestamp</span>: <span style="color:#e6db74">&#39;2021-10-20T17:15:32Z&#39;</span>
+  <span style="color:#66d9ef">generation</span>: <span style="color:#ae81ff">52</span>
+  <span style="color:#66d9ef">managedFields</span>:
+    - <span style="color:#66d9ef">apiVersion</span>: tekton.dev/v1beta1
+      <span style="color:#66d9ef">fieldsType</span>: FieldsV1
+      <span style="color:#66d9ef">fieldsV1</span>:
+        <span style="color:#66d9ef">&#39;f:metadata&#39;</span>:
+          <span style="color:#66d9ef">&#39;f:annotations&#39;</span>:
+            <span style="color:#66d9ef">.</span>: {}
+            <span style="color:#66d9ef">&#39;f:tekton.dev/pipelines.minVersion&#39;</span>: {}
+            <span style="color:#66d9ef">&#39;f:tekton.dev/tags&#39;</span>: {}
+          <span style="color:#66d9ef">&#39;f:labels&#39;</span>:
+            <span style="color:#66d9ef">.</span>: {}
+            <span style="color:#66d9ef">&#39;f:app.kubernetes.io/version&#39;</span>: {}
+            <span style="color:#66d9ef">&#39;f:operator.tekton.dev/provider-type&#39;</span>: {}
+        <span style="color:#66d9ef">&#39;f:spec&#39;</span>:
+          <span style="color:#66d9ef">.</span>: {}
+          <span style="color:#66d9ef">&#39;f:description&#39;</span>: {}
+          <span style="color:#66d9ef">&#39;f:params&#39;</span>: {}
+          <span style="color:#66d9ef">&#39;f:results&#39;</span>: {}
+          <span style="color:#66d9ef">&#39;f:steps&#39;</span>: {}
+          <span style="color:#66d9ef">&#39;f:workspaces&#39;</span>: {}
+      <span style="color:#66d9ef">manager</span>: Mozilla
+      <span style="color:#66d9ef">operation</span>: Update
+      <span style="color:#66d9ef">time</span>: <span style="color:#e6db74">&#39;2021-10-20T17:15:32Z&#39;</span>
+  <span style="color:#66d9ef">namespace</span>: deepspace-int
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app.kubernetes.io/version</span>: <span style="color:#e6db74">&#39;0.1&#39;</span>
+    <span style="color:#66d9ef">operator.tekton.dev/provider-type</span>: community
 <span style="color:#66d9ef">spec</span>:
- <span style="color:#66d9ef">description</span>: This Task can be used to update image digest in a Git repo using kustomize
- <span style="color:#66d9ef">params</span>:
-   - <span style="color:#66d9ef">name</span>: GIT_REPOSITORY
-     <span style="color:#66d9ef">type</span>: string
-   - <span style="color:#66d9ef">name</span>: GIT_USERNAME
-     <span style="color:#66d9ef">type</span>: string
-   - <span style="color:#66d9ef">name</span>: GIT_PASSWORD
-     <span style="color:#66d9ef">type</span>: string
-   - <span style="color:#66d9ef">name</span>: CURRENT_IMAGE
-     <span style="color:#66d9ef">type</span>: string
-   - <span style="color:#66d9ef">name</span>: NEW_IMAGE
-     <span style="color:#66d9ef">type</span>: string
-   - <span style="color:#66d9ef">name</span>: NEW_DIGEST
-     <span style="color:#66d9ef">type</span>: string
-   - <span style="color:#66d9ef">name</span>: KUSTOMIZATION_PATH
-     <span style="color:#66d9ef">type</span>: string
- <span style="color:#66d9ef">results</span>:
-   - <span style="color:#66d9ef">description</span>: The commit SHA
-     <span style="color:#66d9ef">name</span>: commit
- <span style="color:#66d9ef">steps</span>:
-   - <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#39;docker.io/alpine/git:v2.26.2&#39;</span>
-     <span style="color:#66d9ef">name</span>: git-clone
-     <span style="color:#66d9ef">resources</span>: {}
-     <span style="color:#66d9ef">script</span>: <span style="color:#e6db74">|
-</span><span style="color:#e6db74">       rm -rf git-update-digest-workdir</span>
-       git clone $(params.GIT_REPOSITORY) git-update-digest-workdir
-     <span style="color:#66d9ef">workingDir</span>: $(workspaces.workspace.path)
-   - <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#39;quay.io/wpernath/kustomize-ubi:latest&#39;</span>
-     <span style="color:#66d9ef">name</span>: update-digest
-     <span style="color:#66d9ef">resources</span>: {}
-     <span style="color:#66d9ef">script</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">       #!/usr/bin/env bash</span>
- 
-       echo <span style="color:#e6db74">&#34;Start&#34;</span>
- 
-       pwd
- 
-       cd git-update-digest-workdir/$(params.KUSTOMIZATION_PATH)
- 
-       pwd
- 
- 
-       <span style="color:#75715e">#echo &#34;kustomize edit set image</span>
-       <span style="color:#75715e">#$(params.CURRENT_IMAGE)=$(params.NEW_IMAGE)@$(params.NEW_DIGEST)&#34;</span>
- 
- 
-       kustomize version
- 
- 
-       kustomize edit set image \
-       $(params.CURRENT_IMAGE)=$(params.NEW_IMAGE)@$(params.NEW_DIGEST)
- 
- 
-       echo <span style="color:#e6db74">&#34;##########################&#34;</span>
- 
- 
- 
-       echo <span style="color:#e6db74">&#34;### kustomization.yaml ###&#34;</span>
- 
- 
- 
-       echo <span style="color:#e6db74">&#34;##########################&#34;</span>
- 
- 
-       ls
- 
- 
-       cat kustomization.yaml
-     <span style="color:#66d9ef">workingDir</span>: $(workspaces.workspace.path)
-   - <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#39;docker.io/alpine/git:v2.26.2&#39;</span>
-     <span style="color:#66d9ef">name</span>: git-commit
-     <span style="color:#66d9ef">resources</span>: {}
-     <span style="color:#66d9ef">script</span>: <span style="color:#e6db74">&gt;
-</span><span style="color:#e6db74">       pwd</span>
- 
- 
-       cd git-update-digest-workdir
- 
- 
- 
-       git config user.email <span style="color:#e6db74">&#34;tekton-pipelines-ci@redhat.com&#34;</span>
- 
- 
- 
-       git config user.name <span style="color:#e6db74">&#34;tekton-pipelines-ci&#34;</span>
- 
- 
- 
-       git status
+  <span style="color:#66d9ef">description</span>: This Task can be used to update image digest in a Git repo using kustomize
+  <span style="color:#66d9ef">params</span>:
+    - <span style="color:#66d9ef">name</span>: GIT_REPOSITORY
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">name</span>: GIT_USERNAME
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">name</span>: GIT_PASSWORD
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">name</span>: CURRENT_IMAGE
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">name</span>: NEW_IMAGE
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">name</span>: NEW_DIGEST
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">name</span>: KUSTOMIZATION_PATH
+      <span style="color:#66d9ef">type</span>: string
+  <span style="color:#66d9ef">results</span>:
+    - <span style="color:#66d9ef">description</span>: The commit SHA
+      <span style="color:#66d9ef">name</span>: commit
+  <span style="color:#66d9ef">steps</span>:
+    - <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#39;docker.io/alpine/git:v2.26.2&#39;</span>
+      <span style="color:#66d9ef">name</span>: git-clone
+      <span style="color:#66d9ef">resources</span>: {}
+      <span style="color:#66d9ef">script</span>: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">        rm -rf git-update-digest-workdir</span>
+        git clone $(params.GIT_REPOSITORY) git-update-digest-workdir
+      <span style="color:#66d9ef">workingDir</span>: $(workspaces.workspace.path)
+    - <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#39;quay.io/wpernath/kustomize-ubi:latest&#39;</span>
+      <span style="color:#66d9ef">name</span>: update-digest
+      <span style="color:#66d9ef">resources</span>: {}
+      <span style="color:#66d9ef">script</span>: <span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">        #!/usr/bin/env bash</span>
+
+        echo <span style="color:#e6db74">&#34;Start&#34;</span>
+
+        pwd
+
+        cd git-update-digest-workdir/$(params.KUSTOMIZATION_PATH)
+
+        pwd
 
 
-       git add $(params.KUSTOMIZATION_PATH)/kustomization.yaml
+        <span style="color:#75715e">#echo &#34;kustomize edit set image</span>
+        <span style="color:#75715e">#$(params.CURRENT_IMAGE)=$(params.NEW_IMAGE)@$(params.NEW_DIGEST)&#34;</span>
+
+
+        kustomize version
+
+
+        kustomize edit set image \
+        $(params.CURRENT_IMAGE)=$(params.NEW_IMAGE)@$(params.NEW_DIGEST)
+
+
+        echo <span style="color:#e6db74">&#34;##########################&#34;</span>
+
+
+
+        echo <span style="color:#e6db74">&#34;### kustomization.yaml ###&#34;</span>
+
+
+
+        echo <span style="color:#e6db74">&#34;##########################&#34;</span>
+
+
+        ls
+
+
+        cat kustomization.yaml
+      <span style="color:#66d9ef">workingDir</span>: $(workspaces.workspace.path)
+    - <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#39;docker.io/alpine/git:v2.26.2&#39;</span>
+      <span style="color:#66d9ef">name</span>: git-commit
+      <span style="color:#66d9ef">resources</span>: {}
+      <span style="color:#66d9ef">script</span>: <span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">        pwd</span>
+
+
+        cd git-update-digest-workdir
+
+
+
+        git config user.email <span style="color:#e6db74">&#34;tekton-pipelines-ci@redhat.com&#34;</span>
+
+
+
+        git config user.name <span style="color:#e6db74">&#34;tekton-pipelines-ci&#34;</span>
+
+
+
+        git status
+
+
+
+        git add $(params.KUSTOMIZATION_PATH)/kustomization.yaml
 
 
         <span style="color:#75715e"># git commit -m &#34;[$(context.pipelineRun.name)] Image digest updated&#34;</span>
 
 
-       git status
+        git status
 
 
-       git commit -m <span style="color:#e6db74">&#34;[ci] Image digest updated&#34;</span>
+        git commit -m <span style="color:#e6db74">&#34;[ci] Image digest updated&#34;</span>
 
 
-       git status
+        git status
 
-        <span style="color:#75715e"># Challenge</span>
+
         <span style="color:#75715e">#git remote add auth-origin $(echo $(params.GIT_REPOSITORY) | sed -E \</span>
         <span style="color:#75715e">#&#34;s#http://(.*)#http://$(params.GIT_USERNAME):$(params.GIT_PASSWORD)@\1#g&#34;)</span>
 
-        <span style="color:#75715e">#Manual</span>
         git remote add auth-origin
-        https://gitea:gitea@repository-gitea.apps.{YOUR DOMAIN}/gitea/openshift-gitops-getting-started.git
+        https://gitea:gitea@repository-gitea.apps.ocp4.nexus-eight.com/gitea/openshift-gitops-getting-started.git
 
 
         git show-ref
@@ -655,7 +655,6 @@ Give ACS Permissions to create objects in namespace deepspace-prod</li>
   <span style="color:#66d9ef">workspaces</span>:
     - <span style="color:#66d9ef">description</span>: The workspace consisting of maven project.
       <span style="color:#66d9ef">name</span>: workspace
-
 
 </code></pre></div><ul>
 <li>Add a Task to your pipeline like this</li>
@@ -932,19 +931,19 @@ Give ACS Permissions to create objects in namespace deepspace-prod</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1634896750"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1634896750"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1634896750"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1634896750"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1634896750"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1634896750"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1634898605"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1634898605"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1634898605"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1634898605"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1634898605"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1634898605"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1634896750"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1634896750"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1634896750"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1634898605"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1634898605"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1634898605"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1634896750"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1634898605"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
