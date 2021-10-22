@@ -12,22 +12,22 @@
     <title>Configure GitOps :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634906168" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1634906168" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1634906168" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1634906168" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1634906168" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1634906168" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1634906168" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1634906168" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1634906168" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1634906168" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634906980" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1634906980" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1634906980" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1634906980" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1634906980" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1634906980" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1634906980" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1634906980" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1634906980" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1634906980" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1634906168" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1634906980" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1634906168"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1634906980"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1634906168"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1634906168"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1634906980"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1634906980"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1634906168"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1634906980"></script>
 
     
   </div>
@@ -590,17 +590,7 @@ Give ArgoCD Permissions to create objects in namespace deepspace-prod</li>
 
         git status
 
-
-        <span style="color:#75715e">#git remote add auth-origin $(echo $(params.GIT_REPOSITORY) | sed -E \</span>
-        <span style="color:#75715e">#&#34;s#http://(.*)#http://$(params.GIT_USERNAME):$(params.GIT_PASSWORD)@\1#g&#34;)</span>
-
-        git remote add auth-origin
-        https://gitea:gitea@repository-gitea.apps.{YOUR_DOMAIN}/gitea/openshift-gitops-getting-started.git
-
-
-        git show-ref
-
-        git push auth-origin main
+        git push
 
 
 
@@ -663,6 +653,30 @@ Give ArgoCD Permissions to create objects in namespace deepspace-prod</li>
        - <span style="color:#66d9ef">name</span>: workspace
          <span style="color:#66d9ef">workspace</span>: workspace
 
+</code></pre></div><ul>
+<li>Create a secret with credentails for your gitea repository</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: Secret
+<span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: gitea
+  <span style="color:#66d9ef">namespace</span>: deepspace-int
+  <span style="color:#66d9ef">annotations</span>:
+    <span style="color:#66d9ef">tekton.dev/git-0</span>: <span style="color:#e6db74">&#39;https://repository-git.apps.{YOUR DOMAIN}&#39;</span>
+<span style="color:#66d9ef">data</span>:
+  <span style="color:#66d9ef">password</span>: Z2l0ZWE=
+  <span style="color:#66d9ef">username</span>: Z2l0ZWE=
+<span style="color:#66d9ef">type</span>: kubernetes.io/basic-auth
+</code></pre></div><ul>
+<li>Edit the serviceaccount &ldquo;pipeline&rdquo; and add the secret to it:</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: ServiceAccount
+<span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: pipeline
+  <span style="color:#66d9ef">namespace</span>: deepspace-int
+<span style="color:#66d9ef">secrets</span>:
+  - <span style="color:#66d9ef">name</span>: gitea
 </code></pre></div><ul>
 <li>Run the pipeline and see that in your Gitea repo /environment/dev/kustomize.yaml is updated with the newImage version</li>
 <li>This will tell ArgoCD to update the Deployment with this new Image version</li>
@@ -908,19 +922,19 @@ Give ArgoCD Permissions to create objects in namespace deepspace-prod</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1634906168"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1634906168"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1634906168"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1634906168"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1634906168"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1634906168"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1634906980"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1634906980"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1634906980"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1634906980"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1634906980"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1634906980"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1634906168"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1634906168"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1634906168"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1634906980"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1634906980"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1634906980"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1634906168"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1634906980"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
