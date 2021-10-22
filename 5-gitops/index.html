@@ -12,22 +12,22 @@
     <title>Configure GitOps :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634898784" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1634898784" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1634898784" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1634898784" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1634898784" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1634898784" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1634898784" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1634898784" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1634898784" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1634898784" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1634899559" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1634899559" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1634899559" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1634899559" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1634899559" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1634899559" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1634899559" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1634899559" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1634899559" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1634899559" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1634898784" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1634899559" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1634898784"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1634899559"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1634898784"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1634898784"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1634899559"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1634899559"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1634898784"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1634899559"></script>
 
     
   </div>
@@ -442,14 +442,14 @@
 
 	<ul>
 <li>Install GitOps Operator from Operator Hub</li>
-<li>Clone GitOps Repo to Gitea
+<li>Clone Config GitOps Repo to Gitea
 <a href="https://github.com/devsecops-workshop/openshift-gitops-getting-started.git">https://github.com/devsecops-workshop/openshift-gitops-getting-started.git</a></li>
 <li>Create OpenShift Project deepspace-prod
-Give ACS Permissions to create objects in namespace deepspace-prod</li>
+Give ArgoCD Permissions to create objects in namespace deepspace-prod</li>
 </ul>
 <pre><code> oc adm policy add-role-to-user admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller -n deepspace-prod
 </code></pre><ul>
-<li>Give namespace deepspace-prod Permissions to pull Images from deepspace-int</li>
+<li>Give namespace deepspace-prod permissions to pull images from deepspace-int</li>
 </ul>
 <pre><code>oc policy add-role-to-user \
     system:image-puller system:serviceaccount:deepspace-prod:default \
@@ -468,8 +468,8 @@ Give ACS Permissions to create objects in namespace deepspace-prod</li>
 <li>Namespace : deepspace-prod</li>
 </ul>
 </li>
-<li>Watch the resources get rolled out to the namespace deepspace-prod</li>
-<li>Add a new custom Tekton task (Pipelines &gt; Tasks &gt; New Task) to push changes to the git repo.</li>
+<li>Watch the resources (Deployment, Service, Route)get rolled out to the namespace deepspace-prod</li>
+<li>Add a new custom Tekton task (Switch to Administrator Perspective &gt; Pipelines &gt; Tasks &gt; New Task) that can push to a git repo.</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: tekton.dev/v1beta1
 <span style="color:#66d9ef">kind</span>: Task
@@ -657,7 +657,7 @@ Give ACS Permissions to create objects in namespace deepspace-prod</li>
       <span style="color:#66d9ef">name</span>: workspace
 
 </code></pre></div><ul>
-<li>Add a Task to your pipeline like this</li>
+<li>Add this Task to your Pipeline by adding it to the YAML like this</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">name</span>: git-update-deployment
      <span style="color:#66d9ef">params</span>:
@@ -688,8 +688,9 @@ Give ACS Permissions to create objects in namespace deepspace-prod</li>
          <span style="color:#66d9ef">workspace</span>: workspace
 
 </code></pre></div><ul>
-<li>Run pipeline and see that the git /environment/dev/kustomize.yaml is updated</li>
-<li>Check that the new image is rolled out (you may need to Sync manually in ArgoCD)</li>
+<li>Run the pipeline and see that in your Gitea repo /environment/dev/kustomize.yaml is updated with the newImage version</li>
+<li>This will tell ArgoCD to update the Deployment with this new Image version</li>
+<li>Check that the new image is rolled out (you may need to Sync manually in ArgoCD to speed it up)</li>
 </ul>
 
 
@@ -931,19 +932,19 @@ Give ACS Permissions to create objects in namespace deepspace-prod</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1634898784"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1634898784"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1634898784"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1634898784"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1634898784"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1634898784"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1634899559"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1634899559"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1634899559"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1634899559"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1634899559"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1634899559"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1634898784"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1634898784"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1634898784"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1634899559"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1634899559"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1634899559"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1634898784"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1634899559"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
