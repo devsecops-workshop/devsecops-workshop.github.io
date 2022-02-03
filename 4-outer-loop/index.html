@@ -12,22 +12,22 @@
     <title>Outer Loop :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1643886359" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1643886359" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1643886359" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1643886359" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1643886359" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1643886359" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1643886359" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1643886359" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1643886359" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1643886359" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1643896409" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1643896409" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1643896409" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1643896409" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1643896409" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1643896409" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1643896409" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1643896409" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1643896409" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1643896409" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1643886359" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1643896409" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1643886359"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1643896409"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1643886359"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1643886359"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1643896409"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1643896409"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1643886359"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1643896409"></script>
 
     
   </div>
@@ -440,27 +440,28 @@
 
 
 
-	<p>Now that you have seen how a developer can quickly start to code using modern tooling, it&rsquo;s time to learn how to proceed with the application to production. The first step is to implement a build pipeline to automate new builds. Let&rsquo;s call this stage <code>int</code> for integration.</p>
-<p>To create and run the build pipeline you&rsquo;ll use OpenShift Pipelines (Tekton). The first step is to install it:</p>
+	<p>Now that you have seen how a developer can quickly start to code using modern tooling, it&rsquo;s time to learn how to proceed with the application towards production. The first step is to implement a CI/CD pipeline to automate new builds. Let&rsquo;s call this stage <code>int</code> for integration.</p>
+<p>To create and run the build pipeline you&rsquo;ll use OpenShift Pipelines based on project Tekton. The first step is to install it:</p>
 <ul>
 <li>Install <code>OpenShift Pipelines</code> from OperatorHub</li>
 </ul>
 <p>After this create a new deployment of your game-changing application:</p>
 <ul>
+<li>Create a new OpenShift project <code>workshop-int</code></li>
 <li>Switch to the <strong>OpenShift Developer Console</strong></li>
-<li>Create a new project <code>workshop-int</code></li>
-<li>Click the <strong>+Add</strong> menu entry to the right and choose <strong>From Git</strong></li>
+<li>Click the <strong>+Add</strong> menu entry to the left and choose <strong>Import from Git</strong></li>
 <li>As <strong>Git Repo URL</strong> enter your Gitea clone URL (There my may be warning about the repo url that you can ignore)</li>
-<li>As <strong>Builder Image</strong> keep or select <strong>Red Hat OpenJDK 11 (RHEL 7)</strong></li>
-<li>Remove the segment <code>-git</code> from Application and Name</li>
+<li>As <strong>Import Strategy</strong> select <strong>Builder Image</strong></li>
+<li>As <strong>Builder Image</strong> select <strong>Java</strong> and <strong>Red Hat OpenJDK 11 (RHEL 7)</strong></li>
+<li>As <strong>Application Name</strong> enter <strong>workshop-app</strong></li>
+<li>As <strong>Name</strong> enter <strong>workshop</strong></li>
 <li>Check <strong>Add pipeline</strong></li>
 <li>Click <strong>Create</strong></li>
-<li>In the main menu left, click in Pipeline and observe how the Tekton Pipeline is created</li>
+<li>In the main menu left, click on <strong>Pipelines</strong> and observe how the Tekton Pipeline is created adn run</li>
 </ul>
-<p>Now your build pipeline has been set up and is ready to run. There is one more step in preparation of the security part of this workshop. We need a way to build and deploy from an older image with some security issues in it.</p>
+<p>Now your build pipeline has been set up and is ready. There is one more step in preparation of the security part of this workshop. We need a way to build and deploy from an older image with some security issues in it. For that we will add another <strong>ImageStream Tag</strong> in the default <code>Java</code> <strong>ImageStream</strong> that points to an older version.</p>
 <ul>
-<li>In the default <code>Java</code> image stream create another <strong>Image Stream Tag</strong> that points to an older version.</li>
-<li>Using the Administrator view, switch to the project <code>openshift</code> and under <strong>Builds</strong> access the <strong>ImageStreams</strong></li>
+<li>Using the Administrator view, switch to the project <code>openshift</code> and under <strong>Builds</strong> click on the <strong>ImageStreams</strong></li>
 <li>Search and open the <strong>ImageStream</strong> <code>Java</code></li>
 <li>Switch to YAML view and add the following snippet to the <code>tags:</code> section.
 <ul>
@@ -469,7 +470,7 @@
 </li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">name</span>: java-old-image
-     <span style="color:#66d9ef">annotations</span>:
+      <span style="color:#66d9ef">annotations</span>:
        <span style="color:#66d9ef">description</span>: Build and run Java applications using Maven and OpenJDK <span style="color:#ae81ff">8</span>.
        <span style="color:#66d9ef">iconClass</span>: icon-rh-openjdk
        <span style="color:#66d9ef">openshift.io/display-name</span>: Red Hat OpenJDK <span style="color:#ae81ff">8</span> (UBI <span style="color:#ae81ff">8</span>)
@@ -731,19 +732,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1643886359"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1643886359"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1643886359"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1643886359"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1643886359"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1643886359"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1643896409"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1643896409"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1643896409"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1643896409"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1643896409"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1643896409"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1643886359"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1643886359"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1643886359"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1643896409"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1643896409"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1643896409"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1643886359"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1643896409"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
