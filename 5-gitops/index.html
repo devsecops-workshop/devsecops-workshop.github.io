@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en" class="js csstransforms3d">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.69.0" />
+    <meta name="description" content="A DevSecOps Workshop Day using openShift and ACS">
+<meta name="author" content="Götz, Daniel">
+
+    <link rel="icon" href="https://devsecops-workshop.github.io/images/favicon.png" type="image/png">
+
+    <title>Configure GitOps :: DevSecOps Workshop 2021</title>
+
+    
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1643993597" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1643993597" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1643993597" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1643993597" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1643993597" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1643993597" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1643993597" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1643993597" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1643993597" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1643993597" rel="stylesheet">
+    
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1643993597" rel="stylesheet">
+    
+    
+
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1643993597"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+        :not(pre) > code + span.copy-to-clipboard {
+            display: none;
+        }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/5-gitops/">
+    <nav id="sidebar" class="">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="https://devsecops-workshop.github.io/">
+    <img src="https://devsecops-workshop.github.io/images/acs-logo.png">
+  </a>
+
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1643993597"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1643993597"></script>
+<script type="text/javascript">
+    
+        var baseurl = "https:\/\/devsecops-workshop.github.io\/";
+    
+</script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1643993597"></script>
+
+    
+  </div>
+  
+    <section id="homelinks">
+      <ul>
+        <li>
+            <a class="padding" href='https://devsecops-workshop.github.io/'><i class='fas fa-home'></i> Home</a>
+        </li>
+      </ul>
+    </section>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/1-intro/" title="The DevSecOps Workshop" class="dd-item
+        
+        
+        
+        ">
+      <a href="https://devsecops-workshop.github.io/1-intro/">
+          The DevSecOps Workshop
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prepare-cluster/" title="Prepare Cluster" class="dd-item
+        
+        
+        
+        ">
+      <a href="https://devsecops-workshop.github.io/2-prepare-cluster/">
+          Prepare Cluster
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-inner-loop/" title="Inner Loop" class="dd-item
+        
+        
+        
+        ">
+      <a href="https://devsecops-workshop.github.io/3-inner-loop/">
+          Inner Loop
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-outer-loop/" title="Outer Loop" class="dd-item
+        
+        
+        
+        ">
+      <a href="https://devsecops-workshop.github.io/4-outer-loop/">
+          Outer Loop
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/5-gitops/" title="Configure GitOps" class="dd-item
+        
+        active
+        
+        ">
+      <a href="https://devsecops-workshop.github.io/5-gitops/">
+          Configure GitOps
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/10-rhacs-setup/" title="Install and Configure ACS" class="dd-item
+        
+        
+        
+        ">
+      <a href="https://devsecops-workshop.github.io/10-rhacs-setup/">
+          Install and Configure ACS
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/11-rhacs-warmup/" title="Getting to know ACS" class="dd-item
+        
+        
+        
+        ">
+      <a href="https://devsecops-workshop.github.io/11-rhacs-warmup/">
+          Getting to know ACS
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/12-create-policy/" title="Create a Custom Security Policy" class="dd-item
+        
+        
+        
+        ">
+      <a href="https://devsecops-workshop.github.io/12-create-policy/">
+          Create a Custom Security Policy
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/13-rhacs-pipeline/" title="Integrating ACS into the Pipeline" class="dd-item
+        
+        
+        
+        ">
+      <a href="https://devsecops-workshop.github.io/13-rhacs-pipeline/">
+          Integrating ACS into the Pipeline
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/14-runtime-security/" title="Securing Runtime Events" class="dd-item
+        
+        
+        
+        ">
+      <a href="https://devsecops-workshop.github.io/14-runtime-security/">
+          Securing Runtime Events
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/100-playground/" title="Playground" class="dd-item
+        
+        
+        
+        ">
+      <a href="https://devsecops-workshop.github.io/100-playground/">
+          Playground
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://devsecops-workshop.github.io/"><i class='fas fa-home'></i> Homepage</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="footer">
+      <p>Built with <a href="https://github.com/matcornic/hugo-theme-learn"><i class="fas fa-heart"></i></a> from <a href="https://getgrav.org">Grav</a> and <a href="https://gohugo.io/">Hugo</a></p>
+
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            <a href='https://devsecops-workshop.github.io/'></a> > Configure GitOps
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents"></nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Configure GitOps
+            </h1>
+          
+
+        
+
+
+
+	<p>Now that our CI/CD build and integration stage is really we could promote the app version directly to a production stage.  But with the help of the GitOps approach we can leverage our Git System to handle promotion that is tracked through commits and can deploy and configure the whole production environment.  This stage is just too critical to configuare manually and without audit.</p>
+<p>So let&rsquo;s start be installing the OpenShift GitOps Operator based on project ArgoCD.</p>
+<ul>
+<li>Install the <strong>Red Hat OpenShift GitOps</strong> Operator from OperatorHub</li>
+<li>Create a new Migration and clone the <strong>Config GitOps Repository</strong> to Gitea. This will be the repository that contains our GitOps infrastructure components and state</li>
+<li><a href="https://github.com/devsecops-workshop/openshift-gitops-getting-started.git">https://github.com/devsecops-workshop/openshift-gitops-getting-started.git</a></li>
+<li>Create OpenShift Project <code>workshop-prod</code>
+Give ArgoCD Permissions to create objects in namespace workshop-prod</li>
+</ul>
+<pre><code> oc adm policy add-role-to-user admin system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller -n workshop-prod
+</code></pre><ul>
+<li>Give namespace <code>workshop-prod</code> permissions to pull images from <code>workshop-int</code></li>
+</ul>
+<pre><code>oc policy add-role-to-user \
+    system:image-puller system:serviceaccount:workshop-prod:default \
+    --namespace=workshop-int
+</code></pre><ul>
+<li>Go to <strong>ArgoCD</strong> URL (There is new shortcut at the top right menu with the squares)</li>
+<li>User is <code>admin</code> and password will be in namespace <code>openshift-gitops</code> in Secret <code>openshift-gitops-cluster</code></li>
+<li>Create App
+<ul>
+<li>Application name : workshop</li>
+<li>Project : default</li>
+<li>Repo URL : <a href="https://repository-gitea.apps">https://repository-gitea.apps</a>.{YOUR DOMAIN}.com/gitea/openshift-gitops-getting-started.git (replacing {YOUR DOMAIN) so this matches your Gitea config repo)</li>
+<li>Path : environments/dev</li>
+<li>Cluster URL : <a href="https://kubernetes.default.svc">https://kubernetes.default.svc</a></li>
+<li>Namespace : workshop-prod</li>
+<li>ENABLE AUTO-SYNC</li>
+<li>Click <strong>Create</strong></li>
+</ul>
+</li>
+<li>In the <strong>NAMESPACES</strong> filter in the bottom left filter to <code>ẁorkspace-prod</code></li>
+<li>Watch the resources (Deployment, Service, Route) get rolled out to the namespace <code>workshop-prod</code>. Notice we have also scaled our app to 2 pods in the prod stage as we want some HA.</li>
+</ul>
+<p>Our complete prod stage is now configured and controlled though GitOps. But how do we now tell ArgoCD that there is a new version of our app to deploy? Weel, we will add a step to our build pipeline updating the config repo. Since ArgoCD permanently watches this repo it will react to a chnage immediately.</p>
+<p>It is also possible to update the repo with a Pull request. Then you have an approval process for your prod deployment.</p>
+<p>Let&rsquo;s add a new custom Tekton task that can push to a git repo</p>
+<ul>
+<li>In the namespace<code>ẁorkshop-int</code> switch to Administrator Perspective &gt; Pipelines &gt; Tasks &gt; New Task</li>
+<li>And enter</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: tekton.dev/v1beta1
+<span style="color:#66d9ef">kind</span>: Task
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">annotations</span>:
+    <span style="color:#66d9ef">tekton.dev/pipelines.minVersion</span>: <span style="color:#ae81ff">0.12.1</span>
+    <span style="color:#66d9ef">tekton.dev/tags</span>: git
+  <span style="color:#66d9ef">name</span>: git-update-deployment
+  <span style="color:#66d9ef">namespace</span>: workshop-int
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">app.kubernetes.io/version</span>: <span style="color:#e6db74">&#39;0.1&#39;</span>
+    <span style="color:#66d9ef">operator.tekton.dev/provider-type</span>: community
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">description</span>: This Task can be used to update image digest in a Git repo using kustomize
+  <span style="color:#66d9ef">params</span>:
+    - <span style="color:#66d9ef">name</span>: GIT_REPOSITORY
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">name</span>: GIT_USERNAME
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">name</span>: GIT_PASSWORD
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">name</span>: CURRENT_IMAGE
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">name</span>: NEW_IMAGE
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">name</span>: NEW_DIGEST
+      <span style="color:#66d9ef">type</span>: string
+    - <span style="color:#66d9ef">name</span>: KUSTOMIZATION_PATH
+      <span style="color:#66d9ef">type</span>: string
+  <span style="color:#66d9ef">results</span>:
+    - <span style="color:#66d9ef">description</span>: The commit SHA
+      <span style="color:#66d9ef">name</span>: commit
+  <span style="color:#66d9ef">steps</span>:
+    - <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#39;docker.io/alpine/git:v2.26.2&#39;</span>
+      <span style="color:#66d9ef">name</span>: git-clone
+      <span style="color:#66d9ef">resources</span>: {}
+      <span style="color:#66d9ef">script</span>: <span style="color:#e6db74">|
+</span><span style="color:#e6db74">        rm -rf git-update-digest-workdir</span>
+        git clone $(params.GIT_REPOSITORY) git-update-digest-workdir
+      <span style="color:#66d9ef">workingDir</span>: $(workspaces.workspace.path)
+    - <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#39;quay.io/wpernath/kustomize-ubi:latest&#39;</span>
+      <span style="color:#66d9ef">name</span>: update-digest
+      <span style="color:#66d9ef">resources</span>: {}
+      <span style="color:#66d9ef">script</span>: <span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">        #!/usr/bin/env bash</span>
+
+        echo <span style="color:#e6db74">&#34;Start&#34;</span>
+
+        pwd
+
+        cd git-update-digest-workdir/$(params.KUSTOMIZATION_PATH)
+
+        pwd
+
+
+        <span style="color:#75715e">#echo &#34;kustomize edit set image</span>
+        <span style="color:#75715e">#$(params.CURRENT_IMAGE)=$(params.NEW_IMAGE)@$(params.NEW_DIGEST)&#34;</span>
+
+
+        kustomize version
+
+
+        kustomize edit set image
+        $(params.CURRENT_IMAGE)=$(params.NEW_IMAGE)@$(params.NEW_DIGEST)
+
+
+        echo <span style="color:#e6db74">&#34;##########################&#34;</span>
+
+
+
+        echo <span style="color:#e6db74">&#34;### kustomization.yaml ###&#34;</span>
+
+
+
+        echo <span style="color:#e6db74">&#34;##########################&#34;</span>
+
+
+        ls
+
+
+        cat kustomization.yaml
+      <span style="color:#66d9ef">workingDir</span>: $(workspaces.workspace.path)
+    - <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#39;docker.io/alpine/git:v2.26.2&#39;</span>
+      <span style="color:#66d9ef">name</span>: git-commit
+      <span style="color:#66d9ef">resources</span>: {}
+      <span style="color:#66d9ef">script</span>: <span style="color:#e6db74">&gt;
+</span><span style="color:#e6db74">        pwd</span>
+
+
+        cd git-update-digest-workdir
+
+
+
+        git config user.email <span style="color:#e6db74">&#34;tekton-pipelines-ci@redhat.com&#34;</span>
+
+
+
+        git config user.name <span style="color:#e6db74">&#34;tekton-pipelines-ci&#34;</span>
+
+
+
+        git status
+
+
+
+        git add $(params.KUSTOMIZATION_PATH)/kustomization.yaml
+
+
+        <span style="color:#75715e"># git commit -m &#34;[$(context.pipelineRun.name)] Image digest updated&#34;</span>
+
+
+        git status
+
+
+        git commit -m <span style="color:#e6db74">&#34;[ci] Image digest updated&#34;</span>
+
+
+        git status
+
+        git push
+
+
+
+        RESULT_SHA=<span style="color:#e6db74">&#34;$(git rev-parse HEAD | tr -d &#39;\n&#39;)&#34;</span>
+
+
+
+        EXIT_CODE=<span style="color:#e6db74">&#34;$?&#34;</span>
+
+
+
+        if [ <span style="color:#e6db74">&#34;$EXIT_CODE&#34;</span> != <span style="color:#ae81ff">0</span> ]
+
+
+
+        then
+          exit $EXIT_CODE
+        fi
+
+
+        <span style="color:#75715e"># Make sure we don&#39;t add a trailing newline to the result!</span>
+
+
+        echo -n <span style="color:#e6db74">&#34;$RESULT_SHA&#34;</span> &gt; $(results.commit.path)
+      <span style="color:#66d9ef">workingDir</span>: $(workspaces.workspace.path)
+  <span style="color:#66d9ef">workspaces</span>:
+    - <span style="color:#66d9ef">description</span>: The workspace consisting of maven project.
+      <span style="color:#66d9ef">name</span>: workspace
+
+</code></pre></div><ul>
+<li>Add this Task to your Pipeline by adding it to the YAML like this</li>
+<li>Make sure to replace {YOUR_DOMAIN}</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">...
+- <span style="color:#66d9ef">name</span>: git-update-deployment
+     <span style="color:#66d9ef">params</span>:
+       - <span style="color:#66d9ef">name</span>: GIT_REPOSITORY
+         <span style="color:#66d9ef">value</span>: &gt;<span style="color:#e6db74">-
+</span><span style="color:#e6db74">           https://repository-git.apps.{YOUR DOMAIN}/gitea/openshift-gitops-getting-started.git</span>
+       - <span style="color:#66d9ef">name</span>: GIT_USERNAME
+         <span style="color:#66d9ef">value</span>: gitea
+       - <span style="color:#66d9ef">name</span>: GIT_PASSWORD
+         <span style="color:#66d9ef">value</span>: gitea
+       - <span style="color:#66d9ef">name</span>: CURRENT_IMAGE
+         <span style="color:#66d9ef">value</span>: &gt;<span style="color:#e6db74">-
+</span><span style="color:#e6db74">           image-registry.openshift-image-registry.svc:5000/workshop-int/workshop:latest</span>
+       - <span style="color:#66d9ef">name</span>: NEW_IMAGE
+         <span style="color:#66d9ef">value</span>: &gt;<span style="color:#e6db74">-
+</span><span style="color:#e6db74">           image-registry.openshift-image-registry.svc:5000/workshop-int/workshop</span>
+       - <span style="color:#66d9ef">name</span>: NEW_DIGEST
+         <span style="color:#66d9ef">value</span>: $(tasks.build.results.IMAGE_DIGEST)
+       - <span style="color:#66d9ef">name</span>: KUSTOMIZATION_PATH
+         <span style="color:#66d9ef">value</span>: environments/dev
+     <span style="color:#66d9ef">runAfter</span>:
+       - build
+     <span style="color:#66d9ef">taskRef</span>:
+       <span style="color:#66d9ef">kind</span>: Task
+       <span style="color:#66d9ef">name</span>: git-update-deployment
+     <span style="color:#66d9ef">workspaces</span>:
+       - <span style="color:#66d9ef">name</span>: workspace
+         <span style="color:#66d9ef">workspace</span>: workspace
+
+</code></pre></div><ul>
+<li>Create a secret with credentials for your gitea repository, so the task can authenticate and push to Gitea. Replace {YOUR DOMAIN}</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: Secret
+<span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: gitea
+  <span style="color:#66d9ef">namespace</span>: workshop-int
+  <span style="color:#66d9ef">annotations</span>:
+    <span style="color:#66d9ef">tekton.dev/git-0</span>: <span style="color:#e6db74">&#39;https://repository-git.apps.{YOUR DOMAIN}&#39;</span>
+<span style="color:#66d9ef">data</span>:
+  <span style="color:#66d9ef">password</span>: Z2l0ZWE=
+  <span style="color:#66d9ef">username</span>: Z2l0ZWE=
+<span style="color:#66d9ef">type</span>: kubernetes.io/basic-auth
+</code></pre></div><ul>
+<li>Edit the serviceaccount &ldquo;pipeline&rdquo; and add the secret to it, so it will be available during the pipeline run</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">kind</span>: ServiceAccount
+<span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: pipeline
+  <span style="color:#66d9ef">namespace</span>: workshop-int
+<span style="color:#66d9ef">secrets</span>:
+  - <span style="color:#66d9ef">name</span>: gitea
+</code></pre></div><ul>
+<li>Run the pipeline and see that in your Gitea repo /environment/dev/kustomize.yaml is updated with the new image version</li>
+<li>This will tell ArgoCD to update the <code>Deployment</code> with this new image version</li>
+<li>Check that the new image is rolled out (you may need to sync manually in ArgoCD to speed things up)</li>
+</ul>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="https://devsecops-workshop.github.io/4-outer-loop/" title="Outer Loop"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="https://devsecops-workshop.github.io/10-rhacs-setup/" title="Install and Configure ACS" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1643993597"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1643993597"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1643993597"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1643993597"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1643993597"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1643993597"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1643993597"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1643993597"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1643993597"></script>
+    
+        
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1643993597"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    
+
+  </body>
+</html>
