@@ -35,11 +35,15 @@
   </url>
   
   <url>
+    <loc>https://devsecops-workshop.github.io/14-advanced-pipeline/</loc>
+  </url>
+  
+  <url>
     <loc>https://devsecops-workshop.github.io/13-rhacs-pipeline/</loc>
   </url>
   
   <url>
-    <loc>https://devsecops-workshop.github.io/14-runtime-security/</loc>
+    <loc>https://devsecops-workshop.github.io/15-runtime-security/</loc>
   </url>
   
   <url>
