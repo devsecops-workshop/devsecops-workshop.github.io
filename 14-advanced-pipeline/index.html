@@ -12,22 +12,22 @@
     <title>Advanced Pipeline :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1644580656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1644580656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1644580656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1644580656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1644580656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1644580656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1644580656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1644580656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1644580656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1644580656" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1644586267" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1644586267" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1644586267" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1644586267" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1644586267" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1644586267" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1644586267" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1644586267" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1644586267" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1644586267" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1644580656" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1644586267" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1644580656"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1644586267"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1644580656"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1644580656"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1644586267"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1644586267"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1644580656"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1644586267"></script>
 
     
   </div>
@@ -444,6 +444,7 @@
   <ul>
     <li><a href="#optimizing-our-devsecops-pipeline">Optimizing our DevSecOps Pipeline</a>
       <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#lets-go-create-our-advanced-pipeline">Let&rsquo;s go: Create our advanced Pipeline</a></li>
         <li><a href="#test-the-advanced-pipeline">Test the advanced Pipeline</a></li>
       </ul>
@@ -476,6 +477,17 @@
 	<h2 id="optimizing-our-devsecops-pipeline">Optimizing our DevSecOps Pipeline</h2>
 <p>In the chapter before we created a Pipeline which builds, checks and deploys our image, if the image passes all ACS checks. But what should happen, if the image doesn&rsquo;t pass the ACS check? It doesn&rsquo;t seems to be a good idea to save an unsafe image in the internal OpenShift registry.
 So lets modify our pipeline to an advanced one, which deletes an image, if it doesn&rsquo;t pass the ACS checks.</p>
+<h3 id="prerequisites">Prerequisites</h3>
+<p>There is a major security vulnerability in our code, but ACS is not able to detect it at the moment. So first of all navigate to ACS and follow these steps:</p>
+<ul>
+<li>navigate to <strong>Platform Configuration &gt; System Policies</strong></li>
+<li>search for <code>Log4Shell</code> and click on it. In the right top corner should be <strong>Clone</strong></li>
+<li>clone the policy and rename it</li>
+<li>remove the current categorie and add <code>Workshop</code></li>
+<li>go next until you are at the enforcement card and enable both <code>build</code> and <code>deploy</code></li>
+<li>save the policy</li>
+</ul>
+<p>ACS is now able to detect the vulnerability. It is time now to implement your advanced Pipeline.</p>
 <h3 id="lets-go-create-our-advanced-pipeline">Let&rsquo;s go: Create our advanced Pipeline</h3>
 <p>In OpenShift administration view:</p>
 <ul>
@@ -651,6 +663,12 @@ So lets modify our pipeline to an advanced one, which deletes an image, if it do
 </ul>
 <h3 id="test-the-advanced-pipeline">Test the advanced Pipeline</h3>
 <p>Go ahead and start your newly created advanced Pipeline. See what happens and play a little bit around with it. Have fun!</p>
+<h4 id="examples">Examples</h4>
+<p>Go to Gitea and remove the vulnerabilities and start the Pipeline again!</p>
+
+<div class="notices tip" ><p>You have to remove them from <code>pom.xml</code> and <code>GreetingResource.java</code> in the <code>quarkus-build-options</code> repository!</p>
+</div>
+
 
 
 
@@ -907,19 +925,19 @@ So lets modify our pipeline to an advanced one, which deletes an image, if it do
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1644580656"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1644580656"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1644580656"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1644580656"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1644580656"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1644580656"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1644586267"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1644586267"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1644586267"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1644586267"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1644586267"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1644586267"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1644580656"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1644580656"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1644580656"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1644586267"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1644586267"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1644586267"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1644580656"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1644586267"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
