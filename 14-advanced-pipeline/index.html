@@ -12,22 +12,22 @@
     <title>Advanced Pipeline :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1644570999" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1644570999" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1644570999" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1644570999" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1644570999" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1644570999" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1644570999" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1644570999" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1644570999" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1644570999" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1644575325" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1644575325" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1644575325" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1644575325" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1644575325" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1644575325" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1644575325" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1644575325" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1644575325" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1644575325" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1644570999" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1644575325" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1644570999"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1644575325"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1644570999"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1644570999"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1644575325"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1644575325"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1644570999"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1644575325"></script>
 
     
   </div>
@@ -445,6 +445,7 @@
     <li><a href="#optimizing-our-devsecops-pipeline">Optimizing our DevSecOps Pipeline</a>
       <ul>
         <li><a href="#lets-go-create-our-advancede-pipeline">Let&rsquo;s go: Create our advancede Pipeline</a></li>
+        <li><a href="#test-the-advanced-pipeline">Test the advanced Pipeline</a></li>
       </ul>
     </li>
   </ul>
@@ -637,7 +638,20 @@ So lets modify our pipeline to a advanced one, which deletes an image, if it doe
         <span style="color:#66d9ef">name</span>: openshift-client
   <span style="color:#66d9ef">workspaces</span>:
     - <span style="color:#66d9ef">name</span>: workspace
-</code></pre></div>
+</code></pre></div><p>Lets see what has changed in the Pipeline:</p>
+<ul>
+<li>the image which was build through the <strong>build task</strong> will be pushed in a new <strong>ImageStreamTag</strong> called <code>dev</code></li>
+<li>if the image passes the ACS checks, the image will be pushed to the <strong>ImageStreamTag</strong> called <code>latest</code> and the <code>dev</code>tag will be removed</li>
+<li>if the image doesn&rsquo;t pass the ACS checks, the <strong>ImageStreamTag</strong> called <code>dev</code> will be removed. This is handled by a function called <code>finally</code>and a <code>when expression</code>
+<ul>
+<li>have a look at your Pipeline YAML and try to understand how this works</li>
+</ul>
+</li>
+<li>the last three steps stays the same as before</li>
+</ul>
+<h3 id="test-the-advanced-pipeline">Test the advanced Pipeline</h3>
+<p>Go ahead and start your newly created advanced Pipeline. See what happens and play a little bit around with it. Have fun!</p>
+
 
 
 
@@ -893,19 +907,19 @@ So lets modify our pipeline to a advanced one, which deletes an image, if it doe
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1644570999"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1644570999"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1644570999"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1644570999"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1644570999"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1644570999"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1644575325"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1644575325"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1644575325"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1644575325"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1644575325"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1644575325"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1644570999"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1644570999"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1644570999"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1644575325"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1644575325"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1644575325"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1644570999"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1644575325"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
