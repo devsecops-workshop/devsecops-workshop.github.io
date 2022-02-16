@@ -12,22 +12,22 @@
     <title>Prepare Cluster :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1644586656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1644586656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1644586656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1644586656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1644586656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1644586656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1644586656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1644586656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1644586656" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1644586656" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645026964" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645026964" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645026964" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645026964" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645026964" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645026964" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645026964" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1645026964" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645026964" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645026964" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1644586656" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645026964" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1644586656"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645026964"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1644586656"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1644586656"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645026964"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645026964"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1644586656"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645026964"></script>
 
     
   </div>
@@ -484,10 +484,10 @@
 </ul>
 <pre><code>oc apply -f https://raw.githubusercontent.com/redhat-gpte-devopsautomation/gitea-operator/master/catalog_source.yaml
 </code></pre><ul>
-<li>Go to OperatorHub and search for <code>Gitea</code> (You may need to disable search filters)</li>
+<li>Int the web UI, go to <strong>Operators-&gt;OperatorHub</strong> and search for <code>Gitea</code> (You may need to disable search filters)</li>
 <li>Install the <code>Gitea Operator</code> with default settings</li>
 <li>Create a new OpenShift project called <code>git</code></li>
-<li>Go to <strong>Installed Operators -&gt; Gitea Operator</strong> and click <strong>Create instance</strong> in the <code>git</code> project</li>
+<li>Go to <strong>Installed Operators -&gt; Gitea Operator</strong> and click <strong>Create Gitea</strong> in the <code>git</code> project</li>
 <li>On the <strong>Create Gitea</strong> page switch to the YAML view and make sure the following <code>spec</code> values are set:</li>
 </ul>
 <pre><code>spec:
@@ -500,7 +500,7 @@
 </ul>
 <p>After creation has finished:</p>
 <ul>
-<li>On the left click on <strong>Networking &gt; Routes &gt; repository &gt; Location</strong></li>
+<li>Access the route you&rsquo;ll find e.g. in <strong>Networking &gt; Routes &gt; repository &gt; Location</strong></li>
 <li>This will take you to the Gitea web UI</li>
 <li>Sign-In to Gitea with user <code>gitea</code> and password <code>gitea</code></li>
 <li>Clone the example repo:
@@ -515,30 +515,32 @@
 <p>In the cloned repository you&rsquo;ll find a <code>devfile.yml</code>. We will need the URL to the file soon, so keep the tab open.</p>
 <h2 id="install-and-prepare-codeready-workspaces-crw">Install and Prepare CodeReady Workspaces (CRW)</h2>
 <ul>
-<li>Install the CRW Operator from OperatorHub (not the Tech Preview one!)</li>
+<li>Install the <strong>Red Hat CodeReady Workspaces for Devfile v1 and v2</strong> Operator from OperatorHub (not the Tech Preview one!)</li>
 <li>Go to <strong>Installed Operators -&gt; CodeReady Workspaces</strong> and create a new instance (CodeReady Workspaces instance Specification) using the default settings</li>
 <li>Wait until deployment has finished. This may take a couple of minutes as several components will be deployed.</li>
-<li>Once the instance status is ready (You can check the YAML of the instance : status &gt; cheClusterRunning: Available ), look up the <code>codeready</code> Route in the &lsquo;openshift-workspaces&rsquo; namespace (You may need to toggle the <strong>Show default project</strong> button).</li>
-<li>Open the link in a new browser tab and log in with your OCP credentials</li>
-<li>Apply permissions</li>
-<li>Enter an email, First Name and Last Name to set up your account</li>
+<li>Once the instance status is ready (You can check the YAML of the instance: <code>status &gt; cheClusterRunning: Available</code>), look up the <code>codeready</code> Route in the <code>openshift-workspaces</code> namespace (You may need to toggle the <strong>Show default project</strong> button).</li>
+<li>Open the link in a new browser tab, choose <code>htpasswd_provider</code> and log in with your OCP credentials</li>
+<li>Allow selected permissions</li>
+<li>Enter an email address, First Name and Last Name to set up your account (you can make these up).</li>
 </ul>
 
 <div class="notices tip" ><p>We could create a workspace from one of the templates that come with CodeReady, but we want to use a customized workspace with some additionally defined plugins in a <a href="https://redhat-developer.github.io/devfile/">v1 devfile</a> in our git repo. With devfiles you can share a complete workspace setup and with the click of a button you will end up in a fully configured project in your browser.</p>
 </div>
 
 <ul>
-<li>So at the top click on &lsquo;Custom Workspace&rsquo;</li>
-<li>In &lsquo;Enter the devfile URL&rsquo; enter the <strong>raw URL</strong>* to your <code>devfile.yml</code> in Gitea repository by clicking on the file and then on the **Raw** button</li>
-<li>Once the content of the devfile is loaded click on <strong>Create &amp; Open</strong> at the buttom</li>
-<li>Give the workspace containers some time to spin up</li>
+<li>At the top click on <strong>Custom Workspace</strong></li>
+<li>Copy the <strong>raw URL</strong> of the <code>devfile.yml</code> file in your Gitea repository by clicking on the file and then on the <strong>Raw</strong> button.</li>
+<li>Paste the full URL into the <code>Enter devfile URL</code> field and click <strong>Load Devfile</strong></li>
+<li>Once the content of the devfile is loaded click on <strong>Create &amp; Open</strong> at the button</li>
+<li>You&rsquo;ll get into the <strong>Starting workspace &hellip;</strong> view, give the workspace containers some time to spin up.</li>
 </ul>
-<p>Have a good look around the UI. It should look familiar if you have ever worked with VSCode or similar IDEs. To install the <code>odo</code>cli into your workspace, run the following steps:</p>
+<p>When your workspace has finally started, have a good look around in the UI. It should look familiar if you have ever worked with VSCode or similar IDEs. To install the <code>odo</code> cli into your workspace, run the following steps:</p>
 <ul>
-<li>In the CRW shortcuts menu to the right (&ldquo;cube icon&rdquo;) run <code>install odo</code></li>
-<li>odo cli will be downloaded and unpacked in your project folder</li>
-<li>Close the terminal tab the installation opened</li>
+<li>From the CRW shortcuts menu to the right (the &ldquo;cube icon&rdquo;) run <code>install odo</code></li>
+<li>odo cli will be downloaded and unpacked in your project folder, you can safely ignore the warning about file or directory not found</li>
+<li>Close the <code>install odo</code> terminal tab the installation opened</li>
 </ul>
+<p>Your cluster is now prepared for the next step, proceed to <code>Inner Loop</code>.</p>
 
 
 
@@ -795,19 +797,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1644586656"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1644586656"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1644586656"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1644586656"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1644586656"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1644586656"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645026964"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645026964"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645026964"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645026964"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645026964"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645026964"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1644586656"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1644586656"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1644586656"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645026964"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1645026964"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645026964"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1644586656"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645026964"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
