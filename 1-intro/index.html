@@ -12,22 +12,22 @@
     <title>The DevSecOps Workshop :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645035261" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645035261" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645035261" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645035261" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645035261" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645035261" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645035261" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1645035261" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645035261" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645035261" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645042666" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645042666" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645042666" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645042666" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645042666" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645042666" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645042666" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1645042666" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645042666" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645042666" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645035261" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645042666" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645035261"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645042666"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645035261"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645035261"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645042666"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645042666"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645035261"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645042666"></script>
 
     
   </div>
@@ -472,19 +472,19 @@
 
 
 	<h2 id="intro">Intro</h2>
-<p>This workshop is meant to introduce you to the application development cycle leveraging OpenShift&rsquo;s tooling &amp; features with a special focus on securing your environment using Advanced Cluster Security for Kubernetes (ACS). And all in a <strong>fun way</strong>.</p>
+<p>This workshop is meant to introduce you to the application development cycle leveraging <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift">OpenShift&rsquo;s</a> tooling &amp; features with a special focus on securing your environment using <a href="https://www.redhat.com/en/technologies/cloud-computing/openshift/advanced-cluster-security-kubernetes">Advanced Cluster Security for Kubernetes (ACS)</a>. And all in a fun way.</p>
 <p>This is the storyline you&rsquo;ll follow today:</p>
 <ul>
-<li>Create application using CodeReady Workspaces</li>
-<li>Inner Dev Loop
+<li>Create application using the browser based development environment <a href="https://developers.redhat.com/products/codeready-workspaces/overview">CodeReady Workspaces</a></li>
+<li>Setting up the <strong>Inner Dev Loop</strong>
 <ul>
-<li>Use <a href="https://developers.redhat.com/products/odo/overview">odo</a> to create, push, change apps on the fly</li>
+<li>Use the cli tool <a href="https://developers.redhat.com/products/odo/overview">odo</a> to create, push, change apps on the fly</li>
 </ul>
 </li>
-<li>Outer Dev Loop
+<li>Setting up the <strong>Outer Dev Loop</strong>
 <ul>
-<li>Learn to work with Tekton Pipelines</li>
-<li>Use GitOps with ArgoCD</li>
+<li>Learn to work with OpenShift Pipelines based on Tekton</li>
+<li>Use OpenShift GitOps based on ArgoCD</li>
 </ul>
 </li>
 <li>Secure your app and OpenShift cluster with <strong>ACS</strong>
@@ -498,11 +498,12 @@
 <h2 id="what-to-expect">What to Expect</h2>
 <p>We try to balance guided workshop steps and challenging you to use your knowledge to learn new skills. This means you&rsquo;ll get detailed step-by-step instructions for every new chapter/task, later on the guide will become less verbose and we&rsquo;ll weave in some challenges.</p>
 
-<div class="notices warning" ><p>A good understanding of how OpenShift works together with hands-on experience is expected. For example we will not tell you how to log in <code>oc</code> to your cluster or tell you what it is&hellip; ;)</p>
+<div class="notices warning" ><p>This workshop is for intermediate OpenShift users. A good understanding of how OpenShift works along with hands-on experience is expected. For example we will not tell you how to log in with <code>oc</code> to your cluster or tell you what it is&hellip; ;)</p>
 </div>
 
 <h2 id="workshop-environment">Workshop Environment</h2>
-<p>You will be provided with freshly installed OpenShift 4 clusters running in AWS. Depending on attendee numbers we might ask you to gather in teams. Some workshop tasks must be done only once for the cluster (e.g. installing Operators), others like deploying and securing the application can be done by every team member separately in her/his own Project. This will be mentioned in the guide.</p>
+<p>As part of the workshop you will be provided with freshly installed OpenShift 4.9 clusters. Depending on attendee numbers we might ask you to gather in teams. Some workshop tasks must be done only once for the cluster (e.g. installing Operators), others like deploying and securing the application can be done by every team member separately in their own Project. This will be mentioned in the guide.</p>
+<p>As there is not special setup for the OpenShift cluster you should be able to run the workshop with any 4.9 cluster of you own.</p>
 <h2 id="workshop-flow">Workshop Flow</h2>
 <p>We&rsquo;ll tackle the topics at hand step by step with an introduction covering the things worked on before every section.</p>
 
@@ -758,19 +759,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645035261"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645035261"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645035261"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645035261"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645035261"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645035261"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645042666"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645042666"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645042666"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645042666"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645042666"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645042666"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645035261"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1645035261"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645035261"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645042666"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1645042666"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645042666"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645035261"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645042666"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
