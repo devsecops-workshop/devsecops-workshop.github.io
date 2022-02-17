@@ -47,10 +47,6 @@
   </url>
   
   <url>
-    <loc>https://devsecops-workshop.github.io/100-playground/</loc>
-  </url>
-  
-  <url>
     <loc>https://devsecops-workshop.github.io/</loc>
     <priority>0</priority>
   </url>
