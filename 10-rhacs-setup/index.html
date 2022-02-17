@@ -12,22 +12,22 @@
     <title>Install and Configure ACS :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645116228" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645120035" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645116228" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645120035" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645116228"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645120035"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645116228"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645116228"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645120035"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645120035"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645116228"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645120035"></script>
 
     
   </div>
@@ -310,13 +310,13 @@
  
   
     
-    <li data-nav-id="/14-advanced-pipeline/" title="Advanced Pipeline" class="dd-item
+    <li data-nav-id="/14-advanced-pipeline/" title="Advanced ACS Pipeline" class="dd-item
         
         
         
         ">
       <a href="https://devsecops-workshop.github.io/14-advanced-pipeline/">
-          Advanced Pipeline
+          Advanced ACS Pipeline
           
       </a>
       
@@ -449,7 +449,7 @@
         <li><a href="#prepare-to-add-secured-clusters">Prepare to add Secured Clusters</a></li>
         <li><a href="#prepare-the-secured-cluster">Prepare the Secured Cluster</a></li>
         <li><a href="#add-the-cluster-as-securedcluster-to-acs-central">Add the Cluster as <strong>SecuredCluster</strong> to <strong>ACS Central</strong></a></li>
-        <li><a href="#create-a-serviceaccount-to-scan-the-internal-registry">Create a serviceaccount to scan the internal registry</a></li>
+        <li><a href="#create-a-serviceaccount-to-scan-the-internal-openshift-registry">Create a serviceaccount to scan the internal OpenShift registry</a></li>
       </ul>
     </li>
   </ul>
@@ -478,7 +478,7 @@
 
 
 	<p>During the workshop you went through the OpenShift developer experience starting from software development using Quarkus and <code>odo</code>, moving on to automating build and deployment using Tekton pipelines and finally using GitOps for production deployments.</p>
-<p>Now it&rsquo;s time to add another extremely important piece to the setup; enhancing application security in a conainerized world. Using the most recent addition to the OpenShift portfolio: <strong>Red Hat Advanced Cluster Security for Kubernetes</strong>!</p>
+<p>Now it&rsquo;s time to add another extremely important piece to the setup; enhancing application security in a containerized world. Using the most recent addition to the OpenShift portfolio: <strong>Red Hat Advanced Cluster Security for Kubernetes</strong>!</p>
 <h2 id="install-rhacs">Install RHACS</h2>
 <h3 id="install-the-operator">Install the Operator</h3>
 <ul>
@@ -496,14 +496,14 @@
 <ul>
 <li>Navigate to <strong>Operators → Installed Operators</strong></li>
 <li>Select the ACS operator</li>
-<li>You should now be in the <strong>rhacs-operator</strong> project the Operator created, create a new <strong>Project</strong> for the Central instance:
+<li>You should now be in the <strong>rhacs-operator</strong> project the Operator created, create a new OpenShift <strong>Project</strong> for the <strong>Central</strong> instance:
 <ul>
 <li>Select <strong>Project: rhacs-operator → Create project</strong></li>
-<li>Create a new project <strong>stackrox</strong> (Red Hat recommends using <strong>stackrox</strong> as the project name.)</li>
+<li>Create a new project called <strong>stackrox</strong> (Red Hat recommends using <strong>stackrox</strong> as the project name.)</li>
 </ul>
 </li>
-<li>Select <strong>Provided APIs → Central → Create Central</strong></li>
-<li>Accept the name <strong>stackrox-central-services</strong> and adjust the memory limit of the central instances to 6Gi (<strong>Central Component Settings-&gt;Resources-&gt;Memory</strong>).</li>
+<li>In the Operator view select the tile <strong>Provided APIs → Central → Create Instance</strong></li>
+<li>Accept the name <strong>stackrox-central-services</strong> and in the <em>Form</em> view adjust the memory limit of the central instances to 6Gi (<strong>Central Component Settings-&gt;Resources-&gt;Limits&gt;Memory</strong>).</li>
 <li>Click <strong>Create</strong></li>
 </ul>
 <p>After deployment has finished (&quot;<strong>Status</strong> Conditions: Deployed, Initialized&rdquo;) it can take some time until the application is completely up and running. One easy way to check the state is to switch to the <strong>Developer</strong> console view at the upper left. Then make sure you are in the <strong>stackrox</strong> project and open the <strong>Topology</strong> map. You&rsquo;ll see the three deployments of an <strong>Central</strong> instance:</p>
@@ -585,8 +585,8 @@ secret/admission-control-tls created
 <li>Click <strong>Create</strong></li>
 </ul>
 <p>Now go to your <strong>RHACS Portal</strong> again, after a couple of minutes you should see you secured cluster under <strong>Platform Configuration-&gt;Clusters</strong>. Wait until all <strong>Cluster Status</strong> indicators become green.</p>
-<h3 id="create-a-serviceaccount-to-scan-the-internal-registry">Create a serviceaccount to scan the internal registry</h3>
-<p>The integrations to the internal registry where created automatically. To enable scanning of images in the internal registry, you&rsquo;ll have to configure credentials, so this is what you&rsquo;ll do:</p>
+<h3 id="create-a-serviceaccount-to-scan-the-internal-openshift-registry">Create a serviceaccount to scan the internal OpenShift registry</h3>
+<p>The integrations to the internal registry were created automatically. To enable scanning of images in the internal registry, you&rsquo;ll have to configure credentials, so this is what you&rsquo;ll do:</p>
 <ul>
 <li>add a serviceaccount</li>
 <li>assign it the needed privileges</li>
@@ -594,7 +594,7 @@ secret/admission-control-tls created
 </ul>
 <p><strong>Create ServiceAccount to read images from Registry</strong></p>
 <ul>
-<li>Make sure you are in the <code>stackrox</code> <strong>Project</strong></li>
+<li>In the OCP Web Console make sure you are in the <code>stackrox</code> <strong>Project</strong></li>
 <li><strong>User Management -&gt; ServiceAccounts -&gt; Create ServiceAccount</strong></li>
 <li>Replace the example name in the YAML with <code>acs-registry-reader</code> and click <strong>Create</strong></li>
 <li>In the new ServiceAccount, under <strong>Secrets</strong> click one of the <code>acs-registry-reader-token-...</code> secrets</li>
@@ -877,19 +877,19 @@ or -->
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645116228"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645120035"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645116228"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645120035"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645116228"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645120035"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

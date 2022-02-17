@@ -12,22 +12,22 @@
     <title>Integrating ACS into the Pipeline :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645116228" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645120035" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645116228" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645120035" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645116228"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645120035"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645116228"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645116228"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645120035"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645120035"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645116228"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645120035"></script>
 
     
   </div>
@@ -310,13 +310,13 @@
  
   
     
-    <li data-nav-id="/14-advanced-pipeline/" title="Advanced Pipeline" class="dd-item
+    <li data-nav-id="/14-advanced-pipeline/" title="Advanced ACS Pipeline" class="dd-item
         
         
         
         ">
       <a href="https://devsecops-workshop.github.io/14-advanced-pipeline/">
-          Advanced Pipeline
+          Advanced ACS Pipeline
           
       </a>
       
@@ -488,11 +488,11 @@
 <h2 id="integrate-image-scan-into-the-pipeline">Integrate Image Scan into the Pipeline</h2>
 <p>You should have created and build a custom policy in ACS and tested it for triggering violations. Now you will integrate it into the build pipeline.</p>
 <h3 id="lets-go-prepare-roxctl">Let&rsquo;s go: Prepare <code>roxctl</code></h3>
-<p>Build-time policies require the use of the <code>roxctl</code> command-line tool which is available for download from the ACS Central UI, in the upper right corner of the dashboard. <code>Roxctl</code> needs to authenticate to <strong>ACS Central</strong> to do anything. It can use either username and password authentication to Central, or API token based. It&rsquo;s good practice to use a token so that&rsquo;s what you&rsquo;ll do.</p>
+<p>Build-time policies require the use of the <code>roxctl</code> command-line tool which is available for download from the ACS Central UI, in the upper right corner of the dashboard. <code>Roxctl</code> needs to authenticate to <strong>ACS Central</strong> to do anything. It can use either username and password API tokens to authenticate against Central. It&rsquo;s good practice to use a token so that&rsquo;s what we&rsquo;ll do.</p>
 <h3 id="create-the-roxctl-token">Create the <code>roxctl</code> token</h3>
 <p>On the ACS portal:</p>
 <ul>
-<li>navigate to <strong>Configure &gt; Integrations</strong>.</li>
+<li>Navigate to <strong>Platform Configure &gt; Integrations</strong>.</li>
 <li>Scroll down to the <strong>Authentication Tokens</strong> category, and select <strong>API Token</strong>.</li>
 <li>Click <strong>Generate Token</strong>. Enter the name <code>pipeline</code> for the token and select the role <strong>Admin</strong>.</li>
 <li>Select <strong>Generate</strong></li>
@@ -502,12 +502,12 @@
 <p>In your OCP cluster, create a secret with the API token in the project your pipeline lives in:</p>
 <ul>
 <li>In the UI switch to your Project</li>
-<li>Create a new key/value secret named <strong>roxsecrets</strong></li>
+<li>Create a new key/value <code>Secret</code> named <strong>roxsecrets</strong></li>
 <li>Introduce these key/values into the secret:
 <ul>
 <li><strong>rox_central_endpoint</strong>: &lt;the URL to your <strong>ACS Portal</strong>&gt;
 <ul>
-<li>It should be something like central-stackrox.apps.cluster-psslb.psslb.sandbox555.opentlc.com:443&rdquo;</li>
+<li>It should be something like central-stackrox.apps.cluster-psslb.psslb.sandbox555.opentlc.com:443</li>
 </ul>
 </li>
 <li><strong>rox_api_token</strong>: &lt;the API token you generated&gt;</li>
@@ -593,7 +593,7 @@
 <ul>
 <li><strong>rox_central_endpoint</strong>: <code>roxsecrets</code></li>
 <li><strong>rox_api_token</strong>: <code>roxsecrets</code></li>
-<li><strong>image</strong>: <code>image-registry.openshift-image-registry.svc:5000/workshop-int/quarkus-workshop</code>
+<li><strong>image</strong>: <code>image-registry.openshift-image-registry.svc:5000/workshop-int/workshop</code>
 <ul>
 <li>Adapt the Project name if you changed it</li>
 </ul>
@@ -880,7 +880,7 @@
 			<a class="nav nav-prev" href="https://devsecops-workshop.github.io/12-create-policy/" title="Create a Custom Security Policy"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="https://devsecops-workshop.github.io/14-advanced-pipeline/" title="Advanced Pipeline" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="https://devsecops-workshop.github.io/14-advanced-pipeline/" title="Advanced ACS Pipeline" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -890,19 +890,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645116228"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645120035"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645116228"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645120035"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645116228"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645120035"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

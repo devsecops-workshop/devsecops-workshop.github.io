@@ -9,25 +9,25 @@
 
     <link rel="icon" href="https://devsecops-workshop.github.io/images/favicon.png" type="image/png">
 
-    <title>Advanced Pipeline :: DevSecOps Workshop 2021</title>
+    <title>Advanced ACS Pipeline :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645116228" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645116228" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645120035" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645120035" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645116228" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645120035" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645116228"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645120035"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645116228"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645116228"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645120035"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645120035"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645116228"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645120035"></script>
 
     
   </div>
@@ -310,13 +310,13 @@
  
   
     
-    <li data-nav-id="/14-advanced-pipeline/" title="Advanced Pipeline" class="dd-item
+    <li data-nav-id="/14-advanced-pipeline/" title="Advanced ACS Pipeline" class="dd-item
         
         active
         
         ">
       <a href="https://devsecops-workshop.github.io/14-advanced-pipeline/">
-          Advanced Pipeline
+          Advanced ACS Pipeline
           
       </a>
       
@@ -429,7 +429,7 @@
             
           
           
-            <a href='https://devsecops-workshop.github.io/'></a> > Advanced Pipeline
+            <a href='https://devsecops-workshop.github.io/'></a> > Advanced ACS Pipeline
           
         
           
@@ -444,7 +444,8 @@
   <ul>
     <li><a href="#optimizing-our-devsecops-pipeline">Optimizing our DevSecOps Pipeline</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#adding-a-package-level-vulnerability">Adding a Package Level Vulnerability</a></li>
+        <li><a href="#acs-prerequisites">ACS Prerequisites</a></li>
         <li><a href="#lets-go-create-our-advanced-pipeline">Let&rsquo;s go: Create our advanced Pipeline</a></li>
         <li><a href="#test-the-advanced-pipeline">Test the advanced Pipeline</a></li>
       </ul>
@@ -466,7 +467,7 @@
           
             <h1>
               
-              Advanced Pipeline
+              Advanced ACS Pipeline
             </h1>
           
 
@@ -477,7 +478,53 @@
 	<h2 id="optimizing-our-devsecops-pipeline">Optimizing our DevSecOps Pipeline</h2>
 <p>In the chapter before we created a Pipeline which builds, checks and deploys our image, if the image passes all ACS checks. But what should happen, if the image doesn&rsquo;t pass the ACS check? It doesn&rsquo;t seems to be a good idea to save an unsafe image in the internal OpenShift registry.
 So lets modify our pipeline to an advanced one, which deletes an image, if it doesn&rsquo;t pass the ACS checks.</p>
-<h3 id="prerequisites">Prerequisites</h3>
+<h3 id="adding-a-package-level-vulnerability">Adding a Package Level Vulnerability</h3>
+<p>Before we adjust our pipeline let&rsquo;s add another vulnerability to our Deployment. So far we had a system library security issue but let&rsquo;s image a developer tried to add (hopefully by mistake) a vulnerable Java library to his/her application. How about we pick one of the most infamous current ones such as the <strong>Log4Shell</strong> vulnerability?  But don&rsquo;t worry ACS already ships with a policy for that and has your back.</p>
+
+<div class="notices tip" ><p>Quarkus doesn&rsquo;t use the log4J library for logging so is not affected by it. Although it is a bit contrived we will still force it to include the library just to trigger our policy.  If you want to find out more about this particular vulnerability have look <a href="https://www.wired.com/story/log4j-log4shell/">here</a></p>
+</div>
+
+<p>To add this library to you Quarkus app</p>
+<ul>
+<li>Go to your <code>quarkus-build-options</code> repo in <code>Gitea</code></li>
+<li>Edit the <code>pom.xml</code> file to include the new dependency</li>
+<li>Find the line</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">    <span style="color:#75715e">&lt;!-- Add dependency here  --&gt;</span>
+</code></pre></div><p>and after that paste</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">    <span style="color:#75715e">&lt;!-- Add dependency here  --&gt;</span>
+    <span style="color:#f92672">&lt;dependency&gt;</span>
+      <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.logging.log4j<span style="color:#f92672">&lt;/groupId&gt;</span>
+      <span style="color:#f92672">&lt;artifactId&gt;</span>log4j-core<span style="color:#f92672">&lt;/artifactId&gt;</span>
+      <span style="color:#f92672">&lt;version&gt;</span>2.9.1<span style="color:#f92672">&lt;/version&gt;</span>
+    <span style="color:#f92672">&lt;/dependency&gt;</span>
+    <span style="color:#f92672">&lt;dependency&gt;</span>
+      <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.logging.log4j<span style="color:#f92672">&lt;/groupId&gt;</span>
+      <span style="color:#f92672">&lt;artifactId&gt;</span>log4j-api<span style="color:#f92672">&lt;/artifactId&gt;</span>
+      <span style="color:#f92672">&lt;version&gt;</span>2.9.1<span style="color:#f92672">&lt;/version&gt;</span>
+    <span style="color:#f92672">&lt;/dependency&gt;</span>
+</code></pre></div><ul>
+<li>Commit</li>
+<li>Edit the <code>src/main/java/org/acme/GreetingResource.java</code> file to use the new dependency (otherwise Quarkus will just optimize it away)</li>
+<li>Find the line</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">   <span style="color:#75715e">// Add import here
+</span></code></pre></div><p>and after that paste</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">   <span style="color:#75715e">// Add import here
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">import</span> org.apache.logging.log4j.Logger<span style="color:#f92672">;</span>
+  <span style="color:#f92672">import</span> org.apache.logging.log4j.LogManager<span style="color:#f92672">;</span>
+</code></pre></div><ul>
+<li>Find the line</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">// Add Logger instantiation here
+</span></code></pre></div><p>and after that paste</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">   <span style="color:#75715e">// Add Logger instantiation here
+</span><span style="color:#75715e"></span>   <span style="color:#66d9ef">private</span> Logger logger <span style="color:#f92672">=</span> LogManager<span style="color:#f92672">.</span><span style="color:#a6e22e">getLogger</span><span style="color:#f92672">(</span>GreetingResource<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">());</span>
+</code></pre></div><ul>
+<li>Commit</li>
+</ul>
+<p>There you go. That developer has just introduced a ticking timebomb into the application. Let&rsquo;s see how far he will get with that.</p>
+<h3 id="acs-prerequisites">ACS Prerequisites</h3>
 <p>There is a major security vulnerability in our code, but ACS is not able to detect it at the moment. So first of all navigate to ACS and follow these steps:</p>
 <ul>
 <li>navigate to <strong>Platform Configuration &gt; System Policies</strong></li>
@@ -490,9 +537,9 @@ So lets modify our pipeline to an advanced one, which deletes an image, if it do
 <p>In OpenShift administration view:</p>
 <ul>
 <li>navigate to <strong>Pipelines &gt; Pipelines</strong></li>
-<li>on the left click <strong>Create &gt; Pipeline</strong></li>
+<li>on the right click <strong>Create &gt; Pipeline</strong></li>
 <li>switch to <strong>YAML view</strong></li>
-<li>Replace the YAML displayed with this:</li>
+<li>Replace the YAML with this making sure to update your <code>Gitea</code> Repo URLS (Specifically replace the {YOUR_CLUSTER_HOSTNAME}):</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: tekton.dev/v1beta1
 <span style="color:#66d9ef">kind</span>: Pipeline
@@ -521,7 +568,7 @@ So lets modify our pipeline to an advanced one, which deletes an image, if it do
       <span style="color:#66d9ef">name</span>: APP_NAME
       <span style="color:#66d9ef">type</span>: string
     - <span style="color:#66d9ef">default</span>: &gt;<span style="color:#e6db74">-
-</span><span style="color:#e6db74">        https://repository-openshift-operators.apps.cluster-rsph7.rsph7.sandbox1788.opentlc.com/gitea/quarkus-build-options.git</span>
+</span><span style="color:#e6db74">        https://repository-git.apps.{YOUR_CLUSTER_HOSTNAME}/gitea/quarkus-build-options.git</span>
       <span style="color:#66d9ef">name</span>: GIT_REPO
       <span style="color:#66d9ef">type</span>: string
     - <span style="color:#66d9ef">default</span>: master
@@ -542,7 +589,7 @@ So lets modify our pipeline to an advanced one, which deletes an image, if it do
       <span style="color:#66d9ef">params</span>:
         - <span style="color:#66d9ef">name</span>: GIT_REPOSITORY
           <span style="color:#66d9ef">value</span>: &gt;<span style="color:#e6db74">-
-</span><span style="color:#e6db74">            https://repository-openshift-operators.apps.cluster-rsph7.rsph7.sandbox1788.opentlc.com/gitea/openshift-gitops-getting-started.git</span>
+</span><span style="color:#e6db74">            https://repository-git.apps.{YOUR_CLUSTER_HOSTNAME}/gitea/openshift-gitops-getting-started.git</span>
         - <span style="color:#66d9ef">name</span>: GIT_USERNAME
           <span style="color:#66d9ef">value</span>: gitea
         - <span style="color:#66d9ef">name</span>: GIT_PASSWORD
@@ -646,7 +693,10 @@ So lets modify our pipeline to an advanced one, which deletes an image, if it do
         <span style="color:#66d9ef">name</span>: openshift-client
   <span style="color:#66d9ef">workspaces</span>:
     - <span style="color:#66d9ef">name</span>: workspace
-</code></pre></div><p>Lets see what has changed in the Pipeline:</p>
+</code></pre></div><ul>
+<li>Click <strong>Create</strong></li>
+</ul>
+<p>As you can see in the Pipeline visualization the flow is now a bit different. Lets see what has changed:</p>
 <ul>
 <li>the image which was built through the <strong>build task</strong> will be pushed in a new <strong>ImageStreamTag</strong> called <code>dev</code></li>
 <li>if the image passes the ACS checks, the image will be pushed to the <strong>ImageStreamTag</strong> called <code>latest</code> and the <code>dev</code> tag will be removed</li>
@@ -659,13 +709,24 @@ So lets modify our pipeline to an advanced one, which deletes an image, if it do
 </ul>
 <h3 id="test-the-advanced-pipeline">Test the advanced Pipeline</h3>
 <p>Go ahead and start your newly created advanced Pipeline. See what happens and play a little bit around with it. Have fun!</p>
-<h4 id="examples">Examples</h4>
-<p>Go to Gitea and remove the vulnerabilities and start the Pipeline again!</p>
-
-<div class="notices tip" ><p>You have to remove them from <code>pom.xml</code> and <code>GreetingResource.java</code> in the <code>quarkus-build-options</code> repository!</p>
-</div>
-
-
+<h4 id="fix-the-vulnerability">Fix the Vulnerability</h4>
+<p>If by the now the developer that introduced the log4jShell vulnerability has not realized by now that he/she &ldquo;broke the build&rdquo; you can tell him/her to update their dependency to a safe version.</p>
+<p>Go to your <code>quarkus-build-options</code> repo in <code>Gitea</code> again</p>
+<ul>
+<li>Edit the <code>pom.xml</code> file update dependency to a safe version like this</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">    <span style="color:#75715e">&lt;!-- Add dependency here  --&gt;</span>
+    <span style="color:#f92672">&lt;dependency&gt;</span>
+      <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.logging.log4j<span style="color:#f92672">&lt;/groupId&gt;</span>
+      <span style="color:#f92672">&lt;artifactId&gt;</span>log4j-core<span style="color:#f92672">&lt;/artifactId&gt;</span>
+      <span style="color:#f92672">&lt;version&gt;</span>2.17.1<span style="color:#f92672">&lt;/version&gt;</span>
+    <span style="color:#f92672">&lt;/dependency&gt;</span>
+    <span style="color:#f92672">&lt;dependency&gt;</span>
+      <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.logging.log4j<span style="color:#f92672">&lt;/groupId&gt;</span>
+      <span style="color:#f92672">&lt;artifactId&gt;</span>log4j-api<span style="color:#f92672">&lt;/artifactId&gt;</span>
+      <span style="color:#f92672">&lt;version&gt;</span>2.17.1<span style="color:#f92672">&lt;/version&gt;</span>
+    <span style="color:#f92672">&lt;/dependency&gt;</span>
+</code></pre></div>
 
 
 
@@ -921,19 +982,19 @@ So lets modify our pipeline to an advanced one, which deletes an image, if it do
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645116228"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645120035"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1645116228"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645116228"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1645120035"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645120035"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645116228"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645120035"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
