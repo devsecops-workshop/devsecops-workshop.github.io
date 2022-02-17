@@ -12,22 +12,22 @@
     <title>Getting to know ACS :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645088482" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645088482" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645088482" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645088482" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645088482" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645088482" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645088482" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1645088482" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645088482" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645088482" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645091096" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645091096" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645091096" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645091096" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645091096" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645091096" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645091096" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1645091096" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645091096" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645091096" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645088482" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645091096" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645088482"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645091096"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645088482"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645088482"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645091096"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645091096"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645088482"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645091096"></script>
 
     
   </div>
@@ -445,8 +445,8 @@
     <li><a href="#acs-features">ACS Features</a></li>
     <li><a href="#ui-overview">UI Overview</a></li>
     <li><a href="#exploring-the-security-use-cases">Exploring the Security Use Cases</a></li>
-    <li><a href="#system-policies">System Policies</a></li>
     <li><a href="#filters">Filters</a></li>
+    <li><a href="#system-policies">System Policies</a></li>
   </ul>
 </nav>
     </div>
@@ -547,17 +547,8 @@ On every page throughout the UI, the global search allows you to search for any 
 </ul>
 </li>
 </ul>
-<h2 id="system-policies">System Policies</h2>
-<p>As the foundation of ACS are the <strong>system policies</strong>, have a good look around:</p>
-<ul>
-<li>Navigate to the <strong>System Policies</strong> section from <strong>Platform Configuration</strong> in the left side menu.</li>
-<li>You will get an overview of the Built-in Policies</li>
-<li>All of the policies that ship with the product are designed with the goal of providing targeted remediation that improves security hardening.</li>
-<li>You’ll see this list contains many <strong>Build</strong> and <strong>Deploy</strong> time policies to catch misconfigurations early in the pipeline, but also <strong>Runtime</strong> policies.</li>
-<li>These policies come from us at Red Hat - our expertise, our interpretation of industry best practice, and our interpretation of common compliance standards, but you can modify them or create your own.</li>
-</ul>
 <h2 id="filters">Filters</h2>
-<p>Most UI pages have a filters section at the top that allows you to narrow the reporting view to matching or non-matching criteria. Almost all of the attributes that ACS gathers are filterable, try it out:</p>
+<p>Most UI pages have a filters section at the top that allows you to narrow the view to matching or non-matching criteria. Almost all of the attributes that ACS gathers are filterable, try it out:</p>
 <ul>
 <li>Go to the <strong>Risk</strong> view</li>
 <li>Click in the <strong>Filters</strong> Bar</li>
@@ -567,6 +558,20 @@ On every page throughout the UI, the global search allows you to search for any 
 <li>Try another one: limit the filter to your Project namespace only</li>
 <li>Note the <strong>Create Policy</strong> button. It can be used to create a policy from the search filter to automatically identify this criteria.</li>
 </ul>
+<h2 id="system-policies">System Policies</h2>
+<p>As the foundation of ACS are the <strong>system policies</strong>, have a good look around:</p>
+<ul>
+<li>Navigate to the <strong>System Policies</strong> section from <strong>Platform Configuration</strong> in the left side menu.</li>
+<li>You will get an overview of the Built-in Policies</li>
+<li>All of the policies that ship with the product are designed with the goal of providing targeted remediation that improves security hardening.</li>
+<li>You’ll see this list contains many <strong>Build</strong> and <strong>Deploy</strong> time policies to catch misconfigurations early in the pipeline, but also <strong>Runtime</strong> policies.</li>
+<li>These policies come from us at Red Hat - our expertise, our interpretation of industry best practice, and our interpretation of common compliance standards, but you can modify them or create your own.</li>
+</ul>
+
+<div class="notices tip" ><p>Here is a great tip for you: By default only some policies are enabled. If you want to get an overview which ones, you can use the filter view introduced above. But there is one catch: the filter value needed is not as straight forward as it could be&hellip; until this has been fixed, use this:</p>
+<p>Use <code>Enforcement</code> as filter key and <code>FAIL_BUILD_ENFORCEMENT</code> as the magic ingredient, eh, value. ;-)</p>
+</div>
+
 
 
 
@@ -823,19 +828,19 @@ On every page throughout the UI, the global search allows you to search for any 
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645088482"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645088482"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645088482"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645088482"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645088482"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645088482"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645091096"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645091096"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645091096"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645091096"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645091096"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645091096"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645088482"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1645088482"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645088482"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645091096"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1645091096"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645091096"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645088482"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645091096"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
