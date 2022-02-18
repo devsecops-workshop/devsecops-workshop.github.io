@@ -12,22 +12,22 @@
     <title>Advanced ACS Pipeline :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645166402" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645166402" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645166402" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645166402" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645166402" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645166402" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645166402" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1645166402" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645166402" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645166402" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645193243" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645193243" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645193243" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645193243" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645193243" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645193243" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645193243" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1645193243" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645193243" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645193243" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645166402" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645193243" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645166402"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645193243"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645166402"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645166402"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645193243"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645193243"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645166402"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645193243"></script>
 
     
   </div>
@@ -422,8 +422,13 @@
       <ul>
         <li><a href="#adding-a-package-level-vulnerability">Adding a Package Level Vulnerability</a></li>
         <li><a href="#acs-prerequisites">ACS Prerequisites</a></li>
+      </ul>
+    </li>
+    <li><a href="#modify-log4shell-policy">Modify Log4Shell Policy</a>
+      <ul>
         <li><a href="#lets-go-create-our-advanced-pipeline">Let&rsquo;s go: Create our advanced Pipeline</a></li>
         <li><a href="#test-the-advanced-pipeline">Test the advanced Pipeline</a></li>
+        <li><a href="#fix-the-vulnerability">Fix the Vulnerability</a></li>
       </ul>
     </li>
   </ul>
@@ -501,21 +506,30 @@ So lets modify our pipeline to an advanced one, which deletes an image, if it do
 </ul>
 <p>There you go. That developer has just introduced a ticking timebomb into the application. Let&rsquo;s see how far he will get with that.</p>
 <h3 id="acs-prerequisites">ACS Prerequisites</h3>
-<p>There is a major security vulnerability in our code, but ACS is not able to detect it at the moment. So first of all navigate to ACS and follow these steps:</p>
+<p>So there is a major security vulnerability in our code. ACS would detect the deployment because the System Policy <code>Log4Shell: log4j Remote Code Execution vulnerability</code> is enabled but won&rsquo;t stop it, because the Policy is not set to enforce.</p>
+<h2 id="modify-log4shell-policy">Modify Log4Shell Policy</h2>
+<p>So first of all in the <strong>RHACS Portal</strong> follow these steps:</p>
 <ul>
-<li>navigate to <strong>Platform Configuration &gt; System Policies</strong></li>
-<li>search for <code>Log4Shell</code> and click on it.</li>
-<li>go next until you are at the enforcement card and enable both <code>build</code> and <code>deploy</code></li>
-<li>save the policy</li>
+<li>Navigate to <strong>Platform Configuration &gt; System Policies</strong></li>
+<li>Search for <code>Log4Shell</code> and click on the Policy.</li>
+<li>Click <strong>Edit</strong> at the upper right</li>
 </ul>
-<p>ACS is now able to detect the vulnerability. It is time now to implement your advanced Pipeline.</p>
-<h3 id="lets-go-create-our-advanced-pipeline">Let&rsquo;s go: Create our advanced Pipeline</h3>
-<p>In OpenShift administration view:</p>
+<p>Remember setting up image scanning with <code>roxctl</code> in our first pipeline? We use <code>roxctl</code> in a way that it only scans against Policies from a certain category, <code>Workshop</code> in our case. To have the task scan for the Log4Shell Policy, first add the Policy to the category <code>Workshop</code>:</p>
 <ul>
-<li>navigate to <strong>Pipelines &gt; Pipelines</strong></li>
-<li>on the right click <strong>Create &gt; Pipeline</strong></li>
-<li>switch to <strong>YAML view</strong></li>
-<li>Replace the YAML with this making sure to update your <code>Gitea</code> Repo URLS (Specifically replace the {YOUR_CLUSTER_HOSTNAME}):</li>
+<li>Remove the current categorie and add <code>Workshop</code></li>
+<li>Now hit next until you are at the enforcement tab</li>
+<li>Enable both <code>Build</code> and <code>Deploy</code> enforcement by setting them to <strong>On</strong></li>
+<li>Save the policy</li>
+</ul>
+<p>ACS is now able to detect and enforce the vulnerability. It is time now to implement your advanced Pipeline.</p>
+<h3 id="lets-go-create-our-advanced-pipeline">Let&rsquo;s go: Create our advanced Pipeline</h3>
+<p>In the OpenShift Web Console:</p>
+<ul>
+<li>Make sure you are in the <code>workshop-int</code> Project</li>
+<li>Navigate to <strong>Pipelines &gt; Pipelines</strong></li>
+<li>On the right click <strong>Create &gt; Pipeline</strong></li>
+<li>Switch to <strong>YAML view</strong></li>
+<li>Replace the YAML with this making sure to update your two <code>Gitea</code> Repo URL&rsquo;s (Specifically replace the {YOUR_CLUSTER_HOSTNAME}):</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: tekton.dev/v1beta1
 <span style="color:#66d9ef">kind</span>: Pipeline
@@ -674,29 +688,32 @@ So lets modify our pipeline to an advanced one, which deletes an image, if it do
 </ul>
 <p>As you can see in the Pipeline visualization the flow is now a bit different. Lets see what has changed:</p>
 <ul>
-<li>the image which was built through the <strong>build task</strong> will be pushed in a new <strong>ImageStreamTag</strong> called <code>dev</code></li>
-<li>if the image passes the ACS checks, the image will be pushed to the <strong>ImageStreamTag</strong> called <code>latest</code> and the <code>dev</code> tag will be removed</li>
-<li>if the image doesn&rsquo;t pass the ACS checks, the <strong>ImageStreamTag</strong> called <code>dev</code> will be removed. This is handled by a function called <code>finally</code> and a <code>when expression</code>
+<li>The image which was built through the <strong>build task</strong> will be pushed in a new <strong>ImageStreamTag</strong> called <code>dev</code></li>
+<li>If the image passes the ACS checks, the image will be pushed to the <strong>ImageStreamTag</strong> called <code>latest</code> and the <code>dev</code> tag will be removed</li>
+<li>If the image doesn&rsquo;t pass the ACS checks, the <strong>ImageStreamTag</strong> called <code>dev</code> will be removed. This is handled by a function called <code>finally</code> and a <code>when expression</code>
 <ul>
-<li>have a look at your Pipeline YAML and try to understand how it works</li>
+<li>Have a look at your Pipeline YAML and try to understand how it works</li>
 </ul>
 </li>
-<li>the last three steps stays the same as before</li>
+<li>The last three steps stays the same as before</li>
 </ul>
 <h3 id="test-the-advanced-pipeline">Test the advanced Pipeline</h3>
 <p>Go ahead and start your newly created advanced Pipeline.
 Navigate to:</p>
 <ul>
-<li>Pipelines -&gt; Pipelines</li>
+<li><strong>Pipelines -&gt; Pipelines</strong></li>
 <li>Click on <strong>workshop-advanced</strong></li>
-<li>in the top right corner click <strong>Start</strong> -&gt; <strong>Start</strong></li>
-<li>in the dialogue on the bottom select a <strong>workspace</strong></li>
-<li>choose a <strong>PersistentVolumeClaim</strong></li>
-<li>start the Pipeline
-See what happens and play a little bit around with it. Have fun!</li>
+<li>In the top right corner click <strong>Actions</strong> -&gt; <strong>Start</strong></li>
+<li>In the <strong>Start Pipeline</strong> window at the bottom set <strong>workspace</strong> to <strong>PersistentVolumeClaim</strong></li>
+<li>Set the <strong>Select a PVC</strong> drop-down to a PVC</li>
+<li>Start the Pipeline</li>
 </ul>
-<h4 id="fix-the-vulnerability">Fix the Vulnerability</h4>
-<p>If by the now the developer that introduced the log4jShell vulnerability has not realized by now that he/she &ldquo;broke the build&rdquo; you can tell him/her to update their dependency to a safe version.</p>
+<p>See what happens and maybe play around with it and start again. Have fun!</p>
+<ul>
+<li>The pipeline should be stopped</li>
+</ul>
+<h3 id="fix-the-vulnerability">Fix the Vulnerability</h3>
+<p>If by now the developer that introduced the log4jShell vulnerability has not realized that he/she &ldquo;broke the build&rdquo; you can tell him/her to update their dependency to a safe version.</p>
 <p>Go to your <code>quarkus-build-options</code> repo in <code>Gitea</code> again</p>
 <ul>
 <li>Edit the <code>pom.xml</code> file update dependency to a safe version like this</li>
@@ -952,19 +969,19 @@ See what happens and play a little bit around with it. Have fun!</li>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645166402"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645166402"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645166402"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645166402"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645166402"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645166402"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645193243"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645193243"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645193243"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645193243"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645193243"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645193243"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645166402"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1645166402"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645166402"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645193243"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1645193243"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645193243"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645166402"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645193243"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
