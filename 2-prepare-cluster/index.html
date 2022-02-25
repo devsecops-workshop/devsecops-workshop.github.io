@@ -12,22 +12,22 @@
     <title>Prepare Cluster :: DevSecOps Workshop 2021</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645441371" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645441371" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645441371" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645441371" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645441371" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645441371" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645441371" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1645441371" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645441371" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645441371" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645804318" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645804318" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645804318" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645804318" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645804318" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645804318" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645804318" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1645804318" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645804318" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645804318" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645441371" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645804318" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645441371"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645804318"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645441371"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645441371"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645804318"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645804318"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645441371"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645804318"></script>
 
     
   </div>
@@ -447,15 +447,18 @@
 
 
 	<h2 id="cluster-preparation">Cluster Preparation</h2>
-<p>Before you start you have to install a number of components you&rsquo;ll use during the workshop. The first two are <code>Gitea</code> for providing Git services in your cluster and <strong>CodeReady Workspaces</strong> as development environment. But fear not, both are managed by an <a href="https://cloud.redhat.com/learn/topics/operators">operator</a>.</p>
+<p>Before you start you have to install a number of components you&rsquo;ll use during the workshop. The first two are <code>Gitea</code> for providing Git services in your cluster and <code>CodeReady Workspaces</code> as development environment. But fear not, both are managed by Kubernetes <a href="https://cloud.redhat.com/learn/topics/operators">operators</a> on OpenShift.</p>
 <h2 id="install-and-prepare-gitea">Install and Prepare Gitea</h2>
 <p>We&rsquo;ll need Git repository services to keep our app and infrastructure source code, so let&rsquo;s just install trusted <code>Gitea</code> using an operator:</p>
 
-<div class="notices tip" ><p>This is a good example of how you can integrate an operator into your catalog that is not part of the default <a href="https://operatorhub.io/">OperatorHub</a> already.</p>
+<div class="notices tip" ><p><a href="https://gitea.io/en-us/">Gitea</a> is an OpenSource Git Server similar to GitHub.  A team at Red Hat was so nice to create an Operator for it. This is a good example of how you can integrate an operator into your catalog that is not part of the default <a href="https://operatorhub.io/">OperatorHub</a> already.</p>
 </div>
 
 <ul>
-<li>Log in with the <code>oc</code> command to your OpenShift cluster (the easiest way is to use the <strong>Copy login command</strong> link when clicking on your username in the top right of the OCP Web Console).</li>
+<li>If you don&rsquo;t already have the oc client installed, you can download the matching version for your operating system <a href="https://mirror.openshift.com/pub/openshift-v4/clients/ocp/stable/">here</a></li>
+<li>Log into your OpenShift Webconsole with you cluster admin credentials</li>
+<li>On the top right click on your username and then <strong>Copy login command</strong> to copy your login token</li>
+<li>On you local machine open a terminal log in with the <code>oc</code> command you copied</li>
 <li>Now using <code>oc</code> add the Gitea Operator to your OpenShift OperatorHub catalog</li>
 </ul>
 <pre><code>oc apply -f https://raw.githubusercontent.com/redhat-gpte-devopsautomation/gitea-operator/master/catalog_source.yaml
@@ -463,7 +466,8 @@
 <li>In the Web Console, go to <strong>Operators &gt; OperatorHub</strong> and search for <code>Gitea</code> (You may need to disable search filters)</li>
 <li>Install the <code>Gitea Operator</code> with default settings</li>
 <li>Create a new OpenShift project called <code>git</code></li>
-<li>Go to <strong>Installed Operators &gt; Gitea Operator</strong> and click on the <strong>Create Instance</strong> tile in the <code>git</code> project</li>
+<li>Go to <strong>Installed Operators &gt; Gitea Operator</strong> and click on the <strong>Create Instance</strong> tile in the <code>git</code> project
+<img src="../images/gitea.png" alt="Gitea"></li>
 <li>On the <strong>Create Gitea</strong> page switch to the YAML view and make sure the following <code>spec</code> values are set:</li>
 </ul>
 <pre><code>spec:
@@ -506,7 +510,8 @@
 <ul>
 <li>At the top click on <strong>Custom Workspace</strong></li>
 <li>Copy the <strong>raw</strong>(!) URL of the <code>devfile.yml</code> file in your <code>Gitea</code> repository by clicking on the file and then on the <strong>Raw</strong> button (or <strong>Originalversion</strong> in German).</li>
-<li>Paste the full URL into the <strong>Enter devfile URL</strong> field and click <strong>Load Devfile</strong></li>
+<li>Paste the full URL into the <strong>Enter devfile URL</strong> field and click <strong>Load Devfile</strong>
+<img src="../images/crw.png" alt="Gitea"></li>
 <li>Once the content of the devfile is loaded click on <strong>Create &amp; Open</strong> at the button</li>
 <li>You&rsquo;ll get into the <strong>Starting workspace &hellip;</strong> view, give the workspace containers some time to spin up.</li>
 </ul>
@@ -756,19 +761,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645441371"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645441371"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645441371"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645441371"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645441371"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645441371"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645804318"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645804318"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645804318"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645804318"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645804318"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645804318"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645441371"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1645441371"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645441371"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645804318"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1645804318"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645804318"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645441371"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645804318"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
