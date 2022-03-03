@@ -9,25 +9,25 @@
 
     <link rel="icon" href="https://devsecops-workshop.github.io/images/favicon.png" type="image/png">
 
-    <title>Integrating ACS into the Pipeline :: DevSecOps Workshop 2021</title>
+    <title>Integrating ACS into the Pipeline :: DevSecOps Workshop</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645804318" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1646317247" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645804318" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1646317247" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645804318"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1646317247"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645804318"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645804318"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1646317247"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1646317247"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645804318"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1646317247"></script>
 
     
   </div>
@@ -466,7 +466,7 @@
 <h3 id="lets-go-prepare-roxctl">Let&rsquo;s go: Prepare <code>roxctl</code></h3>
 <p>Build-time policies require the use of the <code>roxctl</code> command-line tool which is available for download from the ACS Central UI, in the upper right corner of the dashboard. <code>Roxctl</code> needs to authenticate to <strong>ACS Central</strong> to do anything. It can use either username and password API tokens to authenticate against Central. It&rsquo;s good practice to use a token so that&rsquo;s what we&rsquo;ll do.</p>
 <h3 id="create-the-roxctl-token">Create the <code>roxctl</code> token</h3>
-<p>On the ACS portal:</p>
+<p>In the <strong>ACS portal</strong>:</p>
 <ul>
 <li>Navigate to <strong>Platform Configure &gt; Integrations</strong>.</li>
 <li>Scroll down to the <strong>Authentication Tokens</strong> category, and select <strong>API Token</strong>.</li>
@@ -475,7 +475,7 @@
 <li>Save the contents of the token somewhere!</li>
 </ul>
 <h3 id="create-ocp-secret-with-token">Create OCP secret with token</h3>
-<p>In your OCP cluster, create a secret with the API token in the project your pipeline lives in:</p>
+<p>Change to the <strong>OpenShift Web Console</strong> and create a secret with the API token in the project your pipeline lives in:</p>
 <ul>
 <li>In the UI switch to your Project</li>
 <li>Create a new key/value <code>Secret</code> named <strong>roxsecrets</strong></li>
@@ -581,6 +581,12 @@
 </li>
 <li>Click <strong>Save</strong></li>
 </ul>
+<figure>
+    <img src="../images/pipeline.png?width=30pc&amp;classes=border,shadow"/> <figcaption>
+            <h4>Click image to enlarge</h4>
+        </figcaption>
+</figure>
+
 <h2 id="test-the-scan-task">Test the Scan Task</h2>
 <p>With our custom <strong>System Policy</strong> still not set to <code>enforce</code> we first are going to test the pipeline integration. Start the pipeline with Java <strong>Version</strong> <code>java-old-image</code></p>
 <ul>
@@ -850,19 +856,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645804318"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1646317247"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645804318"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1646317247"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645804318"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1646317247"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

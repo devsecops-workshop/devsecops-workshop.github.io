@@ -9,25 +9,25 @@
 
     <link rel="icon" href="https://devsecops-workshop.github.io/images/favicon.png" type="image/png">
 
-    <title>Install and Configure ACS :: DevSecOps Workshop 2021</title>
+    <title>Install and Configure ACS :: DevSecOps Workshop</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1645804318" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1645804318" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1646317247" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1646317247" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1645804318" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1646317247" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1645804318"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1646317247"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1645804318"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1645804318"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1646317247"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1646317247"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1645804318"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1646317247"></script>
 
     
   </div>
@@ -492,7 +492,7 @@
 </ul>
 <p>Wait until all Pods have been scaled up properly.</p>
 <p><strong>Verify the Installation</strong></p>
-<p>Switch to the <strong>Administrator</strong> console view again. Now to check the installation of your <strong>Central</strong> instance, access the RHACS Portal:</p>
+<p>Switch to the <strong>Administrator</strong> console view again. Now to check the installation of your <strong>Central</strong> instance, access the <strong>ACS Portal</strong>:</p>
 <ul>
 <li>Look up the <strong>central-htpasswd</strong> secret that was created to get the password</li>
 </ul>
@@ -503,7 +503,7 @@
 <ul>
 <li>Look up  and access the route <strong>central</strong> which was also generated automatically.</li>
 </ul>
-<p>This will get you to the RHACS portal, accept the self-signed certificate and login as user <strong>admin</strong> with the password from the secret.</p>
+<p>This will get you to the <strong>ACS Portal</strong>, accept the self-signed certificate and login as user <strong>admin</strong> with the password from the secret.</p>
 <p>Now you have a <strong>Central</strong> instance that provides the following services in an
 RHACS setup:</p>
 <ul>
@@ -514,11 +514,11 @@ RHACS setup:</p>
 <p>Scanner, which is a vulnerability scanner for  scanning container images. It analyzes all image layers to check known vulnerabilities from the Common Vulnerabilities and Exposures (CVEs) list. Scanner also identifies vulnerabilities in packages installed by package managers and in dependencies for multiple programming languages.</p>
 </li>
 </ul>
-<p>To actually do and see anything you need to add a <strong>SecuredCluster</strong> (be it the same or another OpenShift cluster). For effect go to the <strong>RHACS Portal</strong>, the Dashboard should by pretty empty, click on the <strong>Compliance</strong> link in the menu to the left, lots of zero&rsquo;s and empty panels, too.</p>
+<p>To actually do and see anything you need to add a <strong>SecuredCluster</strong> (be it the same or another OpenShift cluster). For effect go to the <strong>ACS Portal</strong>, the Dashboard should by pretty empty, click on the <strong>Compliance</strong> link in the menu to the left, lots of zero&rsquo;s and empty panels, too.</p>
 <p>This is because you don&rsquo;t have a monitored and secured OpenShift cluster yet.</p>
 <h3 id="prepare-to-add-secured-clusters">Prepare to add Secured Clusters</h3>
 <p>First you have to generate an init bundle which contains certificates and is used to authenticate a <strong>SecuredCluster</strong> to the <strong>Central</strong> instance, again regardless if it&rsquo;s the same cluster as the Central instance or a remote/other cluster.</p>
-<p>In the <strong>RHACS Portal</strong>:</p>
+<p>In the <strong>ACS Portal</strong>:</p>
 <ul>
 <li>Navigate to <strong>Platform Configuration → Integrations</strong>.</li>
 <li>Under the <strong>Authentication Tokens</strong> section, click on <strong>Cluster Init Bundle</strong>.</li>
@@ -544,14 +544,14 @@ RHACS setup:</p>
 secret/sensor-tls created
 secret/admission-control-tls created
 </code></pre><h3 id="add-the-cluster-as-securedcluster-to-acs-central">Add the Cluster as <strong>SecuredCluster</strong> to <strong>ACS Central</strong></h3>
-<p>Now you are ready to install the <strong>SecuredClusters</strong> instance, this will deploy the secured cluster services:</p>
+<p>You are ready to install the <strong>SecuredClusters</strong> instance, this will deploy the secured cluster services:</p>
 <ul>
-<li>Go to the <strong>ACS Operator</strong> in <strong>Operators-&gt;Installed Operators</strong></li>
+<li>In the <strong>OpenShift Web Console</strong> go to the <strong>ACS Operator</strong> in <strong>Operators-&gt;Installed Operators</strong></li>
 <li>Using the Operator create an instance of the <strong>Secured Cluster</strong> type <strong>in the Project you created</strong> (should be stackrox)</li>
-<li>Change the <strong>Cluster Name</strong> for the cluster if you want, it&rsquo;ll appear under this name in the RHACS Portal</li>
-<li>And most importantly for <strong>Central Endpoint</strong>  enter the address and port number of your <strong>Central</strong> instance, this is the same as the <strong>RACS Portal</strong>.
+<li>Change the <strong>Cluster Name</strong> for the cluster if you want, it&rsquo;ll appear under this name in the <strong>ACS Portal</strong></li>
+<li>And most importantly for <strong>Central Endpoint</strong>  enter the address and port number of your <strong>Central</strong> instance, this is the same as the <strong>ACS Portal</strong>.
 <ul>
-<li>If the RHACS Portal is available at <code>https://central-stackrox.apps.cluster-65h4j.65h4j.sandbox1803.opentlc.com/</code> the endpoint is <code>central-stackrox.apps.cluster-65h4j.65h4j.sandbox1803.opentlc.com:443</code>.</li>
+<li>If the <strong>ACS Portal</strong> is available at <code>https://central-stackrox.apps.cluster-65h4j.65h4j.sandbox1803.opentlc.com/</code> the endpoint is <code>central-stackrox.apps.cluster-65h4j.65h4j.sandbox1803.opentlc.com:443</code>.</li>
 </ul>
 </li>
 <li>Under <strong>Admission Control Settings</strong> make sure
@@ -562,7 +562,7 @@ secret/admission-control-tls created
 </li>
 <li>Click <strong>Create</strong></li>
 </ul>
-<p>Now go to your <strong>RHACS Portal</strong> again, after a couple of minutes you should see you secured cluster under <strong>Platform Configuration-&gt;Clusters</strong>. Wait until all <strong>Cluster Status</strong> indicators become green.</p>
+<p>Now go to your <strong>ACS Portal</strong> again, after a couple of minutes you should see you secured cluster under <strong>Platform Configuration-&gt;Clusters</strong>. Wait until all <strong>Cluster Status</strong> indicators become green.</p>
 <h3 id="create-a-serviceaccount-to-scan-the-internal-openshift-registry">Create a serviceaccount to scan the internal OpenShift registry</h3>
 <p>The integrations to the internal registry were created automatically. But to enable scanning of images in the internal registry, you&rsquo;ll have to configure valid credentials, so this is what you&rsquo;ll do:</p>
 <ul>
@@ -585,7 +585,7 @@ secret/admission-control-tls created
 </ul>
 <p><strong>Create ServiceAccount to read images from Registry</strong></p>
 <ul>
-<li>In the OCP Web Console make sure you are still in the <code>stackrox</code> <strong>Project</strong></li>
+<li>In the <strong>OpenShift Web Console</strong> make sure you are still in the <code>stackrox</code> <strong>Project</strong></li>
 <li><strong>User Management -&gt; ServiceAccounts -&gt; Create ServiceAccount</strong></li>
 <li>Replace the example name in the YAML with <code>acs-registry-reader</code> and click <strong>Create</strong></li>
 <li>In the new ServiceAccount, under <strong>Secrets</strong> click one of the <code>acs-registry-reader-token-...</code> secrets</li>
@@ -602,7 +602,7 @@ or -->
 </code></pre><!-- And you'll need the service address for the registry, look it up e.g. from the **Environment** of a registry pod.
   - It should be something like: `image-registry.openshift-image-registry.svc:5000` -->
 <p><strong>Configure Registry Integrations in ACS</strong></p>
-<p>Access the <strong>RHACS Portal</strong> and configure the already existing integrations of type <strong>Generic Docker Registry</strong>. Go to <strong>Platform Configuration -&gt; Integrations -&gt; Generic Docker Registry</strong>. You should see a number of autogenerated (from existing pull-secrets) entries.</p>
+<p>Access the <strong>ACS Portal</strong> and configure the already existing integrations of type <strong>Generic Docker Registry</strong>. Go to <strong>Platform Configuration -&gt; Integrations -&gt; Generic Docker Registry</strong>. You should see a number of autogenerated (from existing pull-secrets) entries.</p>
 <p>You have to change four entries pointing to the internal registry, you can easily recognize them by the placeholder <strong>Username</strong> <code>serviceaccount</code>.</p>
 <p>For each of the four local registry integrations click <strong>Edit integration</strong> using the three dots at the right:</p>
 <ul>
@@ -868,19 +868,19 @@ You now have to remove the four auto-generated entries (you can easily recognize
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1645804318"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1646317247"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1645804318"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1645804318"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1646317247"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1646317247"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1645804318"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1646317247"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
