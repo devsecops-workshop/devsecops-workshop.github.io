@@ -12,22 +12,22 @@
     <title>Install and Configure ACS :: DevSecOps Workshop</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1656351822" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1656351822" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1656351822" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1656351822" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1656351822" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1656351822" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1656351822" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1656351822" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1656351822" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1656351822" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1656352208" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1656352208" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1656352208" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1656352208" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1656352208" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1656352208" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1656352208" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1656352208" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1656352208" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1656352208" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1656351822" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1656352208" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1656351822"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1656352208"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1656351822"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1656351822"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1656352208"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1656352208"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1656351822"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1656352208"></script>
 
     
   </div>
@@ -425,6 +425,7 @@
         <li><a href="#prepare-to-add-secured-clusters">Prepare to add Secured Clusters</a></li>
         <li><a href="#prepare-the-secured-cluster">Prepare the Secured Cluster</a></li>
         <li><a href="#add-the-cluster-as-securedcluster-to-acs-central">Add the Cluster as <strong>SecuredCluster</strong> to <strong>ACS Central</strong></a></li>
+        <li><a href="#create-a-serviceaccount-to-scan-the-internal-openshift-registry">Create a serviceaccount to scan the internal OpenShift registry</a></li>
       </ul>
     </li>
   </ul>
@@ -453,14 +454,13 @@
 
 
 	<p>During the workshop you went through the OpenShift developer experience starting from software development using Quarkus and <code>odo</code>, moving on to automating build and deployment using Tekton pipelines and finally using GitOps for production deployments.</p>
-<p>Now it&rsquo;s time to add another extremely important piece to the setup; enhancing application security in a containerized world. Using a recent addition to the OpenShift portfolio: <strong>Red Hat Advanced Cluster Security for Kubernetes</strong>!</p>
+<p>Now it&rsquo;s time to add another extremely important piece to the setup; enhancing application security in a containerized world. Using the most recent addition to the OpenShift portfolio: <strong>Red Hat Advanced Cluster Security for Kubernetes</strong>!</p>
 <h2 id="install-rhacs">Install RHACS</h2>
 <h3 id="install-the-operator">Install the Operator</h3>
 <p>Install the &ldquo;Advanced Cluster Security for Kubernetes&rdquo; operator from OperatorHub:</p>
 <ul>
 <li>Switch <strong>Update approval</strong> to <code>Manual</code></li>
 <li>Apart from this use the default settings</li>
-<li>Approve the installation when asked</li>
 </ul>
 
 <div class="notices info" ><p>Red Hat recommends installing the Red Hat Advanced Cluster Security for Kubernetes Operator in the <strong>rhacs-operators</strong> namespace. This will happen by default..</p>
@@ -480,12 +480,11 @@
 <li>Create a new project called <strong>stackrox</strong> (Red Hat recommends using <strong>stackrox</strong> as the project name.)</li>
 </ul>
 </li>
-<li>In the Operator view under <strong>Provided APIs</strong> on the tile <strong>Central</strong> click <strong>Create Instance</strong></li>
-<li>Accept the name <strong>stackrox-central-services</strong></li>
-<li>Adjust the memory limit of the central instance to <code>6Gi</code> (<strong>Central Component Settings-&gt;Resources-&gt;Limits&gt;Memory</strong>).</li>
+<li>In the Operator view select the tile <strong>Provided APIs → Central → Create Instance</strong></li>
+<li>Accept the name <strong>stackrox-central-services</strong> and in the <em>Form</em> view adjust the memory limit of the central instances to 6Gi (<strong>Central Component Settings-&gt;Resources-&gt;Limits&gt;Memory</strong>).</li>
 <li>Click <strong>Create</strong></li>
 </ul>
-<p>After deployment has finished (<strong>Status</strong> <code>Conditions: Deployed, Initialized</code> in the Operator view on the tab <strong>Central</strong>) it can take some time until the application is completely up and running. One easy way to check the state is to switch to the <strong>Developer</strong> console view at the upper left. Then make sure you are in the <strong>stackrox</strong> project and open the <strong>Topology</strong> map. You&rsquo;ll see the three deployments of an <strong>Central</strong> instance:</p>
+<p>After deployment has finished (&quot;<strong>Status</strong> Conditions: Deployed, Initialized&rdquo;) it can take some time until the application is completely up and running. One easy way to check the state is to switch to the <strong>Developer</strong> console view at the upper left. Then make sure you are in the <strong>stackrox</strong> project and open the <strong>Topology</strong> map. You&rsquo;ll see the three deployments of an <strong>Central</strong> instance:</p>
 <ul>
 <li><strong>scanner-db</strong></li>
 <li><strong>scanner</strong></li>
@@ -564,6 +563,71 @@ secret/admission-control-tls created
 <li>Click <strong>Create</strong></li>
 </ul>
 <p>Now go to your <strong>ACS Portal</strong> again, after a couple of minutes you should see you secured cluster under <strong>Platform Configuration-&gt;Clusters</strong>. Wait until all <strong>Cluster Status</strong> indicators become green.</p>
+<h3 id="create-a-serviceaccount-to-scan-the-internal-openshift-registry">Create a serviceaccount to scan the internal OpenShift registry</h3>
+<p>The integrations to the internal registry were created automatically. But to enable scanning of images in the internal registry, you&rsquo;ll have to configure valid credentials, so this is what you&rsquo;ll do:</p>
+<ul>
+<li>add a serviceaccount</li>
+<li>assign it the needed privileges</li>
+<li>configure the <strong>Integrations</strong> in ACS with the new credentials</li>
+</ul>
+<p>But the first step is to disable the auto-generate mechanism, otherwise your updated credentials would be set back automatically:</p>
+<ul>
+<li>In the <strong>OpenShift Web Console</strong>, switch to the project <strong>stackrox</strong>, go to <strong>Installed Operators-&gt;Advanced Cluster Security for Kubernetes</strong></li>
+<li>Open your Central instance <code>stackrox-central-services</code></li>
+<li>Switch to the YAML view, under <code>spec:</code> add the following YAML snippet (one indent):</li>
+</ul>
+<pre><code>customize:
+    envVars:
+      - name: ROX_DISABLE_AUTOGENERATED_REGISTRIES
+        value: 'true'
+</code></pre><ul>
+<li>Click <strong>Save</strong></li>
+</ul>
+<p><strong>Create ServiceAccount to read images from Registry</strong></p>
+<ul>
+<li>In the <strong>OpenShift Web Console</strong> make sure you are still in the <code>stackrox</code> <strong>Project</strong></li>
+<li><strong>User Management -&gt; ServiceAccounts -&gt; Create ServiceAccount</strong></li>
+<li>Replace the example name in the YAML with <code>acs-registry-reader</code> and click <strong>Create</strong></li>
+<li>In the new ServiceAccount, under <strong>Secrets</strong> click one of the <code>acs-registry-reader-token-...</code> secrets</li>
+<li>Under <strong>Data</strong> copy the Token</li>
+<li>Using <code>oc</code> give the ServiceAccount the right to <strong>read</strong> images from all projects:</li>
+</ul>
+<!-- 
+```
+oc adm policy add-cluster-role-to-user 'system:image-puller' -z acs-registry-reader -n stackrox
+```
+
+or -->
+<pre><code>oc adm policy add-cluster-role-to-user 'system:image-puller' system:serviceaccount:stackrox:acs-registry-reader -n stackrox
+</code></pre><!-- And you'll need the service address for the registry, look it up e.g. from the **Environment** of a registry pod.
+  - It should be something like: `image-registry.openshift-image-registry.svc:5000` -->
+<p><strong>Configure Registry Integrations in ACS</strong></p>
+<p>Access the <strong>ACS Portal</strong> and configure the already existing integrations of type <strong>Generic Docker Registry</strong>. Go to <strong>Platform Configuration -&gt; Integrations -&gt; Generic Docker Registry</strong>. You should see a number of autogenerated (from existing pull-secrets) entries.</p>
+<p>You have to change four entries pointing to the internal registry, you can easily recognize them by the placeholder <strong>Username</strong> <code>serviceaccount</code>.</p>
+<p>For each of the four local registry integrations click <strong>Edit integration</strong> using the three dots at the right:</p>
+<ul>
+<li>Put in <code>acs-registry-reader</code> as <strong>Username</strong></li>
+<li>Paste the token you copied from the secret into the <strong>Password</strong> field</li>
+<li>Select Disable TLS certificate validation</li>
+<li>Press the <strong>Test</strong> button to validate the connection and press <strong>Save</strong> when the test is successful.</li>
+</ul>
+<!-- WORKAROUND!
+
+You now have to remove the four auto-generated entries (you can easily recognize them by the placeholder **Username** `serviceaccount`) and replace them with new entries:
+
+- Lookup the first entry and copy the **Endpoint** URL
+- Select it by ticking the checkbox to the left, click the **Delete 1 selected Integration** button.
+- Click **New integration**, enter:
+  - **Integration name**: Paste the URL and add "for Cluster RHPDS"
+  - **Endpoint**: Paste the URL
+  - **Username**: `acs-registry-reader`
+  - **Password**: Paste the token you copied from the secret
+  - Tick **Disable TLS certificate validation (insecure)**
+- Click the **Test** button, it should come back with a green success message.
+- Click **Save**
+
+**Repeat this for all of the auto-generated entries that are using `serviceaccount` as placeholder username.** -->
+<p><strong>ACS is now able to scan images in the internal registry!</strong></p>
 
 
 
@@ -804,19 +868,19 @@ secret/admission-control-tls created
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1656351822"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1656351822"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1656351822"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1656351822"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1656351822"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1656351822"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1656352208"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1656352208"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1656352208"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1656352208"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1656352208"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1656352208"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1656351822"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1656351822"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1656351822"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1656352208"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1656352208"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1656352208"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1656351822"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1656352208"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
