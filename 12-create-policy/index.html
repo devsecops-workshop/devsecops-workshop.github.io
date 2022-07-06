@@ -12,22 +12,22 @@
     <title>Create a Custom Security Policy :: DevSecOps Workshop</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1656923381" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1656923381" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1656923381" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1656923381" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1656923381" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1656923381" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1656923381" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1656923381" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1656923381" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1656923381" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1657144859" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1657144859" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1657144859" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1657144859" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1657144859" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1657144859" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1657144859" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1657144859" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1657144859" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1657144859" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1656923381" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1657144859" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1656923381"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1657144859"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1656923381"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1656923381"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1657144859"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1657144859"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1656923381"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1657144859"></script>
 
     
   </div>
@@ -448,7 +448,7 @@
 
 	<h2 id="objective">Objective</h2>
 <p>You should have one or more pipelines to build your application from the first workshop part, now we want to secure the build and deployment of it. For the sake of this workshop we&rsquo;ll take a somewhat simplified use case:</p>
-<p><strong>We want to scan our application image for the Red Hat Security Advisory RHSA-2020:5566 concerning openssl-lib.</strong></p>
+<p><strong>We want to scan our application image for the Red Hat Security Advisory RHSA-2021:4904 concerning openssl-lib.</strong></p>
 <p>If this RHSA is found in an image we don&rsquo;t want to deploy the application using it.</p>
 <p>These are the steps you will go through:</p>
 <ul>
@@ -464,24 +464,45 @@
 <h2 id="create-a-custom-system-policy">Create a Custom System Policy</h2>
 <p>First create the system policy. In the <strong>ACS Portal</strong> do the following:</p>
 <ul>
-<li><strong>System Policies-&gt;New Policy</strong></li>
-<li><strong>Name:</strong> Workshop RHSA-2020:5566</li>
+<li><strong>Platform Configuration-&gt;Policies-&gt;Create policy</strong></li>
+<li><strong>Policy Details</strong>
+<ul>
+<li><strong>Name:</strong> Workshop RHSA-2021:4904</li>
 <li><strong>Severity:</strong> Critical</li>
-<li><strong>Lifecycle Stages:</strong> Build, Deploy</li>
 <li><strong>Categories:</strong> Workshop
 <ul>
 <li>This will create a new Category if it doesn&rsquo;t exist</li>
 </ul>
 </li>
-<li><strong>-&gt;Next</strong></li>
-<li>Click <strong>Add a new condition</strong></li>
-<li>Find the policy field <strong>CVE</strong> in <strong>Image Contents</strong> and drag-and-drop it into the <strong>Drop A Policy Field Inside</strong> area.</li>
-<li>Put <code>RHSA-2020:5566</code> into the <strong>CVE</strong> field</li>
-<li>Click <strong>-&gt;Next</strong></li>
-<li>The next page will show <strong>Deployments</strong> that would generate violations</li>
-<li>Click <strong>-&gt;Next</strong></li>
-<li>On the next page you could enable enforcement of the policy for the <strong>Build</strong> and/or <strong>Deploy</strong> stages. <strong>Don&rsquo;t enable enforcement yet!</strong></li>
+<li>Click <strong>Next</strong></li>
+</ul>
+</li>
+<li><strong>Policy Behaviour</strong>
+<ul>
+<li><strong>Lifecycle Stages:</strong> Build, Deploy</li>
+<li><strong>Response method</strong>: Inform</li>
+<li>Click <strong>Next</strong></li>
+</ul>
+</li>
+<li><strong>Policy Criteria</strong>
+<ul>
+<li>Find the <strong>CVE</strong> policy criterium under <strong>Drag out policy fields</strong> in <strong>Image contents</strong></li>
+<li>Drag &amp; drop it on the drop zone of Policy Section 1</li>
+<li>Put <code>RHSA-2021:4904</code> into the <strong>CVE identifier</strong> field</li>
+<li>Click <strong>Next</strong></li>
+</ul>
+</li>
+<li><strong>Policy Scope</strong>
+<ul>
+<li>You could limit the scope the policy is applied in, do nothing for now.</li>
+</ul>
+</li>
+<li><strong>Review Policy</strong>
+<ul>
+<li>Have a quick look around, if the policy would create a violation you get a preview here.</li>
 <li>Click <strong>Save</strong></li>
+</ul>
+</li>
 </ul>
 <figure>
     <img src="../images/custom-policy.png?width=25pc&amp;classes=border,shadow"/> <figcaption>
@@ -497,7 +518,7 @@
 <li>Expected result:
 <ul>
 <li>You&rsquo;ll see the build deployments (<code>Quarkus-Build-Options-Git-Gsklhg-Build-...</code>) come and go when they are finished.</li>
-<li>When the final build is deployed you&rsquo;ll see a violation in <strong>ACS Portal</strong> for policy <code>Workshop RHSA-2020:5566</code> (Check the Time of the violation)</li>
+<li>When the final build is deployed you&rsquo;ll see a violation in <strong>ACS Portal</strong> for policy <code>Workshop RHSA-2021:4904</code> (Check the Time of the violation)</li>
 </ul>
 </li>
 </ul>
@@ -512,11 +533,11 @@
 <li>Expected result:
 <ul>
 <li>You&rsquo;ll see the build deployments come up and go</li>
-<li>When the final build is deployed you&rsquo;ll see the policy violation for <code>Workshop RHSA-2020:5566</code> for your deployment is gone because the image no longer contains it.</li>
+<li>When the final build is deployed you&rsquo;ll see the policy violation for <code>Workshop RHSA-2021:4904</code> for your deployment is gone because the image no longer contains it.</li>
 </ul>
 </li>
 </ul>
-<p>This shows how ACS is automatically scanning images when they become active against all enabled policies. But we don&rsquo;t want to just admire a violation after the image has been deployed, we want to disable the deployment during build time! So the next step is to integrate the check into the build pipeline and enforce it (don&rsquo;t deploy the application).</p>
+<p>This shows how ACS is automatically scanning images when they become active against all enabled policies. But we don&rsquo;t want to just <strong>admire a violation</strong> after the image has been deployed, we want to disable the deployment during build time! So the next step is to integrate the check into the build pipeline and enforce it (don&rsquo;t deploy the application).</p>
 
 
 
@@ -757,19 +778,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1656923381"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1656923381"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1656923381"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1656923381"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1656923381"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1656923381"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1657144859"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1657144859"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1657144859"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1657144859"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1657144859"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1657144859"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1656923381"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1656923381"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1656923381"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1657144859"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1657144859"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1657144859"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1656923381"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1657144859"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
