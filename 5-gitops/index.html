@@ -12,22 +12,22 @@
     <title>Configure GitOps :: DevSecOps Workshop</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1657205174" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1657205174" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1657205174" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1657205174" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1657205174" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1657205174" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1657205174" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1657205174" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1657205174" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1657205174" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1657273913" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1657273913" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1657273913" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1657273913" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1657273913" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1657273913" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1657273913" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1657273913" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1657273913" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1657273913" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1657205174" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1657273913" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1657205174"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1657273913"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -60,14 +60,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1657205174"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1657205174"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1657273913"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1657273913"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1657205174"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1657273913"></script>
 
     
   </div>
@@ -494,7 +494,7 @@
 <li>Don&rsquo;t login with OpenShift but with username and password</li>
 <li>User is <code>admin</code> and password will be in Secret <code>argocd-cluster</code></li>
 </ul>
-<p>ArgoCD works with the concept of <strong>Apps</strong>. We will create an App and point it to the Config Git Repo. ArgoCD will look for k8s yaml files in the repo and path and deploy them to the defined namespace. Additionally ArgoCD will also react to changes to the repo and reflect these to the namespace. You can also enable self-healing to prevent configuration drift. If you want find out more about OpenShift GitOps have look [here]{https://docs.openshift.com/container-platform/4.10/cicd/gitops/understanding-openshift-gitops.html} :</p>
+<p>ArgoCD works with the concept of <strong>Apps</strong>. We will create an App and point it to the Config Git Repo. ArgoCD will look for k8s yaml files in the repo and path and deploy them to the defined namespace. Additionally ArgoCD will also react to changes to the repo and reflect these to the namespace. You can also enable self-healing to prevent configuration drift. If you want find out more about OpenShift GitOps have look <a href="https://docs.openshift.com/container-platform/4.10/cicd/gitops/understanding-openshift-gitops.html">here</a> :</p>
 <ul>
 <li>Create App
 <ul>
@@ -503,7 +503,7 @@
 <li><strong>Application Name</strong>: workshop</li>
 <li><strong>Project</strong>: default</li>
 <li><strong>SYNC POLICY</strong>: Automatic</li>
-<li><strong>Repository URL</strong>: Copy the URL of your config repo from Gitea (It should resemble <code>https://repository-git.apps.{YOUR DOMAIN}.com/gitea/openshift-gitops-getting-started.git</code>)</li>
+<li><strong>Repository URL</strong>: Copy the URL of your config repo from Gitea (It should resemble <code>http://repository-git.apps.{YOUR DOMAIN}.com/gitea/openshift-gitops-getting-started.git</code>)</li>
 <li><strong>Path</strong>: environments/dev</li>
 <li><strong>Cluster URL</strong>: <a href="https://kubernetes.default.svc">https://kubernetes.default.svc</a></li>
 <li><strong>Namespace</strong>: workshop-prod</li>
@@ -675,7 +675,7 @@
       <span style="color:#66d9ef">name</span>: workspace
 </code></pre></div><h2 id="add-tekton-task-to-your-pipeline">Add Tekton Task to Your Pipeline</h2>
 <ul>
-<li>Go to <strong>Pipeline &gt; Pipelines &gt; workshop</strong> and then YAML</li>
+<li>Go to <strong>Pipelines &gt; Pipelines &gt; workshop</strong> and then YAML</li>
 </ul>
 
 <div class="notices tip" ><p>You can edit pipelines either directly in YAML or in the visual <strong>Pipeline Builder</strong>. We will see how to use the Builder later on so let&rsquo;s edit the YAML for now.</p>
@@ -692,33 +692,32 @@
 </div>
 
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#66d9ef">name</span>: git-update-deployment
-     <span style="color:#66d9ef">params</span>:
-       - <span style="color:#66d9ef">name</span>: GIT_REPOSITORY
-         <span style="color:#66d9ef">value</span>: &gt;<span style="color:#e6db74">-
-</span><span style="color:#e6db74">           https://repository-git.apps.{YOUR DOMAIN}/gitea/openshift-gitops-getting-started.git</span>
-       - <span style="color:#66d9ef">name</span>: GIT_USERNAME
-         <span style="color:#66d9ef">value</span>: gitea
-       - <span style="color:#66d9ef">name</span>: GIT_PASSWORD
-         <span style="color:#66d9ef">value</span>: gitea
-       - <span style="color:#66d9ef">name</span>: CURRENT_IMAGE
-         <span style="color:#66d9ef">value</span>: &gt;<span style="color:#e6db74">-
-</span><span style="color:#e6db74">           image-registry.openshift-image-registry.svc:5000/workshop-int/workshop:latest</span>
-       - <span style="color:#66d9ef">name</span>: NEW_IMAGE
-         <span style="color:#66d9ef">value</span>: &gt;<span style="color:#e6db74">-
-</span><span style="color:#e6db74">           image-registry.openshift-image-registry.svc:5000/workshop-int/workshop</span>
-       - <span style="color:#66d9ef">name</span>: NEW_DIGEST
-         <span style="color:#66d9ef">value</span>: $(tasks.build.results.IMAGE_DIGEST)
-       - <span style="color:#66d9ef">name</span>: KUSTOMIZATION_PATH
-         <span style="color:#66d9ef">value</span>: environments/dev
-     <span style="color:#66d9ef">runAfter</span>:
-       - build
-     <span style="color:#66d9ef">taskRef</span>:
-       <span style="color:#66d9ef">kind</span>: Task
-       <span style="color:#66d9ef">name</span>: git-update-deployment
-     <span style="color:#66d9ef">workspaces</span>:
-       - <span style="color:#66d9ef">name</span>: workspace
-         <span style="color:#66d9ef">workspace</span>: workspace
-
+  <span style="color:#66d9ef">params</span>:
+    - <span style="color:#66d9ef">name</span>: GIT_REPOSITORY
+      <span style="color:#66d9ef">value</span>: &gt;<span style="color:#e6db74">-
+</span><span style="color:#e6db74">        https://repository-git.apps.{YOUR DOMAIN}/gitea/openshift-gitops-getting-started.git</span>
+    - <span style="color:#66d9ef">name</span>: GIT_USERNAME
+      <span style="color:#66d9ef">value</span>: gitea
+    - <span style="color:#66d9ef">name</span>: GIT_PASSWORD
+      <span style="color:#66d9ef">value</span>: gitea
+    - <span style="color:#66d9ef">name</span>: CURRENT_IMAGE
+      <span style="color:#66d9ef">value</span>: &gt;<span style="color:#e6db74">-
+</span><span style="color:#e6db74">        image-registry.openshift-image-registry.svc:5000/workshop-int/workshop:latest</span>
+    - <span style="color:#66d9ef">name</span>: NEW_IMAGE
+      <span style="color:#66d9ef">value</span>: &gt;<span style="color:#e6db74">-
+</span><span style="color:#e6db74">        image-registry.openshift-image-registry.svc:5000/workshop-int/workshop</span>
+    - <span style="color:#66d9ef">name</span>: NEW_DIGEST
+      <span style="color:#66d9ef">value</span>: $(tasks.build.results.IMAGE_DIGEST)
+    - <span style="color:#66d9ef">name</span>: KUSTOMIZATION_PATH
+      <span style="color:#66d9ef">value</span>: environments/dev
+  <span style="color:#66d9ef">runAfter</span>:
+    - build
+  <span style="color:#66d9ef">taskRef</span>:
+    <span style="color:#66d9ef">kind</span>: Task
+    <span style="color:#66d9ef">name</span>: git-update-deployment
+  <span style="color:#66d9ef">workspaces</span>:
+    - <span style="color:#66d9ef">name</span>: workspace
+      <span style="color:#66d9ef">workspace</span>: workspace
 </code></pre></div><p>The <code>Pipeline</code> should now look like this</p>
 <!-- ![workshop Pipeline](../images/tekton.png) -->
 <figure>
@@ -737,7 +736,7 @@
   <span style="color:#66d9ef">name</span>: gitea
   <span style="color:#66d9ef">namespace</span>: workshop-int
   <span style="color:#66d9ef">annotations</span>:
-    <span style="color:#66d9ef">tekton.dev/git-0</span>: <span style="color:#e6db74">&#34;https://repository-git.apps.{YOUR DOMAIN}&#34;</span>
+    <span style="color:#66d9ef">tekton.dev/git-0</span>: <span style="color:#e6db74">&#34;http://repository-git.apps.{YOUR DOMAIN}&#34;</span>
 <span style="color:#66d9ef">data</span>:
   <span style="color:#66d9ef">password</span>: Z2l0ZWE=
   <span style="color:#66d9ef">username</span>: Z2l0ZWE=
@@ -1007,19 +1006,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1657205174"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1657205174"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1657205174"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1657205174"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1657205174"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1657205174"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1657273913"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1657273913"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1657273913"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1657273913"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1657273913"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1657273913"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1657205174"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1657205174"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1657205174"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1657273913"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1657273913"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1657273913"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1657205174"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1657273913"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
