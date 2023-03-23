@@ -499,9 +499,11 @@
 <li>Click <strong>Show advanced Git options</strong> and for <strong>Git reference</strong> enter <code>master</code></li>
 <li>As <strong>Import Strategy</strong> select <code>Builder Image</code></li>
 <li>As <strong>Builder Image</strong> select <code>Java</code> and <code>openjdk-11-el7 / Red Hat OpenJDK 11 (RHEL 7)</code></li>
+<li>Under <strong>Application</strong> select <code>Create Application</code></li>
 <li>As <strong>Application Name</strong> enter <code>workshop-app</code></li>
 <li>As <strong>Name</strong> enter <code>workshop</code></li>
-<li>Check <strong>Add pipeline</strong></li>
+<li>Keep the <strong>defaults</strong> for all other settings</li>
+<li>But check <strong>Add pipeline</strong></li>
 </ul>
 
 <div class="notices warning" ><p>If you don&rsquo;t have the checkbox <strong>Add pipeline</strong> and get the message <code>There are no pipeline templates available for Java and Deployment combination</code> in the next step then just give it few more minutes and reload the page.</p>
@@ -554,10 +556,10 @@
 <li>Login with the values of the secret from above</li>
 <li>Click <strong>Sign in</strong></li>
 <li>Scroll down to <strong>Access Settings</strong></li>
-<li>As <strong>Super User</strong> but in <code>quayadmin</code></li>
+<li>As <strong>Super User</strong> but in <code>quayadmin</code> and press <strong>Add</strong></li>
 <li>click <strong>Validate Configuration Changes</strong> and after the validation click <strong>Reconfigure Quay</strong></li>
 </ul>
-<p>Reconfiguring Quay takes some time. The easiest way to determine if it&rsquo;s been finished is to open the Quay portal (using the <code>quay-quay</code> Route). At the upper right you&rsquo;ll see the username (<code>quayadmin</code>), if you click the username the drop-down should show a link <strong>Super User Admin Panel</strong>. When it shows up you can proceed.</p>
+<p>Reconfiguring Quay takes some time. The easiest way to determine if it&rsquo;s been finished is to open the Quay portal (using the <code>quay-quay</code> Route). At the upper right you&rsquo;ll see the username (<code>quayadmin</code>), if you click the username the drop-down should show a link <strong>Super User Admin Panel</strong>. When it shows up you can proceed. If it does not show up for a very long time, check if the pods in the quay-project are pending, due to insufficient CPU resources. If yes, go to <strong>deployments</strong> and change the update-strategy from <code>rolling</code> to <code>recreate</code></p>
 <figure>
     <img src="../images/quay-superuser.png?width=15pc&amp;classes=border,shadow"/> <figcaption>
             <h4>Click image to enlarge</h4>
@@ -612,7 +614,7 @@
 <ul>
 <li><strong>Secret name</strong>: quay-credentials</li>
 <li><strong>Key</strong>: token</li>
-<li><strong>Value</strong>: paste the Access Token you generated in the Quay Portal before</li>
+<li><strong>Value</strong>: paste the Access Token you generated in the Quay Portal before into the <strong>drag and drop field</strong></li>
 <li>Click <strong>Create</strong></li>
 </ul>
 </li>
@@ -622,7 +624,7 @@
 <p>Go to the Red Hat Quay Bridge Operator overview (make sure you are in the <code>quay</code> namespace)</p>
 </li>
 <li>
-<p>On the <strong>Quay Integration</strong> tile click <strong>Create Instance</strong></p>
+<p>On the <strong>Quay Integration</strong> tile click <strong>Create QuayIntegration</strong></p>
 <ul>
 <li>Open <strong>Credentials secret</strong>
 <ul>
