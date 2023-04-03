@@ -39,15 +39,15 @@
   </url>
   
   <url>
-    <loc>https://devsecops-workshop.github.io/14-advanced-pipeline/</loc>
-  </url>
-  
-  <url>
     <loc>https://devsecops-workshop.github.io/15-runtime-security/</loc>
   </url>
   
   <url>
-    <loc>https://devsecops-workshop.github.io/16-appendix/</loc>
+    <loc>https://devsecops-workshop.github.io/16-acm/</loc>
+  </url>
+  
+  <url>
+    <loc>https://devsecops-workshop.github.io/20-appendix/</loc>
   </url>
   
   <url>
