@@ -12,22 +12,22 @@
     <title>Configure GitOps :: DevSecOps Workshop</title>
 
     
-    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1713186906" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1713186906" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1713186906" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1713186906" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1713186906" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1713186906" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1713186906" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/theme.css?1713186906" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/tabs.css?1713186906" rel="stylesheet">
-    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1713186906" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/nucleus.css?1713432778" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/fontawesome-all.min.css?1713432778" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hybrid.css?1713432778" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/featherlight.min.css?1713432778" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/perfect-scrollbar.min.css?1713432778" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/auto-complete.css?1713432778" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/atom-one-dark-reasonable.css?1713432778" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme.css?1713432778" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/tabs.css?1713432778" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/hugo-theme.css?1713432778" rel="stylesheet">
     
-    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1713186906" rel="stylesheet">
+    <link href="https://devsecops-workshop.github.io/css/theme-red.css?1713432778" rel="stylesheet">
     
     
 
-    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1713186906"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery-3.3.1.min.js?1713432778"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -61,14 +61,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1713186906"></script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1713186906"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/lunr.min.js?1713432778"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/auto-complete.js?1713432778"></script>
 <script type="text/javascript">
     
         var baseurl = "https:\/\/devsecops-workshop.github.io\/";
     
 </script>
-<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1713186906"></script>
+<script type="text/javascript" src="https://devsecops-workshop.github.io/js/search.js?1713432778"></script>
 
     
   </div>
@@ -524,8 +524,8 @@
 <li>Keep the settings as they are and click <strong>Create</strong></li>
 </ul>
 <h2 id="check-the-gitops-config-repository">Check the GitOps Config Repository</h2>
-<p>We already have a second repository in Gitea that holds the required Gitops yaml resources. We will use this repo to push changes to our <code>workshop-dev</code> enivronment.</p>
-<p>Have a quick look at the structure of this project:</p>
+<p>We already have a second repository, called <code>openshift-gitops-getting-started</code> in Gitea that holds the required Gitops yaml resources. We will use this repo to push changes to our <code>workshop-prod</code> enivronment.</p>
+<p>Have a quick look at the structure of this git project:</p>
 <p><strong>app</strong> - contains yaml files for the deployment, service and route resources needed by our application. These will be applied to the cluster. There is also a <code>kustomization.yaml</code> defining that kustomize layers will be applied to all yamls</p>
 <p><strong>environments/dev</strong> - contains the <code>kustomization.yaml</code> which will be modified by our builds with new Image versions. ArgoCD will pick up these changes and trigger new deployments.</p>
 <h2 id="setup-the-gitops-project-in-argocd">Setup the GitOps Project in ArgoCD</h2>
@@ -604,7 +604,7 @@
 <h2 id="add-tekton-tasks-to-your-pipeline-to-promote-your-image-to-workshop-prod">Add Tekton Tasks to your Pipeline to Promote your Image to workshop-prod</h2>
 <p>So now we have a new Tekton Task in our task catalog to update a GitOps Git repository, but we still need to promote the actual image from out <code>workshop-int</code> to <code>workshop-prod</code> project. Otherwise the image will not be available for our deployment.</p>
 <ul>
-<li>In the ẁorkshop_int` project, go to <strong>Pipelines &gt; Pipelines &gt; workshop</strong> and then YAML</li>
+<li>In the <code>workshop_int</code> project, go to <strong>Pipelines &gt; Pipelines &gt; workshop</strong> and then YAML</li>
 </ul>
 
 <div class="notices tip" ><p>You can edit pipelines either directly in YAML or in the visual <strong>Pipeline Builder</strong>. We will see how to use the Builder later on so let&rsquo;s edit the YAML for now.</p>
@@ -998,19 +998,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1713186906"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1713186906"></script>
-    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1713186906"></script>
-    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1713186906"></script>
-    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1713186906"></script>
-    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1713186906"></script>
+    <script src="https://devsecops-workshop.github.io/js/clipboard.min.js?1713432778"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.min.js?1713432778"></script>
+    <script src="https://devsecops-workshop.github.io/js/perfect-scrollbar.jquery.min.js?1713432778"></script>
+    <script src="https://devsecops-workshop.github.io/js/jquery.sticky.js?1713432778"></script>
+    <script src="https://devsecops-workshop.github.io/js/featherlight.min.js?1713432778"></script>
+    <script src="https://devsecops-workshop.github.io/js/highlight.pack.js?1713432778"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1713186906"></script>
-    <script src="https://devsecops-workshop.github.io/js/learn.js?1713186906"></script>
-    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1713186906"></script>
+    <script src="https://devsecops-workshop.github.io/js/modernizr.custom-3.6.0.js?1713432778"></script>
+    <script src="https://devsecops-workshop.github.io/js/learn.js?1713432778"></script>
+    <script src="https://devsecops-workshop.github.io/js/hugo-learn.js?1713432778"></script>
     
         
-            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1713186906"></script>
+            <script src="https://devsecops-workshop.github.io/mermaid/mermaid.js?1713432778"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
